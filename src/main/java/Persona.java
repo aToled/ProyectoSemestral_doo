@@ -1,7 +1,7 @@
 public abstract class Persona {
     private String nombre, apellido;
     private Asignatura asignatura;
-    public Profesor(String nombre, String apellido, Asignatura asignatura ) {
+    public Persona(String nombre, String apellido, Asignatura asignatura ) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.asignatura = asignatura;
