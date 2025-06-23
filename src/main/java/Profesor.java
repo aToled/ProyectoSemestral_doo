@@ -14,4 +14,8 @@ public class Profesor extends Persona {
     public long getTarifa(){
         return tarifa;
     }
+
+    public int getCantidadAlumnos(){
+        return cantidadAlumnos;
+    }
 }
