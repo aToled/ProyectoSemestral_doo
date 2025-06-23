@@ -1,0 +1,92 @@
+[
+  {
+    "nombre": "Andrés",
+    "apellido": "Salinas",
+    "correo": "asalinas@gmail.com",
+    "id": "0",
+    "asignatura": "MATEMATICA",
+    "cantidadAlumnos": 25,
+    "tarifa": 35000
+  },
+  {
+    "nombre": "Rosa",
+    "apellido": "Fernández",
+    "correo": "rfernandez@gmail.com",
+    "id": "1",
+    "asignatura": "LENGUAJE",
+    "cantidadAlumnos": 30,
+    "tarifa": 32000
+  },
+  {
+    "nombre": "Gabriel",
+    "apellido": "Alarcón",
+    "correo": "galarcon@gmail.com",
+    "id": "2",
+    "asignatura": "CIENCIAS",
+    "cantidadAlumnos": 28,
+    "tarifa": 40000
+  },
+  {
+    "nombre": "Claudia",
+    "apellido": "Riquelme",
+    "correo": "criquelme@gmail.com",
+    "id": "3",
+    "asignatura": "HISTORIA",
+    "cantidadAlumnos": 22,
+    "tarifa": 31000
+  },
+  {
+    "nombre": "Eduardo",
+    "apellido": "Bravo",
+    "correo": "ebravo@gmail.com",
+    "id": "4",
+    "asignatura": "INGLES",
+    "cantidadAlumnos": 26,
+    "tarifa": 36000
+  },
+  {
+    "nombre": "Natalia",
+    "apellido": "Campos",
+    "correo": "ncampos@gmail.com",
+    "id": "5",
+    "asignatura": "MATEMATICA",
+    "cantidadAlumnos": 29,
+    "tarifa": 37000
+  },
+  {
+    "nombre": "Sebastián",
+    "apellido": "Araya",
+    "correo": "saraya@gmail.com",
+    "id": "6",
+    "asignatura": "CIENCIAS",
+    "cantidadAlumnos": 31,
+    "tarifa": 42000
+  },
+  {
+    "nombre": "Teresa",
+    "apellido": "Fuentes",
+    "correo": "tfuentes@gmail.com",
+    "id": "7",
+    "asignatura": "LENGUAJE",
+    "cantidadAlumnos": 24,
+    "tarifa": 33000
+  },
+  {
+    "nombre": "Mario",
+    "apellido": "Navarro",
+    "correo": "mnavarro@gmail.com",
+    "id": "8",
+    "asignatura": "INGLES",
+    "cantidadAlumnos": 27,
+    "tarifa": 39000
+  },
+  {
+    "nombre": "Verónica",
+    "apellido": "Leiva",
+    "correo": "vleiva@gmail.com",
+    "id": "9",
+    "asignatura": "HISTORIA",
+    "cantidadAlumnos": 23,
+    "tarifa": 34000
+  }
+]

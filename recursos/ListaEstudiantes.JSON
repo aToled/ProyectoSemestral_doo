@@ -1,0 +1,142 @@
+[
+  {
+    "nombre": "Carlos",
+    "apellido": "Gómez",
+    "correo": "cgomez@gmail.com",
+    "id": "0",
+    "asignatura": "MATEMATICA"
+  },
+  {
+    "nombre": "Ana",
+    "apellido": "Pérez",
+    "correo": "aperez@gmail.com",
+    "id": "1",
+    "asignatura": "CIENCIAS"
+  },
+  {
+    "nombre": "Luis",
+    "apellido": "Martínez",
+    "correo": "lmartinez@gmail.com",
+    "id": "2",
+    "asignatura": "HISTORIA"
+  },
+  {
+    "nombre": "Sofía",
+    "apellido": "Ramírez",
+    "correo": "sramirez@gmail.com",
+    "id": "3",
+    "asignatura": "LENGUAJE"
+  },
+  {
+    "nombre": "Pedro",
+    "apellido": "Torres",
+    "correo": "ptorres@gmail.com",
+    "id": "4",
+    "asignatura": "INGLES"
+  },
+  {
+    "nombre": "Valeria",
+    "apellido": "Núñez",
+    "correo": "vnunez@gmail.com",
+    "id": "5",
+    "asignatura": "MATEMATICA"
+  },
+  {
+    "nombre": "Jorge",
+    "apellido": "Castro",
+    "correo": "jcastro@gmail.com",
+    "id": "6",
+    "asignatura": "CIENCIAS"
+  },
+  {
+    "nombre": "Lucía",
+    "apellido": "Mendoza",
+    "correo": "lmendoza@gmail.com",
+    "id": "7",
+    "asignatura": "HISTORIA"
+  },
+  {
+    "nombre": "María",
+    "apellido": "Díaz",
+    "correo": "mdiaz@gmail.com",
+    "id": "8",
+    "asignatura": "LENGUAJE"
+  },
+  {
+    "nombre": "Tomás",
+    "apellido": "Santos",
+    "correo": "tsantos@gmail.com",
+    "id": "9",
+    "asignatura": "INGLES"
+  },
+  {
+    "nombre": "Camila",
+    "apellido": "Vargas",
+    "correo": "cvargas@gmail.com",
+    "id": "10",
+    "asignatura": "MATEMATICA"
+  },
+  {
+    "nombre": "Felipe",
+    "apellido": "Rojas",
+    "correo": "frojas@gmail.com",
+    "id": "11",
+    "asignatura": "CIENCIAS"
+  },
+  {
+    "nombre": "Elena",
+    "apellido": "Silva",
+    "correo": "esilva@gmail.com",
+    "id": "12",
+    "asignatura": "HISTORIA"
+  },
+  {
+    "nombre": "Hugo",
+    "apellido": "Morales",
+    "correo": "hmorales@gmail.com",
+    "id": "13",
+    "asignatura": "LENGUAJE"
+  },
+  {
+    "nombre": "Isabel",
+    "apellido": "Luna",
+    "correo": "iluna@gmail.com",
+    "id": "14",
+    "asignatura": "INGLES"
+  },
+  {
+    "nombre": "Diego",
+    "apellido": "Reyes",
+    "correo": "dreyes@gmail.com",
+    "id": "15",
+    "asignatura": "CIENCIAS"
+  },
+  {
+    "nombre": "Patricia",
+    "apellido": "Herrera",
+    "correo": "pherrera@gmail.com",
+    "id": "16",
+    "asignatura": "MATEMATICA"
+  },
+  {
+    "nombre": "Miguel",
+    "apellido": "Cruz",
+    "correo": "mcruz@gmail.com",
+    "id": "17",
+    "asignatura": "HISTORIA"
+  },
+  {
+    "nombre": "Laura",
+    "apellido": "Paredes",
+    "correo": "lparedes@gmail.com",
+    "id": "18",
+    "asignatura": "LENGUAJE"
+  },
+  {
+    "nombre": "Javier",
+    "apellido": "Ortega",
+    "correo": "jortega@gmail.com",
+    "id": "19",
+    "asignatura": "INGLES"
+  }
+]
