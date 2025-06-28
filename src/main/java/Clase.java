@@ -5,24 +5,49 @@ public class Clase {
     private Profesor profesor;
     private ArrayList<Estudiante> listaEstudiantes;
     private Asignatura asignatura;
+    private int id;
+    private Horario horario;
+    private Dia dia;
 
-    public Clase(Profesor profesor){
+    public Clase(Profesor profesor, int id){
         this.profesor = profesor;
         asignatura = profesor.getAsignatura();
         listaEstudiantes = new ArrayList<Estudiante>();
+        this.id = id;
+        dia = profesor.getDia();
+        horario = profesor.getHorario();
     }
 
-    public boolean agregarEstudiante(Estudiante estudiante){
-        if(listaEstudiantes.size() < profesor.getCantidadAlumnos()){
-            listaEstudiantes.add(estudiante);
-            return true;
+    /**
+     * @param estudiante
+     * @return Booleano si es que se pudo realizar la operacion
+     */
+    public boolean agregarEstudiante(Estudiante estudiante) {
+        //faltan las validaciones si para ver si es que coincide el dia y el horario
+
+        if (estudiante.getAsignatura() == asignatura) {
+
+            if (listaEstudiantes.size() < profesor.getCantidadEstudiantes()) {
+                listaEstudiantes.add(estudiante);
+                System.out.println(estudiante.getNombre()+" "+ estudiante.getApellido()+" Se agrego con exito");
+                return true;
+            }
+
+            else{
+                System.out.println(estudiante.getNombre()+" "+ estudiante.getApellido()+" No se pudo agregar");
+                return false;
+            }
         }
-        return false;
+        else{
+            System.out.println(estudiante.getNombre()+" "+ estudiante.getApellido()+" No se pudo agregar");
+            return false;
+        }
+
     }
 
     public void eliminarEstudiante(int id) {
         for(int i = 0; i > profesor.getCantidadAlumnos(); i++){
-            if(id == listaEstudiantes.get(i).getid()){
+            if((listaEstudiantes.get(i)).getIdInt() == id){
                 listaEstudiantes.remove(i);
             }
             else {continue;}

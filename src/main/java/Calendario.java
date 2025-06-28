@@ -1,9 +1,30 @@
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Clase calendario donde se almacenaran las clases
+ */
 public class Calendario {
-    private int dias, semanas;
-    public Calendario(int semanas, int dias) {
-        this.semanas = semanas;
-        this.dias = dias;
+    private static Calendario instancia;
+    private Map<String, Clase> calendario;
+
+    private Calendario() {
+        calendario = new HashMap<>();
     }
 
-    //hay que convinar horario con calendario
+    /**
+     * Creacion de la instancia(uso de sigleton)
+     * @return Retorna la instancia
+     */
+    public static Calendario getInstancia(){
+        if(instancia == null){
+            instancia = new Calendario();
+            return instancia;
+        }
+        else{return instancia;}
+    }
+
+    public void addClase(Clase clase){
+
+    }
 }

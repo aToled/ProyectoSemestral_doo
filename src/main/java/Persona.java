@@ -1,12 +1,16 @@
 public abstract class Persona {
     private String nombre, apellido, correo, id;
     private Asignatura asignatura;
-    public Persona(String nombre, String apellido, String correo, String id, Asignatura asignatura) {
+    private Horario horario;
+    private Dia dia;
+    public Persona(String nombre, String apellido, String correo, String id, Asignatura asignatura, Horario horario, Dia dia) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.asignatura = asignatura;
         this.correo = correo;
         this.id = id;
+        this.dia = dia;
+        this.horario = horario;
         //falta agragar el horario
 
     }
@@ -25,6 +29,9 @@ public abstract class Persona {
     public String getId() {
         return id;
     }
+    public int getIdInt(){return Integer.valueOf(id);}
+    public Dia getDia() {return dia;}
+    public Horario getHorario(){return horario;}
 
     @Override
     public String toString(){
