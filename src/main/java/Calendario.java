@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -6,7 +7,7 @@ import java.util.Map;
  */
 public class Calendario {
     private static Calendario instancia;
-    private Map<String, Clase> calendario;
+    private Map<ArrayList<String>, Clase> calendario;
 
     private Calendario() {
         calendario = new HashMap<>();

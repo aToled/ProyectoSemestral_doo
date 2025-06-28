@@ -1,9 +1,11 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Clase {
 
     private Profesor profesor;
-    private ArrayList<Estudiante> listaEstudiantes;
+    private Map<Integer,Estudiante> listaEstudiantes;
     private Asignatura asignatura;
     private int id;
     private Horario horario;
@@ -12,7 +14,7 @@ public class Clase {
     public Clase(Profesor profesor, int id){
         this.profesor = profesor;
         asignatura = profesor.getAsignatura();
-        listaEstudiantes = new ArrayList<Estudiante>();
+        listaEstudiantes = new HashMap<>();
         this.id = id;
         dia = profesor.getDia();
         horario = profesor.getHorario();
@@ -28,7 +30,7 @@ public class Clase {
         if (estudiante.getAsignatura() == asignatura) {
 
             if (listaEstudiantes.size() < profesor.getCantidadEstudiantes()) {
-                listaEstudiantes.add(estudiante);
+                listaEstudiantes.put(estudiante.getIdInt(),estudiante);
                 System.out.println(estudiante.getNombre()+" "+ estudiante.getApellido()+" Se agrego con exito");
                 return true;
             }
@@ -46,11 +48,15 @@ public class Clase {
     }
 
     public void eliminarEstudiante(int id) {
-        for(int i = 0; i > profesor.getCantidadAlumnos(); i++){
-            if((listaEstudiantes.get(i)).getIdInt() == id){
-                listaEstudiantes.remove(i);
-            }
-            else {continue;}
-        }
+        listaEstudiantes.remove(id);
+    }
+
+
+    public int getId(){
+        return id;
+    }
+
+    public int cantidadEstudiantes(){
+        return listaEstudiantes.size();
     }
 }
