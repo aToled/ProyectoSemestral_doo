@@ -4,139 +4,139 @@
     "apellido": "Gómez",
     "correo": "cgomez@gmail.com",
     "id": "0",
-    "asignatura": "MATEMATICA"
+    "materiasInteres": ["MATEMATICA","CIENCIAS"]
   },
   {
     "nombre": "Ana",
     "apellido": "Pérez",
     "correo": "aperez@gmail.com",
     "id": "1",
-    "asignatura": "CIENCIAS"
+    "materiasInteres": ["INGLES"]
   },
   {
     "nombre": "Luis",
     "apellido": "Martínez",
     "correo": "lmartinez@gmail.com",
     "id": "2",
-    "asignatura": "HISTORIA"
+    "materiasInteres": ["HISTORIA","LENGUAJE"]
   },
   {
     "nombre": "Sofía",
     "apellido": "Ramírez",
     "correo": "sramirez@gmail.com",
     "id": "3",
-    "asignatura": "LENGUAJE"
+    "materiasInteres": ["CIENCIAS"]
   },
   {
     "nombre": "Pedro",
     "apellido": "Torres",
     "correo": "ptorres@gmail.com",
     "id": "4",
-    "asignatura": "INGLES"
+    "materiasInteres": ["MATEMATICA","LENGUAJE"]
   },
   {
     "nombre": "Valeria",
     "apellido": "Núñez",
     "correo": "vnunez@gmail.com",
     "id": "5",
-    "asignatura": "MATEMATICA"
+    "materiasInteres": ["INGLES","HISTORIA"]
   },
   {
     "nombre": "Jorge",
     "apellido": "Castro",
     "correo": "jcastro@gmail.com",
     "id": "6",
-    "asignatura": "CIENCIAS"
+    "materiasInteres": ["CIENCIAS","MATEMATICA"]
   },
   {
     "nombre": "Lucía",
     "apellido": "Mendoza",
     "correo": "lmendoza@gmail.com",
     "id": "7",
-    "asignatura": "HISTORIA"
+    "materiasInteres": ["LENGUAJE"]
   },
   {
     "nombre": "María",
     "apellido": "Díaz",
     "correo": "mdiaz@gmail.com",
     "id": "8",
-    "asignatura": "LENGUAJE"
+    "materiasInteres": ["HISTORIA"]
   },
   {
     "nombre": "Tomás",
     "apellido": "Santos",
     "correo": "tsantos@gmail.com",
     "id": "9",
-    "asignatura": "INGLES"
+    "materiasInteres": ["INGLES","CIENCIAS"]
   },
   {
     "nombre": "Camila",
     "apellido": "Vargas",
     "correo": "cvargas@gmail.com",
     "id": "10",
-    "asignatura": "MATEMATICA"
+    "materiasInteres": ["MATEMATICA"]
   },
   {
     "nombre": "Felipe",
     "apellido": "Rojas",
     "correo": "frojas@gmail.com",
     "id": "11",
-    "asignatura": "CIENCIAS"
+    "materiasInteres": ["LENGUAJE","CIENCIAS"]
   },
   {
     "nombre": "Elena",
     "apellido": "Silva",
     "correo": "esilva@gmail.com",
     "id": "12",
-    "asignatura": "HISTORIA"
+    "materiasInteres": ["HISTORIA","MATEMATICA"]
   },
   {
     "nombre": "Hugo",
     "apellido": "Morales",
     "correo": "hmorales@gmail.com",
     "id": "13",
-    "asignatura": "LENGUAJE"
+    "materiasInteres": ["INGLES","LENGUAJE"]
   },
   {
     "nombre": "Isabel",
     "apellido": "Luna",
     "correo": "iluna@gmail.com",
     "id": "14",
-    "asignatura": "INGLES"
+    "materiasInteres": ["CIENCIAS","HISTORIA"]
   },
   {
     "nombre": "Diego",
     "apellido": "Reyes",
     "correo": "dreyes@gmail.com",
     "id": "15",
-    "asignatura": "CIENCIAS"
+    "materiasInteres": ["MATEMATICA","INGLES"]
   },
   {
     "nombre": "Patricia",
     "apellido": "Herrera",
     "correo": "pherrera@gmail.com",
     "id": "16",
-    "asignatura": "MATEMATICA"
+    "materiasInteres": ["LENGUAJE","HISTORIA"]
   },
   {
     "nombre": "Miguel",
     "apellido": "Cruz",
     "correo": "mcruz@gmail.com",
     "id": "17",
-    "asignatura": "HISTORIA"
+    "materiasInteres": ["CIENCIAS","INGLES"]
   },
   {
     "nombre": "Laura",
     "apellido": "Paredes",
     "correo": "lparedes@gmail.com",
     "id": "18",
-    "asignatura": "LENGUAJE"
+    "materiasInteres": ["MATEMATICA","CIENCIAS","HISTORIA"]
   },
   {
     "nombre": "Javier",
     "apellido": "Ortega",
     "correo": "jortega@gmail.com",
     "id": "19",
-    "asignatura": "INGLES"
+    "materiasInteres": ["LENGUAJE","MATEMATICA","INGLES"]
   }
 ]

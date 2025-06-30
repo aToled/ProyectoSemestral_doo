@@ -14,7 +14,7 @@ class ClaseTest {
     @BeforeEach
     void setUp(){
         Jueves10 = new BloqueHorario(Dia.JUEVES, Horario.BLOQUE10);
-        profLen = new Profesor("Prof","Leng","hola@gmail.com","14", Set.of(Asignatura.LENGUAJE), 3,19999, Set.of(Jueves10));
+        profLen = new Profesor("Prof", "Leng", "hola@gmail.com", "14", 3, 19999, Set.of(Asignatura.LENGUAJE), Set.of(Jueves10));
         claseLen = new Clase(profLen, "1465", Asignatura.LENGUAJE, Jueves10);
         eLen1 = new Estudiante("A", "B", "a@b.com", "1", Set.of(Asignatura.LENGUAJE));
         eLen2 = new Estudiante("C", "D", "c@d.com", "2", Set.of(Asignatura.LENGUAJE));
