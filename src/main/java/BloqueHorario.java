@@ -1,3 +1,5 @@
+import Enums.*;
+
 /**
  * Record que representa un bloque de horario unico en el calendario, determinado por
  * dia de la semana y horario especificos, se usa como llave en el mapa del calendario, en el profesor para determinar sus

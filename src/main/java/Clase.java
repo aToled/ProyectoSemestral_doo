@@ -1,3 +1,5 @@
+import Enums.Asignatura;
+import Excepciones.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,7 +11,7 @@ public class Clase {
     private final String id;
     private final BloqueHorario bloqueHorario;
 
-    public Clase(Profesor profesor, String id, Asignatura asignatura, BloqueHorario bloque) throws ProfesorNoDictaMateriaException{
+    public Clase(Profesor profesor, String id, Asignatura asignatura, BloqueHorario bloque) throws ProfesorNoDictaMateriaException {
         if(!profesor.getMateriasQueDicta().contains(asignatura)){
             throw new ProfesorNoDictaMateriaException("El Profesor no dicta: "+asignatura);
         }

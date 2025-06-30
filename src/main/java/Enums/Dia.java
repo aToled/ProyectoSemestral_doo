@@ -1,10 +1,7 @@
-public enum Dia {
-    LUNES,
-    MARTES,
-    MIERCOLES,
-    JUEVES,
-    VIERNES;
+package Enums;
 
+public enum Dia {
+    LUNES, MARTES, MIERCOLES, JUEVES, VIERNES;
 
     /**
      * Simplifica la el string del dia

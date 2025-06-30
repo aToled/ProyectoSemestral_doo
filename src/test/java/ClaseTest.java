@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.*;
-
+import Excepciones.*;
+import Enums.*;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -53,7 +54,7 @@ class ClaseTest {
 
     @Test
     void testProfesorNoDisponibleException(){
-        BloqueHorario Lunes16 = new BloqueHorario(Dia.LUNES, Horario.BLOQUE16);
+        BloqueHorario Lunes16 = new BloqueHorario(Dia.LUNES, Horario.BLOQUE12);
         assertThrows(ProfesorNoDisponibleException.class, ()-> new Clase(profLen, "1123", Asignatura.LENGUAJE, Lunes16), "El profesor no esta disponible en ese horario");
     }
 }
