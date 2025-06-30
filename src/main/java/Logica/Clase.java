@@ -1,5 +1,7 @@
-import Enums.Asignatura;
-import Excepciones.*;
+package Logica;
+
+import Logica.Enums.Asignatura;
+import Logica.Excepciones.*;
 import java.util.HashMap;
 import java.util.Map;
 

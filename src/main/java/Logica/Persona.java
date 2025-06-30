@@ -1,3 +1,5 @@
+package Logica;
+
 public abstract class Persona {
     private final String nombre, apellido, correo, id;
 

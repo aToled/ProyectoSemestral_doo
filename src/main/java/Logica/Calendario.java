@@ -1,9 +1,11 @@
+package Logica;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import Enums.*;
-import Excepciones.*;
+import Logica.Enums.*;
+import Logica.Excepciones.*;
 
 /**
  * Clase calendario donde se almacenaran las clases
@@ -18,14 +20,12 @@ public class Calendario {
     }
 
     /**
-     * Creacion de la instancia(uso de singleton)
-     *
+     * Creacion de la instancia. (uso de singleton)
      * @return Retorna la instancia
      */
     public static Calendario getInstancia() {
         if (instancia == null) {
-            instancia = new Calendario();
-        }
+            instancia = new Calendario();}
         return instancia;
     }
 

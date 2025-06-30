@@ -1,4 +1,6 @@
-import Enums.Asignatura;
+package Logica;
+
+import Logica.Enums.Asignatura;
 import java.util.Set;
 
 public class Profesor extends Persona {

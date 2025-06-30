@@ -1,4 +1,6 @@
-import Enums.*;
+package Logica;
+
+import Logica.Enums.*;
 
 /**
  * Record que representa un bloque de horario unico en el calendario, determinado por

@@ -1,6 +1,10 @@
+import Logica.BloqueHorario;
+import Logica.Clase;
+import Logica.Estudiante;
+import Logica.Profesor;
 import org.junit.jupiter.api.*;
-import Excepciones.*;
-import Enums.*;
+import Logica.Excepciones.*;
+import Logica.Enums.*;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;

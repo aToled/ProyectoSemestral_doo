@@ -1,4 +1,4 @@
-package Enums;
+package Logica.Enums;
 
 public enum Dia {
     LUNES, MARTES, MIERCOLES, JUEVES, VIERNES;

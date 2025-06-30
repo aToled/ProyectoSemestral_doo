@@ -1,4 +1,4 @@
-package Enums;
+package Logica.Enums;
 
 /**
  * Contiene los Bloques en los que se desarrollaran las clases

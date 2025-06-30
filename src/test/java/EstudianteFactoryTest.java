@@ -1,7 +1,6 @@
-import Enums.Asignatura;
-import Enums.Dia;
-import Enums.Horario;
-import org.junit.jupiter.api.BeforeEach;
+import Logica.Enums.Asignatura;
+import Logica.Estudiante;
+import Logica.EstudianteFactory;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
