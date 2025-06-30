@@ -1,8 +1,9 @@
 public abstract class Persona {
-    private String nombre, apellido, correo, id;
-    private Asignatura asignatura;
-    private Horario horario;
-    private Dia dia;
+    private final String nombre, apellido, correo, id;
+    private final Asignatura asignatura;
+    private final Horario horario;
+    private final Dia dia;
+
     public Persona(String nombre, String apellido, String correo, String id, Asignatura asignatura, Horario horario, Dia dia) {
         this.nombre = nombre;
         this.apellido = apellido;

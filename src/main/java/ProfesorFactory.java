@@ -15,7 +15,7 @@ public class ProfesorFactory{
      * @param dia
      * @return
      */
-    private Persona crearProfe(String nombre, String apellido, String correo,String id, Asignatura asignatura, int cantidadEstudiantes, Horario horario, Dia dia) {
+    public Profesor crearProfe(String nombre, String apellido, String correo,String id, Asignatura asignatura, int cantidadEstudiantes, Horario horario, Dia dia) {
         return new Profesor(nombre,apellido,correo,id,asignatura,cantidadEstudiantes,horario,dia); //agregar los atributos por el Json
     }
     public static ArrayList<Profesor> sacarArchivo(){
