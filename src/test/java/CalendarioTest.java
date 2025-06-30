@@ -1,10 +1,14 @@
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class CalendarioTest {
+import static org.junit.jupiter.api.Assertions.assertSame;
+
+class CalendarioTest {
     @Test
-    public void testSigleton(){
-        Assertions.assertNotNull(Calendario.getInstancia());
-        Assertions.assertEquals(Calendario.getInstancia(),Calendario.getInstancia());
+    @DisplayName("Verificar que ambas instancias de Calendario sean 'iguales'(que apunten al mismo lugar en memoria)")
+    void testSingleton(){
+        Calendario c1 = Calendario.getInstancia();
+        Calendario c2 = Calendario.getInstancia();
+        assertSame(c1, c2);
     }
 }

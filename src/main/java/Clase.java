@@ -3,47 +3,44 @@ import java.util.Map;
 
 public class Clase {
 
-    private Profesor profesor;
-    private Map<Integer,Estudiante> listaEstudiantes;
-    private Asignatura asignatura;
-    private int id;
-    private Horario horario;
-    private Dia dia;
+    private final Profesor profesor;
+    private final Map<String,Estudiante> listaEstudiantes;
+    private final Asignatura asignatura;
+    private final String id;
+    private final BloqueHorario bloqueHorario;
 
-    public Clase(Profesor profesor, int id){
-        this.profesor = profesor;
-        asignatura = profesor.getAsignatura();
+    public Clase(Profesor profesor, String id, Asignatura asignatura, BloqueHorario bloque) throws ProfesorNoDictaMateriaException{
+        if(!profesor.getMateriasQueDicta().contains(asignatura)){
+            throw new ProfesorNoDictaMateriaException("El Profesor no dicta: "+asignatura);
+        }
+        if(!profesor.getDisponibilidad().contains(bloque)){
+            throw new ProfesorNoDisponibleException("Profesor no disponible en "+ bloque);
+        }
         listaEstudiantes = new HashMap<>();
+        this.profesor = profesor;
         this.id = id;
-        dia = profesor.getDia();
-        horario = profesor.getHorario();
+        this.asignatura = asignatura;
+        this.bloqueHorario = bloque;
     }
 
     /**
-     * @param estudiante
+     * @param e
      * @return Booleano si es que se pudo realizar la operacion
      */
-    public boolean agregarEstudiante(Estudiante estudiante) {
-        //faltan las validaciones si para ver si es que coincide el dia y el horario
-
-        if (estudiante.getAsignatura() == asignatura) {
-
-            if (listaEstudiantes.size() < profesor.getCantidadMaximaAlumnos()) {
-                listaEstudiantes.put(estudiante.getIdInt(),estudiante);
-                System.out.println(estudiante.getNombre()+" "+ estudiante.getApellido()+" Se agrego con exito");
+    public boolean agregarEstudiante(Estudiante e) {
+        if (e.getMateriasInteres().contains(asignatura)) {
+            if (listaEstudiantes.size() < profesor.getCapacidadMaximaAlumnos()) {
+                listaEstudiantes.putIfAbsent(e.getId(), e);
+                System.out.println(e.getNombre()+" "+ e.getApellido()+" Se agrego con exito");
                 return true;
-            }
-
-            else{
-                System.out.println(estudiante.getNombre()+" "+ estudiante.getApellido()+" No se pudo agregar");
+            }else{
+                System.out.println(e.getNombre()+" "+ e.getApellido()+" No se pudo agregar");
                 return false;
             }
-        }
-        else{
-            System.out.println(estudiante.getNombre()+" "+ estudiante.getApellido()+" No se pudo agregar");
+        }else{
+            System.out.println(e.getNombre()+" "+ e.getApellido()+" No se pudo agregar");
             return false;
         }
-
     }
 
     /**
@@ -51,41 +48,40 @@ public class Clase {
      * @return True si la lista es mayor o igual a la cantidad maxima permitida por el profesor.
      */
     public boolean isLlena(){
-        return listaEstudiantes.size() >= profesor.getCantidadMaximaAlumnos();
+        return listaEstudiantes.size() >= profesor.getCapacidadMaximaAlumnos();
     }
 
     /**
      * Metodo utilitario que válida si un estudiante pertenece o no a la clase.
      * @param e: dicho estudiante.
-     * @return valor booleano que depende de si los atributos necesarios del estudiante coinciden con la asignatura.
+     * @return valor booleano que depende de si el estudiante esta en el Map.
      */
     public boolean estudianteEnClase(Estudiante e){
-        return asignatura==e.getAsignatura() && dia==e.getDia() && horario==e.getHorario();
+        return listaEstudiantes.containsValue(e);
 
     }
 
-    public void eliminarEstudiante(int id) {
-        listaEstudiantes.remove(id);
-    }
-
-
-    public int getId(){
-        return id;
+    public void eliminarEstudiante(String idEstudiante) {
+        listaEstudiantes.remove(idEstudiante);
     }
 
     public int cantidadEstudiantes(){
         return listaEstudiantes.size();
     }
 
-    public Dia getDia() {
-        return dia;
+    public Map<String, Estudiante> getListaEstudiantes() {
+        return listaEstudiantes;
     }
-
-    public Horario getHorario() {
-        return horario;
+    public BloqueHorario getBloqueHorario() {
+        return bloqueHorario;
     }
-
+    public Asignatura getAsignatura() {
+        return asignatura;
+    }
     public Profesor getProfesor() {
         return profesor;
+    }
+    public String getId(){
+        return id;
     }
 }

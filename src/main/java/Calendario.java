@@ -9,16 +9,7 @@ import java.util.Map;
 public class Calendario {
     private static Calendario instancia;
 
-    private Map<BloqueHorario, List<Clase>> calendario;
-
-    /**
-     * Record que representa un bloque de horario unico en el calendario, determinado por
-     * dia de la semana y horario especificos, se usa como llave en el mapa del calendario.
-     * @param dia:
-     * @param horario:
-     */
-    public record BloqueHorario(Dia dia, Horario horario) {
-    }
+    private final Map<BloqueHorario, List<Clase>> calendario;
 
     private Calendario() {
         calendario = new HashMap<>();
@@ -32,10 +23,8 @@ public class Calendario {
     public static Calendario getInstancia() {
         if (instancia == null) {
             instancia = new Calendario();
-            return instancia;
-        } else {
-            return instancia;
         }
+        return instancia;
     }
 
     /**
@@ -45,8 +34,8 @@ public class Calendario {
      * @throws ConflictoHorarioException .
      */
     public void addClaseToBloque(Clase clase) throws ConflictoHorarioException {
-        BloqueHorario bloque = new BloqueHorario(clase.getDia(), clase.getHorario());
-        List<Clase> clasesEnBloque = calendario.computeIfAbsent(bloque, k -> new ArrayList<>());
+        BloqueHorario bloque = clase.getBloqueHorario();
+        List<Clase> clasesEnBloque = calendario.computeIfAbsent(bloque, _ -> new ArrayList<>());
 
         for (Clase c : clasesEnBloque) {
             if (c.getProfesor().equals(clase.getProfesor())) {

@@ -1,28 +1,18 @@
 public abstract class Persona {
     private final String nombre, apellido, correo, id;
-    private final Asignatura asignatura;
-    private final Horario horario;
-    private final Dia dia;
 
-    public Persona(String nombre, String apellido, String correo, String id, Asignatura asignatura, Horario horario, Dia dia) {
+    public Persona(String nombre, String apellido, String correo, String id) {
         this.nombre = nombre;
         this.apellido = apellido;
-        this.asignatura = asignatura;
         this.correo = correo;
         this.id = id;
-        this.dia = dia;
-        this.horario = horario;
-        //falta agragar el horario
-
     }
+
     public String getNombre() {
         return nombre;
     }
     public String getApellido(){
         return apellido;
-    }
-    public Asignatura getAsignatura() {
-        return asignatura;
     }
     public String getCorreo() {
         return correo;
@@ -30,9 +20,6 @@ public abstract class Persona {
     public String getId() {
         return id;
     }
-    public int getIdInt(){return Integer.valueOf(id);}
-    public Dia getDia() {return dia;}
-    public Horario getHorario(){return horario;}
 
     @Override
     public String toString(){

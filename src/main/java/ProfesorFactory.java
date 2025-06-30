@@ -1,22 +1,23 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class ProfesorFactory{
 
     /**
      * Clase usada para crear nuvas instancias dentro de sacarArchivo
-     * @param nombre
-     * @param apellido
-     * @param correo
-     * @param id
-     * @param asignatura
-     * @param cantidadEstudiantes
-     * @param horario
-     * @param dia
+     * @param nombre:
+     * @param apellido:
+     * @param correo:
+     * @param id:
+     * @param tarifa:
      * @return
      */
-    public Profesor crearProfe(String nombre, String apellido, String correo,String id, Asignatura asignatura, int cantidadEstudiantes, Horario horario, Dia dia) {
-        return new Profesor(nombre,apellido,correo,id,asignatura,cantidadEstudiantes,horario,dia); //agregar los atributos por el Json
+    public Profesor crearProfesor(String nombre, String apellido, String correo, String id, Set<Asignatura> materiasQueDicta, int capacidadMaximaAlumnos, long tarifa, Set<BloqueHorario> disponibilidad) {
+        return new Profesor(nombre, apellido, correo, id, materiasQueDicta, capacidadMaximaAlumnos, tarifa, disponibilidad); //agregar los atributos por el Json
     }
     public static ArrayList<Profesor> sacarArchivo(){
         String nombreArchivo = "ListaProfesores.JSON";
