@@ -1,102 +1,197 @@
 [
   {
+    "tarifa": 35000,
+    "capacidadMaximaAlumnos": 25,
+    "materiasQueDicta": [
+      "MATEMATICA"
+    ],
+    "disponibilidad": [
+      {
+        "dia": "LUNES",
+        "horario": "BLOQUE8"
+      },
+      {
+        "dia": "MIERCOLES",
+        "horario": "BLOQUE10"
+      }
+    ],
     "nombre": "Andrés",
     "apellido": "Salinas",
     "correo": "asalinas@gmail.com",
-    "id": "0",
-    "capacidadMaximaAlumnos": 25,
-    "tarifa": 35000,
-    "materiasQueDicta": ["MATEMATICA"],
-    "disponibilidad": [{"dia":"LUNES","horario":"BLOQUE8"},{"dia":"MIERCOLES","horario":"BLOQUE10"}]
+    "id": "0"
   },
   {
+    "tarifa": 32000,
+    "capacidadMaximaAlumnos": 30,
+    "materiasQueDicta": [
+      "INGLES",
+      "HISTORIA"
+    ],
+    "disponibilidad": [
+      {
+        "dia": "MARTES",
+        "horario": "BLOQUE9"
+      },
+      {
+        "dia": "VIERNES",
+        "horario": "BLOQUE11"
+      }
+    ],
     "nombre": "Rosa",
     "apellido": "Fernández",
     "correo": "rfernandez@gmail.com",
-    "id": "1",
-    "capacidadMaximaAlumnos": 30,
-    "tarifa": 32000,
-    "materiasQueDicta": ["INGLES","HISTORIA"],
-    "disponibilidad": [{"dia":"MARTES","horario":"BLOQUE9"},{"dia":"VIERNES","horario":"BLOQUE11"}]
+    "id": "1"
   },
   {
+    "tarifa": 40000,
+    "capacidadMaximaAlumnos": 28,
+    "materiasQueDicta": [
+      "CIENCIAS"
+    ],
+    "disponibilidad": [
+      {
+        "dia": "JUEVES",
+        "horario": "BLOQUE12"
+      }
+    ],
     "nombre": "Gabriel",
     "apellido": "Alarcón",
     "correo": "galarcon@gmail.com",
-    "id": "2",
-    "capacidadMaximaAlumnos": 28,
-    "tarifa": 40000,
-    "materiasQueDicta": ["CIENCIAS"],
-    "disponibilidad": [{"dia":"JUEVES","horario":"BLOQUE12"}]
+    "id": "2"
   },
   {
+    "tarifa": 31000,
+    "capacidadMaximaAlumnos": 22,
+    "materiasQueDicta": [
+      "LENGUAJE",
+      "MATEMATICA"
+    ],
+    "disponibilidad": [
+      {
+        "dia": "LUNES"
+      },
+      {
+        "dia": "MARTES"
+      }
+    ],
     "nombre": "Claudia",
     "apellido": "Riquelme",
     "correo": "criquelme@gmail.com",
-    "id": "3",
-    "capacidadMaximaAlumnos": 22,
-    "tarifa": 31000,
-    "materiasQueDicta": ["LENGUAJE","MATEMATICA"],
-    "disponibilidad": [{"dia":"LUNES","horario":"BLOQUE14"},{"dia":"MARTES","horario":"BLOQUE15"}]
+    "id": "3"
   },
   {
+    "tarifa": 36000,
+    "capacidadMaximaAlumnos": 26,
+    "materiasQueDicta": [
+      "HISTORIA"
+    ],
+    "disponibilidad": [
+      {
+        "dia": "MIERCOLES",
+        "horario": "BLOQUE10"
+      },
+      {
+        "dia": "VIERNES",
+        "horario": "BLOQUE8"
+      }
+    ],
     "nombre": "Eduardo",
     "apellido": "Bravo",
     "correo": "ebravo@gmail.com",
-    "id": "4",
-    "capacidadMaximaAlumnos": 26,
-    "tarifa": 36000,
-    "materiasQueDicta": ["HISTORIA"],
-    "disponibilidad": [{"dia":"MIERCOLES","horario":"BLOQUE10"},{"dia":"VIERNES","horario":"BLOQUE8"}]
+    "id": "4"
   },
   {
+    "tarifa": 37000,
+    "capacidadMaximaAlumnos": 29,
+    "materiasQueDicta": [
+      "INGLES"
+    ],
+    "disponibilidad": [
+      {
+        "dia": "MARTES",
+        "horario": "BLOQUE11"
+      }
+    ],
     "nombre": "Natalia",
     "apellido": "Campos",
     "correo": "ncampos@gmail.com",
-    "id": "5",
-    "capacidadMaximaAlumnos": 29,
-    "tarifa": 37000,
-    "materiasQueDicta": ["INGLES"],
-    "disponibilidad": [{"dia":"MARTES","horario":"BLOQUE11"}]
+    "id": "5"
   },
   {
+    "tarifa": 42000,
+    "capacidadMaximaAlumnos": 31,
+    "materiasQueDicta": [
+      "CIENCIAS",
+      "HISTORIA"
+    ],
+    "disponibilidad": [
+      {
+        "dia": "JUEVES",
+        "horario": "BLOQUE9"
+      },
+      {
+        "dia": "VIERNES"
+      }
+    ],
     "nombre": "Sebastián",
     "apellido": "Araya",
     "correo": "saraya@gmail.com",
-    "id": "6",
-    "capacidadMaximaAlumnos": 31,
-    "tarifa": 42000,
-    "materiasQueDicta": ["CIENCIAS","HISTORIA"],
-    "disponibilidad": [{"dia":"JUEVES","horario":"BLOQUE9"},{"dia":"VIERNES","horario":"BLOQUE13"}]
+    "id": "6"
   },
   {
+    "tarifa": 33000,
+    "capacidadMaximaAlumnos": 24,
+    "materiasQueDicta": [
+      "MATEMATICA",
+      "CIENCIAS"
+    ],
+    "disponibilidad": [
+      {
+        "dia": "LUNES"
+      }
+    ],
     "nombre": "Teresa",
     "apellido": "Fuentes",
     "correo": "tfuentes@gmail.com",
-    "id": "7",
-    "capacidadMaximaAlumnos": 24,
-    "tarifa": 33000,
-    "materiasQueDicta": ["MATEMATICA","CIENCIAS"],
-    "disponibilidad": [{"dia":"LUNES","horario":"BLOQUE16"}]
+    "id": "7"
   },
   {
+    "tarifa": 39000,
+    "capacidadMaximaAlumnos": 27,
+    "materiasQueDicta": [
+      "LENGUAJE"
+    ],
+    "disponibilidad": [
+      {
+        "dia": "MIERCOLES",
+        "horario": "BLOQUE8"
+      },
+      {
+        "dia": "JUEVES",
+        "horario": "BLOQUE10"
+      }
+    ],
     "nombre": "Mario",
     "apellido": "Navarro",
     "correo": "mnavarro@gmail.com",
-    "id": "8",
-    "capacidadMaximaAlumnos": 27,
-    "tarifa": 39000,
-    "materiasQueDicta": ["LENGUAJE"],
-    "disponibilidad": [{"dia":"MIERCOLES","horario":"BLOQUE8"},{"dia":"JUEVES","horario":"BLOQUE10"}]
+    "id": "8"
   },
   {
+    "tarifa": 34000,
+    "capacidadMaximaAlumnos": 23,
+    "materiasQueDicta": [
+      "INGLES",
+      "MATEMATICA"
+    ],
+    "disponibilidad": [
+      {
+        "dia": "VIERNES",
+        "horario": "BLOQUE12"
+      }
+    ],
     "nombre": "Verónica",
     "apellido": "Leiva",
     "correo": "vleiva@gmail.com",
-    "id": "9",
-    "capacidadMaximaAlumnos": 23,
-    "tarifa": 34000,
-    "materiasQueDicta": ["INGLES","MATEMATICA"],
-    "disponibilidad": [{"dia":"VIERNES","horario":"BLOQUE12"}]
+    "id": "9"
   }
 ]

@@ -1,5 +1,6 @@
 import Enums.Asignatura;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.lang.reflect.Type;
@@ -10,8 +11,8 @@ import java.util.List;
 import java.util.Set;
 
 public class ProfesorFactory{
-    private static final String nombreArchivo = "ListaProfesores.JSON";
-    private static final Gson gson = new Gson();
+    private static final String rutaArchivo = "src/main/resources/ListaProfesores.JSON";
+    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     /**
      * Clase usada para crear nuvas instancias dentro de sacarArchivo
@@ -23,9 +24,15 @@ public class ProfesorFactory{
      * @param tarifa:
      * @param materiasQueDicta:
      * @param disponibilidad:
-     * @return
+     * @return .
      */
-    public Profesor crearProfesor(String nombre, String apellido, String correo, String id, int capacidadMaximaAlumnos, long tarifa, Set<Asignatura> materiasQueDicta, Set<BloqueHorario> disponibilidad) {
+    public static Profesor crearProfesor(String nombre, String apellido, String correo, String id, int capacidadMaximaAlumnos, long tarifa, Set<Asignatura> materiasQueDicta, Set<BloqueHorario> disponibilidad) {
+        if(capacidadMaximaAlumnos<=0)
+            throw new IllegalArgumentException("La capacidad maxima debe ser mayor a 0");
+        if(materiasQueDicta==null || materiasQueDicta.isEmpty())
+            throw new IllegalArgumentException("El Profesor debe dictar como minimo 1 asignatura");
+        if(disponibilidad==null || disponibilidad.isEmpty())
+            throw new IllegalArgumentException("El Profesor debe tener al menos un bloque disponible");
         return new Profesor(nombre, apellido, correo, id, capacidadMaximaAlumnos, tarifa, materiasQueDicta, disponibilidad); //agregar los atributos por el Json
     }
 
@@ -36,7 +43,7 @@ public class ProfesorFactory{
      * @throws IOException: si es que ocurre un error en la lectura del Archivo.
      */
     public static List<Profesor> cargarProfesores() throws IOException {
-        try(Reader reader = Files.newBufferedReader(Path.of(nombreArchivo))){
+        try(Reader reader = Files.newBufferedReader(Path.of(rutaArchivo))){
             Type listType = new TypeToken<List<Profesor>>(){}.getType();
             List<Profesor> lista = gson.fromJson(reader, listType);
             if (lista == null) {
@@ -52,7 +59,7 @@ public class ProfesorFactory{
      * @throws IOException: si es que ocurre un error en la escritura del Archivo.
      */
     public static void guardarProfesores(List<Profesor> profesores) throws IOException{
-        try(Writer writer = Files.newBufferedWriter(Path.of(nombreArchivo))){
+        try(Writer writer = Files.newBufferedWriter(Path.of(rutaArchivo))){
             gson.toJson(profesores, writer);
         }
     }
@@ -66,6 +73,18 @@ public class ProfesorFactory{
     public static void agregarProfesor(Profesor profesor) throws IOException{
         List<Profesor> profesores = cargarProfesores();
         profesores.add(profesor);
+        guardarProfesores(profesores);
+    }
+
+    /**
+     * Elimina un Profesor de la lista al identificarlo por su ID, sigue el mismo
+     * proceso que el metodo anterior.
+     * @param id: Id del profesor a eliminar.
+     * @throws IOException si es que ocurre un error en la escritura del Archivo.
+     */
+    public static void eliminarProfesor(String id) throws IOException{
+        List<Profesor> profesores = cargarProfesores();
+        profesores.removeIf(p -> p.getId().equals(id));
         guardarProfesores(profesores);
     }
 }
