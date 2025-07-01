@@ -10,10 +10,7 @@ import java.io.Writer;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import java.util.*;
 
 public class GestorSolicitudes {
     private static final String rutaArchivoSolicitudes = "src/main/resources/ListaSolicitudes.JSON";
@@ -55,7 +52,7 @@ public class GestorSolicitudes {
      * Intenta resolver una solicitud utilizando distintas estrategias, se busca la solicitud según el ID proporcionado
      * y luego se recorren las estrategias para ver si alguna puede aplicarse.
      * Si una estrategia propone una clase válida (no nula), esta se asigna a la solicitud como clase sugerida,
-     * después de asignarla, se guarda el estado y se notifica a los listeners.
+     * después de asignarla, se guarda el estado y se notifica a los listeners, si fallan todas las estrategias se le asigna INCONCLUSO a la solicitud.
      * @param id: Id de la solicitud.
      * @param estrategias: Las estrategias disponibles.
      * @return True si es que se encontró al menos una clase válida, si no, false.
@@ -73,6 +70,7 @@ public class GestorSolicitudes {
                 }
             }
         }
+        sol.setEstadoSolicitud(EstadoSolicitud.INCONCLUSO);
         return false;
     }
 
@@ -166,5 +164,35 @@ public class GestorSolicitudes {
         try(Writer writer = Files.newBufferedWriter(Path.of(rutaArchivoSolicitudes))){
             gson.toJson(solicitudes, writer);
         } catch (IOException _){}
+    }
+
+    /**
+     * Elimina una Solicitud de la lista al identificarla por su ID, al quitarla, y guardarla
+     * además notifica a los Listener este cambio.
+     * @param id: Id de la solicitud a eliminar.
+     */
+    public void eliminar(String id){
+        solicitudes.removeIf(s -> s.getId().equals(id));
+        guardar();
+        notificar();
+    }
+
+    /**
+     * Mismo proceso que el método anterior, pero borra todas las solicitudes.
+     */
+    public void eliminarTodas() {
+        solicitudes.clear();
+        guardar();
+        notificar();
+    }
+
+    /**
+     * Devuelve la lista de solicitudes, pero no modificable. (para obligar a usar los métodos agregar, eliminar
+     * y eliminarTodas, ya que podrían generarse incongruencias entre el JSON y la lista de solicitudes
+     * si se modificase la lista interna sin usar esos métodos)
+     * @return tal lista.
+     */
+    public List<Solicitud> getSolicitudesNoModificable() {
+        return Collections.unmodifiableList(solicitudes);
     }
 }

@@ -4,7 +4,7 @@ public enum Dia {
     LUNES, MARTES, MIERCOLES, JUEVES, VIERNES;
 
     /**
-     * Simplifica la el string del dia
+     * Simplifica la el string del día
      * ejemplos: LUNES = LU, MARTES = MA
      * @return String del dia usado
      */

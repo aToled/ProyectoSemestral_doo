@@ -20,7 +20,7 @@ public class Calendario {
     }
 
     /**
-     * Creacion de la instancia. (uso de singleton)
+     * Creación de la instancia. (uso de singleton)
      * @return Retorna la instancia
      */
     public static Calendario getInstancia() {
@@ -30,9 +30,9 @@ public class Calendario {
     }
 
     /**
-     * Agrega la clase del parametro a un bloque del horario, además, si no existe ese bloque crea una nueva lista
+     * Agrega la clase del parámetro a un bloque del horario, además, si no existe ese bloque crea una nueva lista
      * de clases para ese horario, y antes de agregar el bloque se verifica que el profesor no esté cursando ya en ese horario alguna otra clase.
-     * @param clase: la clase en cuestion.
+     * @param clase: la clase en cuestión.
      * @throws ConflictoHorarioException .
      */
     public void addClaseToBloque(Clase clase) throws ConflictoHorarioException {
@@ -48,10 +48,10 @@ public class Calendario {
     }
 
     /**
-     * Devuelve una lista con todas las clases en un bloque basándose en su hora y dia.
+     * Devuelve una lista con todas las clases en un bloque basándose en su hora y día.
      * @param dia: tal dia
      * @param horario: tal hora
-     * @return la lista o un NULL si es que esta vacio el bloque.
+     * @return la lista o un NULL si es que esta vacío el bloque.
      */
     public List<Clase> getClasesEnBloque(Dia dia, Horario horario){
         BloqueHorario bloque = new BloqueHorario(dia, horario);
@@ -69,5 +69,12 @@ public class Calendario {
             clases.addAll(listaClases);
         }
         return clases;
+    }
+
+    /**
+     * Limpia el calendario.
+     */
+    public void clear(){
+        calendario.clear();
     }
 }
