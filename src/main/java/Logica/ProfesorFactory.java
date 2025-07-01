@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 public class ProfesorFactory{
-    private static final String rutaArchivo = "src/main/resources/ListaProfesores.JSON";
+    private static final String rutaArchivoProfesor = "src/main/resources/ListaProfesores.JSON";
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     /**
@@ -45,7 +45,7 @@ public class ProfesorFactory{
      * @throws IOException: si es que ocurre un error en la lectura del Archivo.
      */
     public static List<Profesor> cargarProfesores() throws IOException {
-        try(Reader reader = Files.newBufferedReader(Path.of(rutaArchivo))){
+        try(Reader reader = Files.newBufferedReader(Path.of(rutaArchivoProfesor))){
             Type listType = new TypeToken<List<Profesor>>(){}.getType();
             List<Profesor> lista = gson.fromJson(reader, listType);
             if (lista == null) {
@@ -61,7 +61,7 @@ public class ProfesorFactory{
      * @throws IOException: si es que ocurre un error en la escritura del Archivo.
      */
     public static void guardarProfesores(List<Profesor> profesores) throws IOException{
-        try(Writer writer = Files.newBufferedWriter(Path.of(rutaArchivo))){
+        try(Writer writer = Files.newBufferedWriter(Path.of(rutaArchivoProfesor))){
             gson.toJson(profesores, writer);
         }
     }
