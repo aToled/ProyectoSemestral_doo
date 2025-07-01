@@ -20,13 +20,13 @@ public class EstudianteFactory{
 
     public static Estudiante crearEstudiante(String nombre, String apellido, String correo, String id, Set<Asignatura> materiasInteres) {
         if(materiasInteres==null || materiasInteres.isEmpty())
-            throw new IllegalArgumentException("El Estudiante debe tener al menos una asignatura de interes");
+            throw new IllegalArgumentException("El Estudiante debe tener al menos una asignatura de interés");
         return new Estudiante(nombre, apellido, correo, id, materiasInteres); //agregar los atributos por el Json
     }
 
     /**
-     * Carga los estudiantes que contiene el JSON como un List (y si por alguna razon está vacio devuelve un ArrayList vacio).
-     * @return conjunto deserializado de los estudiantes.
+     * Carga los estudiantes que contiene el JSON como un List (y si por alguna razón está vacío devuelve un ArrayList vacío).
+     * @return conjunto de-serializado de los estudiantes.
      * @throws IOException : si es que ocurre un error en la lectura del Archivo.
      */
     public static List<Estudiante> cargarEstudiantes() throws IOException {
@@ -41,7 +41,7 @@ public class EstudianteFactory{
     }
 
     /**
-     * Serializa la lista de Estudiantes indicada en los parametros.
+     * Serializa la lista de Estudiantes indicada en los parámetros.
      * @param estudiantes: lista a serializar.
      * @throws IOException: si es que ocurre un error en la escritura del Archivo.
      */
@@ -53,7 +53,7 @@ public class EstudianteFactory{
 
     /**
      * Agrega un Estudiante a la lista de estudiantes que contiene el JSON al
-     * deserealizar la lista, añadiendolo y volviendola a serializar.
+     * de-serializar la lista, añadiéndolo y volviéndola a serializar.
      * @param estudiante: tal estudiante
      * @throws IOException si es que ocurre un error en la escritura del Archivo.
      */
@@ -65,7 +65,7 @@ public class EstudianteFactory{
 
     /**
      * Elimina un Estudiante de la lista al identificarlo por su ID, sigue el mismo
-     * proceso que el metodo anterior.
+     * proceso que el método anterior.
      * @param id: Id del estudiante a eliminar.
      * @throws IOException si es que ocurre un error en la escritura del Archivo.
      */

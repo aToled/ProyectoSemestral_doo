@@ -39,9 +39,9 @@ public class ProfesorFactory{
     }
 
     /**
-     * Carga los profesores que contiene el JSON como un List (y si por alguna razon está vacio devuelve un ArrayList vacio).
+     * Carga los profesores que contiene el JSON como un List (y si por alguna razón está vacío devuelve un ArrayList vacío).
      * (<a href="https://stackoverflow.com/questions/5554217/deserialize-a-listt-object-with-gson">...</a>)
-     * @return conjunto deserializado de los profesores.
+     * @return conjunto de-serializado de los profesores.
      * @throws IOException: si es que ocurre un error en la lectura del Archivo.
      */
     public static List<Profesor> cargarProfesores() throws IOException {
@@ -56,7 +56,7 @@ public class ProfesorFactory{
     }
 
     /**
-     * Serializa la lista de profesores indicada en los parametros.
+     * Serializa la lista de profesores indicada en los parámetros.
      * @param profesores: lista a serializar.
      * @throws IOException: si es que ocurre un error en la escritura del Archivo.
      */
@@ -68,7 +68,7 @@ public class ProfesorFactory{
 
     /**
      * Agrega un Profesor a la lista de profesores que contiene el JSON al
-     * deserealizar la lista, añadiendolo y volviendola a serializar.
+     * de-serializar la lista, añadiéndolo y volviéndola a serializar.
      * @param profesor: tal profesor
      * @throws IOException si es que ocurre un error en la escritura del Archivo.
      */
@@ -80,7 +80,7 @@ public class ProfesorFactory{
 
     /**
      * Elimina un Profesor de la lista al identificarlo por su ID, sigue el mismo
-     * proceso que el metodo anterior.
+     * proceso que el método anterior.
      * @param id: Id del profesor a eliminar.
      * @throws IOException si es que ocurre un error en la escritura del Archivo.
      */

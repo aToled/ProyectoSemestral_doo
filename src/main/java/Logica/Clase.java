@@ -56,7 +56,7 @@ public class Clase {
     }
 
     /**
-     * Metodo utilitario que válida si un estudiante pertenece o no a la clase.
+     * Método utilitario que válida si un estudiante pertenece o no a la clase.
      * @param e: dicho estudiante.
      * @return valor booleano que depende de si el estudiante esta en el Map.
      */

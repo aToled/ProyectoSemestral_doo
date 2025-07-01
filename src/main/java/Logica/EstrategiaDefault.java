@@ -1,10 +1,12 @@
 package Logica;
 
+import Logica.Enums.Asignatura;
+
 public class EstrategiaDefault implements EstrategiaSolicitud{
 
     /**
      * Como es la estrategia por defecto, se puede aplicar a todas las solicitudes.
-     * (Idealmente es la ultima que se ejecuta)
+     * (Idealmente, es la última que se ejecuta)
      * @param s: la solicitud a evaluar.
      * @return .
      */
@@ -17,11 +19,20 @@ public class EstrategiaDefault implements EstrategiaSolicitud{
      * Devuelve la primera clase con un cupo disponible, tomando el estudiante
      * y la asignatura asociadas a la solicitud, si no hay ninguna disponible devuelve null.
      * @param s: tal asignatura.
-     * @param calendario: tal estudiante.
      * @return tal clase.
      */
     @Override
-    public Clase proponerClase(Solicitud s, Calendario calendario) {
-        return null;  //TODO hacer metodo.
+    public Clase proponerClase(Solicitud s) {
+        Estudiante estudiante = s.getEstudiante();
+        Asignatura asignatura = s.getAsignatura();
+        Calendario c = Calendario.getInstancia();
+
+        for(Clase clase : c.getTodasLasClases()){
+            if(!estudiante.getMateriasInteres().contains(asignatura)) continue;
+            if(clase.getAsignatura() != asignatura) continue;
+            if(clase.isLlena()) continue;
+            return clase;
+        }
+        return null;
     }
 }

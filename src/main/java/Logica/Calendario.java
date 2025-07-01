@@ -57,4 +57,17 @@ public class Calendario {
         BloqueHorario bloque = new BloqueHorario(dia, horario);
         return calendario.get(bloque);
     }
+
+    /**
+     * Retorna una lista de 1 dimension con todas las clases, al iterar sobre el calendario
+     * extrayendo todas las listas de clases y extrayendo cada clase para copiar su referencia en la nueva lista.
+     * @return tal lista.
+     */
+    public List<Clase> getTodasLasClases(){
+        List<Clase> clases = new ArrayList<>();
+        for (List<Clase> listaClases : calendario.values()){
+            clases.addAll(listaClases);
+        }
+        return clases;
+    }
 }
