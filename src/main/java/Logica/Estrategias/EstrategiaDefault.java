@@ -5,6 +5,7 @@ import Logica.Clase;
 import Logica.Solicitud;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
 public class EstrategiaDefault implements EstrategiaSolicitud{
 
     /**

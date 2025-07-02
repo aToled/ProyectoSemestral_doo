@@ -18,7 +18,7 @@ public interface EstrategiaSolicitud {
      * Propone una coleccion de clases concretas del calendario a las que el Estudiante se puede unir,
      * con base en las condiciones de la estrategia.
      * @param s: La solicitud.
-     * @return Las clases si es que se encontraron validas, si no, null.
+     * @return Las clases si es que se encontraron válidas, si no, null.
      */
     Set<Clase> proponerClase(Solicitud s);
 }

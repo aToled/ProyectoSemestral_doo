@@ -8,7 +8,7 @@ import Logica.Enums.*;
 import Logica.Excepciones.*;
 
 /**
- * Clase calendario donde se almacenaran las clases
+ * Clase calendario donde se almacenaran las clases.
  */
 public class Calendario {
     private static Calendario instancia;

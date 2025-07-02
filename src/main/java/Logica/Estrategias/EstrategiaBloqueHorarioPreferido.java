@@ -13,11 +13,6 @@ public class EstrategiaBloqueHorarioPreferido implements EstrategiaSolicitud{
         return !s.getEstudiante().getBloquesHorariosInteres().isEmpty();
     }
 
-    /**
-     * TODO hacer UnitTest
-     * @param s: La solicitud.
-     * @return .
-     */
     @Override
     public Set<Clase> proponerClase(Solicitud s) {
         Estudiante e = s.getEstudiante();
