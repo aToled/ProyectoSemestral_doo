@@ -5,8 +5,7 @@ import Logica.Enums.EstadoSolicitud;
 import Logica.Enums.Horario;
 import Logica.Estrategias.EstrategiaDefault;
 import org.junit.jupiter.api.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -19,11 +18,11 @@ class SolicitudesObserverTest {
     private Estudiante e;
 
     private static class ObservadorTest implements ObservadorSolicitudes{
-        private List<Solicitud> solicitudesRecibidas = new ArrayList<>();
+        private Set<Solicitud> solicitudesRecibidas = new HashSet<>();
 
         @Override
-        public void actualizar(List<Solicitud> nuevasSolicitudes) {solicitudesRecibidas = nuevasSolicitudes;}
-        public List<Solicitud> getSolicitudesRecibidas() {return solicitudesRecibidas;}
+        public void actualizar(Set<Solicitud> nuevasSolicitudes) {solicitudesRecibidas = nuevasSolicitudes;}
+        public Set<Solicitud> getSolicitudesRecibidas() {return solicitudesRecibidas;}
     }
 
     @BeforeEach

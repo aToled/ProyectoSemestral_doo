@@ -63,7 +63,6 @@ public class Clase {
      */
     public boolean estudianteEnClase(Estudiante e){
         return listaEstudiantes.containsValue(e);
-
     }
 
     public void eliminarEstudiante(String idEstudiante) {

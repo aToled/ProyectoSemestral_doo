@@ -1,8 +1,7 @@
 import Logica.Estudiante;
 import Logica.EstudianteFactory;
 import org.junit.jupiter.api.Test;
-import java.io.IOException;
-import java.util.List;
+import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 class EstudianteFactoryTest {
@@ -14,10 +13,10 @@ class EstudianteFactoryTest {
     }
 
     @Test
-    public void testAgregarEstudiante() throws IOException {
+    public void testAgregarEstudiante() {
         Estudiante e = EstudianteFactory.crearEstudiante("Estudiante", "Test", "ptest@gmail.com", "-1");
         EstudianteFactory.agregarEstudiante(e);
-        List<Estudiante> lista = EstudianteFactory.cargarEstudiantes();
+        Set<Estudiante> lista = EstudianteFactory.cargarEstudiantes();
         assertTrue(lista.contains(e));
         EstudianteFactory.eliminarEstudiante("-1");
     }

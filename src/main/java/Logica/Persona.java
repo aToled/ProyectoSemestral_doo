@@ -1,6 +1,6 @@
 package Logica;
 
-public abstract class Persona {
+public abstract class Persona implements Identificable {
     private final String nombre, apellido, correo, id;
 
     public Persona(String nombre, String apellido, String correo, String id) {
@@ -37,6 +37,10 @@ public abstract class Persona {
 
     @Override
     public final int hashCode() {
-        return Integer.parseInt(id);
+        if(id != null){
+            return id.hashCode();
+        } else {
+            return 0;
+        }
     }
 }

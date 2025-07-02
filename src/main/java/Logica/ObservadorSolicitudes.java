@@ -1,6 +1,6 @@
 package Logica;
-import java.util.List;
+import java.util.Set;
 
 public interface ObservadorSolicitudes {
-    void actualizar(List<Solicitud> nuevasSolicitudes);
+    void actualizar(Set<Solicitud> nuevasSolicitudes);
 }

@@ -1,20 +1,17 @@
 package Logica;
 
 import Logica.Enums.Asignatura;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import java.io.*;
 import java.lang.reflect.Type;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
-public class ProfesorFactory{
-    private static final String rutaArchivoProfesor = "src/main/resources/ListaProfesores.JSON";
-    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+public class ProfesorFactory extends ManejoGenericoJSON<Profesor>{
+    private static final Type listType = new TypeToken<Set<Profesor>>(){}.getType();
+    private static final ProfesorFactory instancia = new ProfesorFactory();
+
+    private ProfesorFactory(){
+        super("ListaProfesores", listType);
+    }
 
     /**
      * Clase usada para crear nuvas instancias dentro de sacarArchivo
@@ -39,54 +36,23 @@ public class ProfesorFactory{
     }
 
     /**
-     * Carga los profesores que contiene el JSON como un List (y si por alguna razón está vacío devuelve un ArrayList vacío).
-     * (<a href="https://stackoverflow.com/questions/5554217/deserialize-a-listt-object-with-gson">...</a>)
-     * @return conjunto de-serializado de los profesores.
-     * @throws IOException: si es que ocurre un error en la lectura del Archivo.
+     * @see ManejoGenericoJSON
      */
-    public static List<Profesor> cargarProfesores() throws IOException {
-        try(Reader reader = Files.newBufferedReader(Path.of(rutaArchivoProfesor))){
-            Type listType = new TypeToken<List<Profesor>>(){}.getType();
-            List<Profesor> lista = gson.fromJson(reader, listType);
-            if (lista == null) {
-                lista = new ArrayList<>();
-            }
-            return lista;
-        }
+    public static Set<Profesor> cargarProfesores() {
+        return instancia.cargar();
     }
 
     /**
-     * Serializa la lista de profesores indicada en los parámetros.
-     * @param profesores: lista a serializar.
-     * @throws IOException: si es que ocurre un error en la escritura del Archivo.
+     * @see ManejoGenericoJSON
      */
-    public static void guardarProfesores(List<Profesor> profesores) throws IOException{
-        try(Writer writer = Files.newBufferedWriter(Path.of(rutaArchivoProfesor))){
-            gson.toJson(profesores, writer);
-        }
+    public static void agregarProfesor(Profesor profesor){
+        instancia.agregar(profesor);
     }
 
     /**
-     * Agrega un Profesor a la lista de profesores que contiene el JSON al
-     * de-serializar la lista, añadiéndolo y volviéndola a serializar.
-     * @param profesor: tal profesor
-     * @throws IOException si es que ocurre un error en la escritura del Archivo.
+     * @see ManejoGenericoJSON
      */
-    public static void agregarProfesor(Profesor profesor) throws IOException{
-        List<Profesor> profesores = cargarProfesores();
-        profesores.add(profesor);
-        guardarProfesores(profesores);
-    }
-
-    /**
-     * Elimina un Profesor de la lista al identificarlo por su ID, sigue el mismo
-     * proceso que el método anterior.
-     * @param id: Id del profesor a eliminar.
-     * @throws IOException si es que ocurre un error en la escritura del Archivo.
-     */
-    public static void eliminarProfesor(String id) throws IOException{
-        List<Profesor> profesores = cargarProfesores();
-        profesores.removeIf(p -> p.getId().equals(id));
-        guardarProfesores(profesores);
+    public static void eliminarProfesor(String id){
+        instancia.eliminar(id);
     }
 }

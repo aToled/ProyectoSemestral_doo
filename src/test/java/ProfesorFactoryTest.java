@@ -5,8 +5,6 @@ import Logica.Enums.Horario;
 import Logica.Profesor;
 import Logica.ProfesorFactory;
 import org.junit.jupiter.api.Test;
-import java.io.IOException;
-import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,10 +38,10 @@ class ProfesorFactoryTest {
 
     }
     @Test
-    public void testAgregarProfesor() throws IOException {
+    public void testAgregarProfesor() {
         Profesor p = ProfesorFactory.crearProfesor("Profesor", "Test", "ptest@gmail.com", "-1", 3, 25000, Set.of(Asignatura.CIENCIAS), Set.of(new BloqueHorario(Dia.VIERNES, Horario.BLOQUE1)));
         ProfesorFactory.agregarProfesor(p);
-        List<Profesor> lista = ProfesorFactory.cargarProfesores();
+        Set<Profesor> lista = ProfesorFactory.cargarProfesores();
         assertTrue(lista.contains(p));
         ProfesorFactory.eliminarProfesor("-1");
     }

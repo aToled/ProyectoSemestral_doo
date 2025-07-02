@@ -3,7 +3,7 @@ package Logica;
 import Logica.Enums.Asignatura;
 import Logica.Enums.EstadoSolicitud;
 
-public class Solicitud {
+public class Solicitud implements Identificable {
     private final String id;
     private final Estudiante estudiante;
     private final Asignatura asignatura;
@@ -49,6 +49,10 @@ public class Solicitud {
 
     @Override
     public final int hashCode() {
-        return Integer.parseInt(id);
+        if(id != null){
+            return id.hashCode();
+        } else {
+            return 0;
+        }
     }
 }

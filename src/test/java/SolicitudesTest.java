@@ -6,7 +6,6 @@ import Logica.Enums.Horario;
 import Logica.Estrategias.EstrategiaDefault;
 import Logica.Estrategias.EstrategiaSolicitud;
 import org.junit.jupiter.api.*;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
@@ -32,6 +31,7 @@ class SolicitudesTest {
         calendario.addClaseToBloque(clase);
 
         gestor = GestorSolicitudes.getInstancia();
+        gestor.eliminarTodas();
         solicitud = estudiante.enviarSolicitud(Asignatura.MATEMATICA);
 
         siempreFalla = new EstrategiaSolicitud() {
@@ -108,7 +108,7 @@ class SolicitudesTest {
 
     @Test
     void testListaSolicitudesNoModificable() {
-        List<Solicitud> list = gestor.getSolicitudesNoModificable();
-        assertThrows(UnsupportedOperationException.class, () -> list.add(solicitud));
+        Set<Solicitud> set = gestor.getSolicitudesNoModificable();
+        assertThrows(UnsupportedOperationException.class, () -> set.add(solicitud));
     }
 }
