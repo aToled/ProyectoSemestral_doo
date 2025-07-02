@@ -5,6 +5,8 @@ import Logica.Enums.EstadoSolicitud;
 import Logica.Enums.Horario;
 import Logica.Estrategias.EstrategiaDefault;
 import org.junit.jupiter.api.*;
+
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -49,7 +51,7 @@ class SolicitudesObserverTest {
     void testNotificarAlAgregar() {
         e = new Estudiante("est", "Dante", "estudiante@gmail.com", "e1");
         e.addMateriasInteres(Asignatura.MATEMATICA);
-        s = e.enviarSolicitud(Asignatura.MATEMATICA);
+        s = e.crearSolicitud(Asignatura.MATEMATICA);
         assertTrue(observadorTest.getSolicitudesRecibidas().contains(s));
     }
 
@@ -57,8 +59,11 @@ class SolicitudesObserverTest {
     void testNotificarAlAceptar() {
         e = new Estudiante("est", "Dante", "estudiante@gmail.com", "e1");
         e.addMateriasInteres(Asignatura.MATEMATICA);
-        s = e.enviarSolicitud(Asignatura.MATEMATICA);
+        s = e.crearSolicitud(Asignatura.MATEMATICA);
         gestor.resolver(s.getId(), new EstrategiaDefault());
+        Clase elegida = new ArrayList<>(s.getClasesSugeridas()).getFirst();
+        s.setClaseElegida(elegida);
+
         gestor.aceptar(s.getId());
         boolean encontrada = false;
         for (Solicitud sol : observadorTest.getSolicitudesRecibidas()) {
@@ -75,7 +80,7 @@ class SolicitudesObserverTest {
         gestor.deSuscribir(observadorTest);
         e = new Estudiante("est", "Dante", "estudiante@gmail.com", "e1");
         e.addMateriasInteres(Asignatura.MATEMATICA);
-        e.enviarSolicitud(Asignatura.MATEMATICA);
+        e.crearSolicitud(Asignatura.MATEMATICA);
         assertTrue(observadorTest.getSolicitudesRecibidas().isEmpty());
     }
 }

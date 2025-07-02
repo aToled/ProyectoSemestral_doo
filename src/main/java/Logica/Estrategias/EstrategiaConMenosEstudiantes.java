@@ -4,6 +4,8 @@ import Logica.Calendario;
 import Logica.Clase;
 import Logica.Estudiante;
 import Logica.Solicitud;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class EstrategiaConMenosEstudiantes implements EstrategiaSolicitud{
     @Override
@@ -12,7 +14,7 @@ public class EstrategiaConMenosEstudiantes implements EstrategiaSolicitud{
     }
 
     @Override
-    public Clase proponerClase(Solicitud s) {
+    public Set<Clase> proponerClase(Solicitud s) {
         Estudiante e = s.getEstudiante();
 
         Clase mejorClase = null;
@@ -28,6 +30,9 @@ public class EstrategiaConMenosEstudiantes implements EstrategiaSolicitud{
                 mejorClase = clase;
             }
         }
-        return mejorClase;
+
+        Set<Clase> candidatas = new LinkedHashSet<>();
+        candidatas.add(mejorClase);
+        return candidatas;
     }
 }

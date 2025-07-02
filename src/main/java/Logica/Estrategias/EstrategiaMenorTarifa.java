@@ -2,9 +2,9 @@ package Logica.Estrategias;
 
 import Logica.Calendario;
 import Logica.Clase;
-import Logica.Enums.Asignatura;
-import Logica.Estudiante;
 import Logica.Solicitud;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class EstrategiaMenorTarifa implements EstrategiaSolicitud{
     @Override
@@ -13,15 +13,13 @@ public class EstrategiaMenorTarifa implements EstrategiaSolicitud{
     }
 
     @Override
-    public Clase proponerClase(Solicitud s) {
-        Estudiante e = s.getEstudiante();
-
+    public Set<Clase> proponerClase(Solicitud sol) {
         Clase mejorClase = null;
         long menorTarifa = Long.MAX_VALUE;
 
         for(Clase clase : Calendario.getInstancia().getTodasLasClases()){
-            if(!e.getMateriasInteres().contains(s.getAsignatura())) continue;
-            if(clase.getAsignatura() != s.getAsignatura()) continue;
+            if(!sol.getEstudiante().getMateriasInteres().contains(sol.getAsignatura())) continue;
+            if(clase.getAsignatura() != sol.getAsignatura()) continue;
             if(clase.isLlena()) continue;
             long tarifa = clase.getProfesor().getTarifa();
             if(tarifa < menorTarifa){
@@ -29,6 +27,9 @@ public class EstrategiaMenorTarifa implements EstrategiaSolicitud{
                 mejorClase = clase;
             }
         }
-        return mejorClase;
+
+        Set<Clase> candidatas = new LinkedHashSet<>();
+        candidatas.add(mejorClase);
+        return candidatas;
     }
 }

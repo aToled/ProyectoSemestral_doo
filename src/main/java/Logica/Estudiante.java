@@ -26,12 +26,13 @@ public class Estudiante extends Persona {
     }
 
     /**
-     * Envía una solicitud al sistema sobre alguna asignatura en particular, y retorna la solicitud enviada. (para mostrarla en la GUI)
-     * (en realidad agrega una solicitud con un ID única a la lista interna de solicitudes)
+     * Crea una solicitud en el sistema sobre alguna asignatura en particular, y retorna la solicitud creada. (para mostrarla en la GUI)
+     * (en realidad agrega una solicitud con un ID única a la lista interna de solicitudes, para que esta despues
+     * pueda ser evaluada con el método resolver())
      * @param a: tal asignatura.
      * @return la solicitud.
      */
-    public Solicitud enviarSolicitud(Asignatura a){
+    public Solicitud crearSolicitud(Asignatura a){
         String idSolicitud = getId() + "_" + (int)(Math.random() * 100000);
         Solicitud s = new Solicitud(idSolicitud, this, a);
         GestorSolicitudes.getInstancia().agregar(s);

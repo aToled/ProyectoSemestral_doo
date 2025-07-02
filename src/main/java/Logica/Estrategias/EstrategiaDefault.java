@@ -2,10 +2,9 @@ package Logica.Estrategias;
 
 import Logica.Calendario;
 import Logica.Clase;
-import Logica.Enums.Asignatura;
-import Logica.Estudiante;
 import Logica.Solicitud;
-
+import java.util.LinkedHashSet;
+import java.util.Set;
 public class EstrategiaDefault implements EstrategiaSolicitud{
 
     /**
@@ -22,19 +21,18 @@ public class EstrategiaDefault implements EstrategiaSolicitud{
     /**
      * Devuelve la primera clase con un cupo disponible, tomando el estudiante
      * y la asignatura asociadas a la solicitud, si no hay ninguna disponible devuelve null.
-     * @param s: tal asignatura.
+     * @param sol: tal asignatura.
      * @return tal clase.
      */
     @Override
-    public Clase proponerClase(Solicitud s) {
-        Estudiante e = s.getEstudiante();
-
+    public Set<Clase> proponerClase(Solicitud sol) {
+        Set<Clase> candidatas = new LinkedHashSet<>();
         for(Clase clase : Calendario.getInstancia().getTodasLasClases()){
-            if(!e.getMateriasInteres().contains(s.getAsignatura())) continue;
-            if(clase.getAsignatura() != s.getAsignatura()) continue;
+            if(!sol.getEstudiante().getMateriasInteres().contains(sol.getAsignatura())) continue;
+            if(clase.getAsignatura() != sol.getAsignatura()) continue;
             if(clase.isLlena()) continue;
-            return clase;
+            candidatas.add(clase);
         }
-        return null;
+        return candidatas;
     }
 }

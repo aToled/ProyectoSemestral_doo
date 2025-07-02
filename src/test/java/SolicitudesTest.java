@@ -6,6 +6,8 @@ import Logica.Enums.Horario;
 import Logica.Estrategias.EstrategiaDefault;
 import Logica.Estrategias.EstrategiaSolicitud;
 import org.junit.jupiter.api.*;
+
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
@@ -32,13 +34,13 @@ class SolicitudesTest {
 
         gestor = GestorSolicitudes.getInstancia();
         gestor.eliminarTodas();
-        solicitud = estudiante.enviarSolicitud(Asignatura.MATEMATICA);
+        solicitud = estudiante.crearSolicitud(Asignatura.MATEMATICA);
 
         siempreFalla = new EstrategiaSolicitud() {
             @Override
             public boolean puedeAplicar(Solicitud s) {return true;}
             @Override
-            public Clase proponerClase(Solicitud s) {return null;}
+            public Set<Clase> proponerClase(Solicitud s) {return null;}
         };
     }
 
@@ -62,8 +64,9 @@ class SolicitudesTest {
         boolean resolucion = gestor.resolver(solicitud.getId(), new EstrategiaDefault());
 
         assertTrue(resolucion);
-        assertNotNull(solicitud.getClaseSugerida());
-        assertEquals(clase, solicitud.getClaseSugerida());
+        assertNotNull(solicitud.getClasesSugeridas());
+        Clase elegida = new ArrayList<>(solicitud.getClasesSugeridas()).getFirst();
+        assertEquals(clase, elegida);
     }
 
     @Test
@@ -71,7 +74,7 @@ class SolicitudesTest {
         boolean resolucion = gestor.resolver(solicitud.getId(), siempreFalla);
 
         assertFalse(resolucion);
-        assertNull(solicitud.getClaseSugerida());
+        assertTrue(solicitud.getClasesSugeridas().isEmpty());
         assertEquals(EstadoSolicitud.INCONCLUSO, solicitud.getEstadoSolicitud());
     }
 
@@ -80,16 +83,18 @@ class SolicitudesTest {
         boolean resolucion = gestor.resolver(solicitud.getId(), siempreFalla, new EstrategiaDefault());
 
         assertTrue(resolucion);
-        assertNotNull(solicitud.getClaseSugerida());
+        assertNotNull(solicitud.getClasesSugeridas());
     }
 
     @Test
     void testAceptar() {
         gestor.resolver(solicitud.getId(), new EstrategiaDefault());
+        Clase elegida = new ArrayList<>(solicitud.getClasesSugeridas()).getFirst();
+        solicitud.setClaseElegida(elegida);
         gestor.aceptar(solicitud.getId());
 
         assertEquals(EstadoSolicitud.ACEPTADA, solicitud.getEstadoSolicitud());
-        assertTrue(solicitud.getClaseSugerida().getListaEstudiantes().containsValue(estudiante));
+        assertTrue(solicitud.getClaseElegida().getListaEstudiantes().containsValue(estudiante));
     }
 
     @Test
@@ -103,7 +108,7 @@ class SolicitudesTest {
         gestor.rechazar(solicitud.getId());
 
         assertEquals(EstadoSolicitud.RECHAZADA, solicitud.getEstadoSolicitud());
-        assertNull(solicitud.getClaseSugerida());
+        assertTrue(solicitud.getClasesSugeridas().isEmpty());
     }
 
     @Test

@@ -42,27 +42,33 @@ public class GestorSolicitudes extends ManejoGenericoJSON<Solicitud> {
     /**
      * Intenta resolver una solicitud utilizando distintas estrategias, se busca la solicitud según el ID proporcionado
      * y luego se recorren las estrategias para ver si alguna puede aplicarse.
-     * Si una estrategia propone una clase válida (no nula), esta se asigna a la solicitud como clase sugerida,
+     * Si una estrategia propone una coleccion de clases válida (no nulas), esta se agrega a las clases sugeridas de la Solicitud,
      * después de asignarla, se guarda el estado y se notifica a los listeners, si fallan todas las estrategias se le asigna INCONCLUSO a la solicitud.
      * @param id: Id de la solicitud.
      * @param estrategias: Las estrategias disponibles.
      * @return True si es que se encontró al menos una clase válida, si no, false.
      */
     public boolean resolver(String id, EstrategiaSolicitud... estrategias){
+        Set<Clase> sugerencias = new LinkedHashSet<>();
         Solicitud sol = buscarSolicitud(id);
+
         for(EstrategiaSolicitud e : estrategias){
             if(e.puedeAplicar(sol)){
-                Clase propuesta = e.proponerClase(sol);
-                if(propuesta != null){
-                    sol.setClaseSugerida(propuesta);
-                    guardar();
-                    notificar();
-                    return true;
+                Set<Clase> propuestas = e.proponerClase(sol);
+                if(propuestas != null && !propuestas.isEmpty()){
+                    sugerencias.addAll(propuestas);
                 }
             }
         }
-        sol.setEstadoSolicitud(EstadoSolicitud.INCONCLUSO);
-        return false;
+        if(!sugerencias.isEmpty()){
+            sol.setClasesSugeridas(sugerencias);
+            guardar();
+            notificar();
+            return true;
+        }else {
+            sol.setEstadoSolicitud(EstadoSolicitud.INCONCLUSO);
+            return false;
+        }
     }
 
     /**
@@ -72,7 +78,7 @@ public class GestorSolicitudes extends ManejoGenericoJSON<Solicitud> {
      */
     public void aceptar(String id){
         Solicitud s = buscarSolicitud(id);
-        s.getClaseSugerida().agregarEstudiante(s.getEstudiante());
+        s.getClaseElegida().agregarEstudiante(s.getEstudiante());
         s.setEstadoSolicitud(EstadoSolicitud.ACEPTADA);
         guardar();
         notificar();
@@ -155,5 +161,13 @@ public class GestorSolicitudes extends ManejoGenericoJSON<Solicitud> {
      */
     public Set<Solicitud> getSolicitudesNoModificable() {
         return Collections.unmodifiableSet(super.objetos);
+    }
+
+    /**
+     * Actualiza las solicitudes en el JSON y notifica a los Listener.
+     */
+    public static void actualizar(){
+        instancia.guardar();
+        instancia.notificar();
     }
 }

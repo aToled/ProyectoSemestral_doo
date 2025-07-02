@@ -5,7 +5,7 @@ import Logica.Excepciones.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Clase {
+public class Clase implements Identificable{
 
     private final Profesor profesor;
     private final Map<String,Estudiante> listaEstudiantes;
@@ -87,5 +87,21 @@ public class Clase {
     }
     public String getId(){
         return id;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(o == this) return true;
+        if(!(o instanceof Persona otro)) return false;
+        return getId().equals(otro.getId());
+    }
+
+    @Override
+    public final int hashCode() {
+        if(id != null){
+            return id.hashCode();
+        } else {
+            return 0;
+        }
     }
 }
