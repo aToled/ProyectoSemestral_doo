@@ -1,6 +1,10 @@
-package Logica;
+package Logica.Estrategias;
 
+import Logica.Calendario;
+import Logica.Clase;
 import Logica.Enums.Asignatura;
+import Logica.Estudiante;
+import Logica.Solicitud;
 
 public class EstrategiaDefault implements EstrategiaSolicitud{
 

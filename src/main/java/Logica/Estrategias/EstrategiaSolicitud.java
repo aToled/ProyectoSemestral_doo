@@ -1,4 +1,7 @@
-package Logica;
+package Logica.Estrategias;
+
+import Logica.Clase;
+import Logica.Solicitud;
 
 public interface EstrategiaSolicitud {
 

@@ -3,6 +3,8 @@ import Logica.Enums.Asignatura;
 import Logica.Enums.Dia;
 import Logica.Enums.EstadoSolicitud;
 import Logica.Enums.Horario;
+import Logica.Estrategias.EstrategiaDefault;
+import Logica.Estrategias.EstrategiaSolicitud;
 import org.junit.jupiter.api.*;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -20,8 +22,9 @@ class SolicitudesTest {
     @BeforeEach
     void setUp() {
         BloqueHorario Lunes8AM = new BloqueHorario(Dia.LUNES, Horario.BLOQUE1);
-        estudiante = new Estudiante("est", "udiante", "estudiante@gmail.com", "e1", Set.of(Asignatura.MATEMATICA) );
-        Profesor profesor = new Profesor("prof", "esor", "profesor@gmail.com", "p1", 2, 10000, Set.of(Asignatura.MATEMATICA), Set.of(Lunes8AM));
+        estudiante = new Estudiante("est", "Dante", "estudiante@gmail.com", "e1");
+        estudiante.addMateriasInteres(Asignatura.MATEMATICA);
+        Profesor profesor = new Profesor("prof", "lessor", "profesor@gmail.com", "p1", 2, 10000, Set.of(Asignatura.MATEMATICA), Set.of(Lunes8AM));
         clase = new Clase(profesor, "C01", Asignatura.MATEMATICA, Lunes8AM);
 
         Calendario calendario = Calendario.getInstancia();
@@ -44,7 +47,7 @@ class SolicitudesTest {
         gestor.eliminarTodas();
     }
 
-    @DisplayName("Tests relacionados al Manejo y Resolucion de Solicitudes: ")
+    @DisplayName("Tests relacionados al Manejo y Resolución de Solicitudes: ")
     @Test
     void testCongruenciaEnviarSolicitud() {
         assertNotNull(solicitud);
@@ -91,7 +94,7 @@ class SolicitudesTest {
 
     @Test
     void testAceptarSinResolucion(){
-        // Este igual verifica que buscarSolicitud funciona correctamente, ya que no encuentra la solicitud "-1" y lanza esa excepcion.
+        // Este igual verifica que buscarSolicitud funciona correctamente, ya que no encuentra la solicitud "-1" y lanza esa excepción.
         assertThrows(NoSuchElementException.class, () -> gestor.aceptar("-1"));
     }
 

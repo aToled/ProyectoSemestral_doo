@@ -1,6 +1,7 @@
 package Logica;
 
 import Logica.Enums.EstadoSolicitud;
+import Logica.Estrategias.EstrategiaSolicitud;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;

@@ -28,14 +28,15 @@ public class Clase {
     }
 
     /**
-     * @param e
-     * @return Booleano si es que se pudo realizar la operacion
+     * Agrega un Estudiante a la clase tras hacer las verificaciones necesarias.
+     * @param e: tal Estudiante
+     * @return Booleano si es que se pudo realizar la operación
      */
     public boolean agregarEstudiante(Estudiante e) {
         if (e.getMateriasInteres().contains(asignatura)) {
             if (listaEstudiantes.size() < profesor.getCapacidadMaximaAlumnos()) {
                 listaEstudiantes.putIfAbsent(e.getId(), e);
-                System.out.println(e.getNombre()+" "+ e.getApellido()+" Se agrego con exito");
+                System.out.println(e.getNombre()+" "+ e.getApellido()+" Se agrego con éxito");
                 return true;
             }else{
                 System.out.println(e.getNombre()+" "+ e.getApellido()+" No se pudo agregar");
@@ -58,7 +59,7 @@ public class Clase {
     /**
      * Método utilitario que válida si un estudiante pertenece o no a la clase.
      * @param e: dicho estudiante.
-     * @return valor booleano que depende de si el estudiante esta en el Map.
+     * @return valor booleano que depende de si el estudiante está en el Map.
      */
     public boolean estudianteEnClase(Estudiante e){
         return listaEstudiantes.containsValue(e);

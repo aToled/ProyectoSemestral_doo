@@ -3,6 +3,7 @@ import Logica.Enums.Asignatura;
 import Logica.Enums.Dia;
 import Logica.Enums.EstadoSolicitud;
 import Logica.Enums.Horario;
+import Logica.Estrategias.EstrategiaDefault;
 import org.junit.jupiter.api.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ class SolicitudesObserverTest {
     void setUp() {
         observadorTest = new ObservadorTest();
         BloqueHorario Lunes8AM = new BloqueHorario(Dia.LUNES, Horario.BLOQUE1);
-        Profesor profesor = new Profesor("prof", "esor", "profesor@gmail.com", "p1", 2, 10000, Set.of(Asignatura.MATEMATICA), Set.of(Lunes8AM));
+        Profesor profesor = new Profesor("prof", "lessor", "profesor@gmail.com", "p1", 2, 10000, Set.of(Asignatura.MATEMATICA), Set.of(Lunes8AM));
         Clase clase = new Clase(profesor, "C01", Asignatura.MATEMATICA, Lunes8AM);
 
         Calendario calendario = Calendario.getInstancia();
@@ -47,14 +48,16 @@ class SolicitudesObserverTest {
 
     @Test
     void testNotificarAlAgregar() {
-        e = new Estudiante("est", "udiante", "estudiante@gmail.com", "e1", Set.of(Asignatura.MATEMATICA) );
+        e = new Estudiante("est", "Dante", "estudiante@gmail.com", "e1");
+        e.addMateriasInteres(Asignatura.MATEMATICA);
         s = e.enviarSolicitud(Asignatura.MATEMATICA);
         assertTrue(observadorTest.getSolicitudesRecibidas().contains(s));
     }
 
     @Test
     void testNotificarAlAceptar() {
-        e = new Estudiante("est", "udiante", "estudiante@gmail.com", "e1", Set.of(Asignatura.MATEMATICA) );
+        e = new Estudiante("est", "Dante", "estudiante@gmail.com", "e1");
+        e.addMateriasInteres(Asignatura.MATEMATICA);
         s = e.enviarSolicitud(Asignatura.MATEMATICA);
         gestor.resolver(s.getId(), new EstrategiaDefault());
         gestor.aceptar(s.getId());
@@ -66,13 +69,13 @@ class SolicitudesObserverTest {
             }
         }
         assertTrue(encontrada);
-
     }
 
     @Test
     void testDeSuscribirObservador() {
         gestor.deSuscribir(observadorTest);
-        e = new Estudiante("est", "udiante", "estudiante@gmail.com", "e1", Set.of(Asignatura.MATEMATICA) );
+        e = new Estudiante("est", "Dante", "estudiante@gmail.com", "e1");
+        e.addMateriasInteres(Asignatura.MATEMATICA);
         e.enviarSolicitud(Asignatura.MATEMATICA);
         assertTrue(observadorTest.getSolicitudesRecibidas().isEmpty());
     }

@@ -1,142 +1,239 @@
 [
   {
+    "materiasInteres": [
+      "MATEMATICA",
+      "CIENCIAS"
+    ],
+    "preferirMenorTarifa": false,
+    "preferirClaseConMenosEstudiantes": false,
     "nombre": "Carlos",
     "apellido": "Gómez",
     "correo": "cgomez@gmail.com",
-    "id": "0",
-    "materiasInteres": ["MATEMATICA","CIENCIAS"]
+    "id": "0"
   },
   {
+    "materiasInteres": [
+      "INGLES"
+    ],
+    "preferirMenorTarifa": false,
+    "preferirClaseConMenosEstudiantes": false,
     "nombre": "Ana",
     "apellido": "Pérez",
     "correo": "aperez@gmail.com",
-    "id": "1",
-    "materiasInteres": ["INGLES"]
+    "id": "1"
   },
   {
+    "materiasInteres": [
+      "HISTORIA",
+      "LENGUAJE"
+    ],
+    "preferirMenorTarifa": false,
+    "preferirClaseConMenosEstudiantes": false,
     "nombre": "Luis",
     "apellido": "Martínez",
     "correo": "lmartinez@gmail.com",
-    "id": "2",
-    "materiasInteres": ["HISTORIA","LENGUAJE"]
+    "id": "2"
   },
   {
+    "materiasInteres": [
+      "CIENCIAS"
+    ],
+    "preferirMenorTarifa": false,
+    "preferirClaseConMenosEstudiantes": false,
     "nombre": "Sofía",
     "apellido": "Ramírez",
     "correo": "sramirez@gmail.com",
-    "id": "3",
-    "materiasInteres": ["CIENCIAS"]
+    "id": "3"
   },
   {
+    "materiasInteres": [
+      "MATEMATICA",
+      "LENGUAJE"
+    ],
+    "preferirMenorTarifa": false,
+    "preferirClaseConMenosEstudiantes": false,
     "nombre": "Pedro",
     "apellido": "Torres",
     "correo": "ptorres@gmail.com",
-    "id": "4",
-    "materiasInteres": ["MATEMATICA","LENGUAJE"]
+    "id": "4"
   },
   {
+    "materiasInteres": [
+      "INGLES",
+      "HISTORIA"
+    ],
+    "preferirMenorTarifa": false,
+    "preferirClaseConMenosEstudiantes": false,
     "nombre": "Valeria",
     "apellido": "Núñez",
     "correo": "vnunez@gmail.com",
-    "id": "5",
-    "materiasInteres": ["INGLES","HISTORIA"]
+    "id": "5"
   },
   {
+    "materiasInteres": [
+      "CIENCIAS",
+      "MATEMATICA"
+    ],
+    "preferirMenorTarifa": false,
+    "preferirClaseConMenosEstudiantes": false,
     "nombre": "Jorge",
     "apellido": "Castro",
     "correo": "jcastro@gmail.com",
-    "id": "6",
-    "materiasInteres": ["CIENCIAS","MATEMATICA"]
+    "id": "6"
   },
   {
+    "materiasInteres": [
+      "LENGUAJE"
+    ],
+    "preferirMenorTarifa": false,
+    "preferirClaseConMenosEstudiantes": false,
     "nombre": "Lucía",
     "apellido": "Mendoza",
     "correo": "lmendoza@gmail.com",
-    "id": "7",
-    "materiasInteres": ["LENGUAJE"]
+    "id": "7"
   },
   {
+    "materiasInteres": [
+      "HISTORIA"
+    ],
+    "preferirMenorTarifa": false,
+    "preferirClaseConMenosEstudiantes": false,
     "nombre": "María",
     "apellido": "Díaz",
     "correo": "mdiaz@gmail.com",
-    "id": "8",
-    "materiasInteres": ["HISTORIA"]
+    "id": "8"
   },
   {
+    "materiasInteres": [
+      "INGLES",
+      "CIENCIAS"
+    ],
+    "preferirMenorTarifa": false,
+    "preferirClaseConMenosEstudiantes": false,
     "nombre": "Tomás",
     "apellido": "Santos",
     "correo": "tsantos@gmail.com",
-    "id": "9",
-    "materiasInteres": ["INGLES","CIENCIAS"]
+    "id": "9"
   },
   {
+    "materiasInteres": [
+      "MATEMATICA"
+    ],
+    "preferirMenorTarifa": false,
+    "preferirClaseConMenosEstudiantes": false,
     "nombre": "Camila",
     "apellido": "Vargas",
     "correo": "cvargas@gmail.com",
-    "id": "10",
-    "materiasInteres": ["MATEMATICA"]
+    "id": "10"
   },
   {
+    "materiasInteres": [
+      "LENGUAJE",
+      "CIENCIAS"
+    ],
+    "preferirMenorTarifa": false,
+    "preferirClaseConMenosEstudiantes": false,
     "nombre": "Felipe",
     "apellido": "Rojas",
     "correo": "frojas@gmail.com",
-    "id": "11",
-    "materiasInteres": ["LENGUAJE","CIENCIAS"]
+    "id": "11"
   },
   {
+    "materiasInteres": [
+      "HISTORIA",
+      "MATEMATICA"
+    ],
+    "preferirMenorTarifa": false,
+    "preferirClaseConMenosEstudiantes": false,
     "nombre": "Elena",
     "apellido": "Silva",
     "correo": "esilva@gmail.com",
-    "id": "12",
-    "materiasInteres": ["HISTORIA","MATEMATICA"]
+    "id": "12"
   },
   {
+    "materiasInteres": [
+      "INGLES",
+      "LENGUAJE"
+    ],
+    "preferirMenorTarifa": false,
+    "preferirClaseConMenosEstudiantes": false,
     "nombre": "Hugo",
     "apellido": "Morales",
     "correo": "hmorales@gmail.com",
-    "id": "13",
-    "materiasInteres": ["INGLES","LENGUAJE"]
+    "id": "13"
   },
   {
+    "materiasInteres": [
+      "CIENCIAS",
+      "HISTORIA"
+    ],
+    "preferirMenorTarifa": false,
+    "preferirClaseConMenosEstudiantes": false,
     "nombre": "Isabel",
     "apellido": "Luna",
     "correo": "iluna@gmail.com",
-    "id": "14",
-    "materiasInteres": ["CIENCIAS","HISTORIA"]
+    "id": "14"
   },
   {
+    "materiasInteres": [
+      "MATEMATICA",
+      "INGLES"
+    ],
+    "preferirMenorTarifa": false,
+    "preferirClaseConMenosEstudiantes": false,
     "nombre": "Diego",
     "apellido": "Reyes",
     "correo": "dreyes@gmail.com",
-    "id": "15",
-    "materiasInteres": ["MATEMATICA","INGLES"]
+    "id": "15"
   },
   {
+    "materiasInteres": [
+      "LENGUAJE",
+      "HISTORIA"
+    ],
+    "preferirMenorTarifa": false,
+    "preferirClaseConMenosEstudiantes": false,
     "nombre": "Patricia",
     "apellido": "Herrera",
     "correo": "pherrera@gmail.com",
-    "id": "16",
-    "materiasInteres": ["LENGUAJE","HISTORIA"]
+    "id": "16"
   },
   {
+    "materiasInteres": [
+      "CIENCIAS",
+      "INGLES"
+    ],
+    "preferirMenorTarifa": false,
+    "preferirClaseConMenosEstudiantes": false,
     "nombre": "Miguel",
     "apellido": "Cruz",
     "correo": "mcruz@gmail.com",
-    "id": "17",
-    "materiasInteres": ["CIENCIAS","INGLES"]
+    "id": "17"
   },
   {
+    "materiasInteres": [
+      "MATEMATICA",
+      "CIENCIAS",
+      "HISTORIA"
+    ],
+    "preferirMenorTarifa": false,
+    "preferirClaseConMenosEstudiantes": false,
     "nombre": "Laura",
     "apellido": "Paredes",
     "correo": "lparedes@gmail.com",
-    "id": "18",
-    "materiasInteres": ["MATEMATICA","CIENCIAS","HISTORIA"]
+    "id": "18"
   },
   {
+    "materiasInteres": [
+      "LENGUAJE",
+      "MATEMATICA",
+      "INGLES"
+    ],
+    "preferirMenorTarifa": false,
+    "preferirClaseConMenosEstudiantes": false,
     "nombre": "Javier",
     "apellido": "Ortega",
     "correo": "jortega@gmail.com",
-    "id": "19",
-    "materiasInteres": ["LENGUAJE","MATEMATICA","INGLES"]
+    "id": "19"
   }
 ]

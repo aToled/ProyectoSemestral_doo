@@ -1,6 +1,5 @@
 package Logica;
 
-import Logica.Enums.Asignatura;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -12,16 +11,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class EstudianteFactory{
     private static final String rutaArchivoEstudiante = "src/main/resources/ListaEstudiantes.JSON";
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public static Estudiante crearEstudiante(String nombre, String apellido, String correo, String id, Set<Asignatura> materiasInteres) {
-        if(materiasInteres==null || materiasInteres.isEmpty())
-            throw new IllegalArgumentException("El Estudiante debe tener al menos una asignatura de interés");
-        return new Estudiante(nombre, apellido, correo, id, materiasInteres); //agregar los atributos por el Json
+    public static Estudiante crearEstudiante(String nombre, String apellido, String correo, String id) {
+        return new Estudiante(nombre, apellido, correo, id); //agregar los atributos por el Json
     }
 
     /**
