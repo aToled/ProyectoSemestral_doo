@@ -3,7 +3,6 @@ package Logica;
 import Logica.Enums.Asignatura;
 import Logica.Enums.Dia;
 import Logica.Enums.Horario;
-
 import java.util.HashSet;
 import java.util.Set;
 

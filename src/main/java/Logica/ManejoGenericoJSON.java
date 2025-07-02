@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Clase cuyo unico proposito es proporcionar metodos para el Manejo de un Set de Objetos <T> dentro de un archivo JSON.
+ * Clase cuyo único propósito es proporcionar métodos para el Manejo de un Set de Objetos <T> dentro de un archivo JSON.
  * (Estudiantes, Profesores, Solicitudes)
  * @param <T>: El tipo de Objeto que con el que se Trabaja.
  */

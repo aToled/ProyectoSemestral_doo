@@ -29,7 +29,7 @@ public class ProfesorFactory extends ManejoGenericoJSON<Profesor>{
         if(capacidadMaximaAlumnos<=0)
             throw new IllegalArgumentException("La capacidad maxima debe ser mayor a 0");
         if(materiasQueDicta==null || materiasQueDicta.isEmpty())
-            throw new IllegalArgumentException("El Profesor debe dictar como minimo 1 asignatura");
+            throw new IllegalArgumentException("El Profesor debe dictar como mínimo 1 asignatura");
         if(disponibilidad==null || disponibilidad.isEmpty())
             throw new IllegalArgumentException("El Profesor debe tener al menos un bloque disponible");
         return new Profesor(nombre, apellido, correo, id, capacidadMaximaAlumnos, tarifa, materiasQueDicta, disponibilidad); //agregar los atributos por el Json

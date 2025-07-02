@@ -6,35 +6,29 @@ import Logica.Enums.Asignatura;
 import Logica.Estudiante;
 import Logica.Solicitud;
 
-public class EstrategiaDefault implements EstrategiaSolicitud{
-
-    /**
-     * Como es la estrategia por defecto, se puede aplicar a todas las solicitudes.
-     * (Idealmente, es la última que se ejecuta)
-     * @param s: la solicitud a evaluar.
-     * @return .
-     */
+public class EstrategiaMenorTarifa implements EstrategiaSolicitud{
     @Override
     public boolean puedeAplicar(Solicitud s) {
-        return true;
+        return s.getEstudiante().isPreferirMenorTarifa();
     }
 
-    /**
-     * Devuelve la primera clase con un cupo disponible, tomando el estudiante
-     * y la asignatura asociadas a la solicitud, si no hay ninguna disponible devuelve null.
-     * @param s: tal asignatura.
-     * @return tal clase.
-     */
     @Override
     public Clase proponerClase(Solicitud s) {
         Estudiante e = s.getEstudiante();
+
+        Clase mejorClase = null;
+        long menorTarifa = Long.MAX_VALUE;
 
         for(Clase clase : Calendario.getInstancia().getTodasLasClases()){
             if(!e.getMateriasInteres().contains(s.getAsignatura())) continue;
             if(clase.getAsignatura() != s.getAsignatura()) continue;
             if(clase.isLlena()) continue;
-            return clase;
+            long tarifa = clase.getProfesor().getTarifa();
+            if(tarifa < menorTarifa){
+                menorTarifa = tarifa;
+                mejorClase = clase;
+            }
         }
-        return null;
+        return mejorClase;
     }
 }
