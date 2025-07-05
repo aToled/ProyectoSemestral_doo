@@ -3,7 +3,6 @@ package interfaz;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
@@ -16,12 +15,8 @@ public class Redimencionador {
 
     public static ImageIcon red(String ruta, int porciento) {
         URL url = Redimencionador.class.getResource(ruta);
-        Image imagen = null;
-        try {
-            imagen = ImageIO.read(url);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        ImageIcon imagne = new ImageIcon(url);
+        Image imagen = imagne.getImage();
         int y = imagen.getHeight(null);
         int x = imagen.getWidth(null);
         double factorEscala = (double) porciento / 100.0;
@@ -31,6 +26,7 @@ public class Redimencionador {
 
         Image imagenFinal = imagen.getScaledInstance(nuevoAncho, nuevoAlto, Image.SCALE_SMOOTH);
         ImageIcon retorna = new ImageIcon(imagenFinal);
+        System.out.println(retorna);
         return retorna;
     }
 }
