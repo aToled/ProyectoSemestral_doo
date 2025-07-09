@@ -19,7 +19,7 @@ public class PanelEntrada extends JPanel {
         boton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Ventana.admin();
+                Ventana.adminInicio();
             }
         });
 

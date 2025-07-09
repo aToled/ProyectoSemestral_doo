@@ -2,6 +2,8 @@ package interfaz;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PanelAdmin extends JPanel {
 
@@ -13,8 +15,17 @@ public class PanelAdmin extends JPanel {
         JButton boton1 = this.addBotones("/botonCalendario.png");
         JButton boton2 = this.addBotones("/botonPerfil.png");
         JButton boton3 = this.addBotones("/botonSolicitud.png");
+        this.botones();
+        add(Box.createRigidArea(new Dimension(0,10)));
         this.repaint();
         this.revalidate();
+
+        boton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Ventana.perfil();
+            }
+        });
     }
 
     private void titulo(){
@@ -29,7 +40,7 @@ public class PanelAdmin extends JPanel {
 
     private JButton addBotones(String ubicacion){
         JButton boton = new JButton();
-        boton.setIcon(Redimencionador.red(ubicacion, 25));
+        boton.setIcon(Redimencionador.red(ubicacion, 23));
         boton.setAlignmentX(Component.CENTER_ALIGNMENT);
         boton.setContentAreaFilled(false);
         boton.setBorderPainted(false);
@@ -40,5 +51,23 @@ public class PanelAdmin extends JPanel {
         this.revalidate();
         this.repaint();
         return boton;
+    }
+
+    public void botones(){
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        panel.setOpaque(false);
+
+        JButton botonSalida = new JButton("Salir");
+        botonSalida.setPreferredSize(new Dimension(200,40));
+        panel.add(botonSalida);
+
+        add(panel);
+        botonSalida.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Ventana.principal();
+            }
+        });
     }
 }

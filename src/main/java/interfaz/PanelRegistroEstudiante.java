@@ -17,21 +17,14 @@ public class PanelRegistroEstudiante extends JPanel {
         this.texto();
         add(Box.createRigidArea(new Dimension(0,30)));
 
-        JButton boton1 = new JButton("Registrarme");
-        boton1.setAlignmentX(Component.CENTER_ALIGNMENT);
-        add(boton1);
+        this.botones();
+
+
         add(Box.createRigidArea(new Dimension(0,10)));
 
 
         this.repaint();
         this.revalidate();
-
-        boton1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Ventana.admin();
-            }
-        });
     }
     private void titulo(){
         Font fuente = new Font("Arial", Font.BOLD, 80);
@@ -104,5 +97,33 @@ public class PanelRegistroEstudiante extends JPanel {
 
         panel.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(panel);
+    }
+    public void botones(){
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout());
+        panel.setOpaque(false);
+
+        JButton boton1 = new JButton("Registrarme");
+        boton1.setPreferredSize(new Dimension(250,40));
+        panel.add(boton1);
+
+        JButton botonSalida = new JButton("Salir");
+        botonSalida.setPreferredSize(new Dimension(250,40));
+        panel.add(botonSalida);
+
+        add(panel);
+
+        boton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Ventana.solicitudEstudiante();
+            }
+        });
+        botonSalida.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Ventana.principal();
+            }
+        });
     }
 }
