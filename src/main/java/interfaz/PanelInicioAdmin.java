@@ -6,8 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PanelInicioAdmin extends JPanel {
-    private final String contrasena = "admin123";
-    private final String usuario = "user";
+    private final String contrasena = "admin";
+    private final String usuario = "admin";
     private JPasswordField password;
     private JTextField field;
     private boolean incorrecto = false;
@@ -49,12 +49,15 @@ public class PanelInicioAdmin extends JPanel {
         JLabel apellido = new JLabel("Contraseña:");
         apellido.setFont(fuente);
 
+
         field = new JTextField();
         password = new JPasswordField();
 
 
         nombre.setForeground(Color.GRAY);
         apellido.setForeground(Color.GRAY);
+
+
 
         panel.add(Box.createRigidArea(new Dimension(350,50)));
         panel.add(Box.createRigidArea(new Dimension(350,50)));

@@ -1,11 +1,17 @@
 package interfaz;
 
+import Logica.Estudiante;
+import Logica.EstudianteFactory;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PanelRegistroEstudiante extends JPanel {
+
+    private JTextField campo1,campo2,campo3,campo4;
+
     public PanelRegistroEstudiante(){
         this.setBackground(Color.black);
         this.setVisible(true);
@@ -49,10 +55,11 @@ public class PanelRegistroEstudiante extends JPanel {
         correo.setFont(fuente);
         JLabel id = new JLabel("Id(Guardar como identificador):");
         id.setFont(fuente);
-        JTextField campo1 = new JTextField("Ingrese su Nombre");
-        JTextField campo2 = new JTextField("Ingrese su Apellido");
-        JTextField campo3 = new JTextField("ejemplo@gmail.com");
-        JTextField campo4 = new JTextField("Numero de id");
+
+        campo1 = new JTextField("Ingrese su Nombre");
+        campo2 = new JTextField("Ingrese su Apellido");
+        campo3 = new JTextField("ejemplo@gmail.com");
+        campo4 = new JTextField("Numero de id");
 
 
         nombre.setForeground(Color.GRAY);
@@ -117,6 +124,7 @@ public class PanelRegistroEstudiante extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Ventana.solicitudEstudiante();
+                Estudiante estudiante = EstudianteFactory.crearEstudiante(campo1.getText(), campo2.getText(), campo3.getText(), campo4.getText());
             }
         });
         botonSalida.addActionListener(new ActionListener() {
