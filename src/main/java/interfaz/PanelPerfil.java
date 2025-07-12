@@ -9,9 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PanelPerfil extends JPanel {
-    JComboBox combo;
     JPanel panel;
-    private boolean elegido = false;
+    int valor = 0;
     private final String dias[] = {"LUNES","MARTES","MIERCOLES","JUEVES","VIERNES"};
 
     public PanelPerfil(){
@@ -23,8 +22,7 @@ public class PanelPerfil extends JPanel {
         this.titulo("Agregar");
 
         this.eliminar();
-        this.texto();
-        this.parteBaja();
+        this.cualAgregar();
 
         this.repaint();
         this.revalidate();
@@ -59,142 +57,34 @@ public class PanelPerfil extends JPanel {
         });
     }
 
-    private void texto(){
+    private void cualAgregar(){
         panel = new JPanel();
-        panel.setLayout(new GridLayout(9,2));
-        JLabel nombre = new JLabel("Nombre:");
-        Font fuente = new Font("Arial", Font.BOLD, 15);
-        nombre.setFont(fuente);
-        JLabel apellido = new JLabel("Apellido:");
-        apellido.setFont(fuente);
-        JLabel correo = new JLabel("Correo electronico:");
-        correo.setFont(fuente);
-        JLabel id = new JLabel("Id:");
-        id.setFont(fuente);
-        JLabel perfil = new JLabel("Tipo de Persona: ");
-        perfil.setFont(fuente);
-
-        JTextField campo1 = new JTextField("Ingrese su Nombre");
-        JTextField campo2 = new JTextField("Ingrese su Apellido");
-        JTextField campo3 = new JTextField("ejemplo@gmail.com");
-        JTextField campo4 = new JTextField("Numero de id");
-
-        this.combo = new JComboBox<String>();
-        combo.addItem("");
-        combo.addItem("ESTUDIANTE");
-        combo.addItem("PROFESOR");
-
-        nombre.setForeground(Color.GRAY);
-        apellido.setForeground(Color.GRAY);
-        correo.setForeground(Color.GRAY);
-        id.setForeground(Color.GRAY);
-        perfil.setForeground(Color.GRAY);
-
-        panel.add(perfil);
-        panel.add(combo);
-        panel.add(nombre);
-        panel.add(campo1);
-        panel.add(apellido);
-        panel.add(campo2);
-        panel.add(correo);
-        panel.add(campo3);
-        panel.add(id);
-        panel.add(campo4);
-
-
+        panel.setLayout(new FlowLayout());
         panel.setOpaque(false);
 
-        panel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(panel);
-    }
+        Font fuente = new Font("Arial", Font.BOLD, 20);
 
-    public void parteBaja(){
-        JButton boton = new JButton("AGREGAR");
-        boton.setEnabled(false);
-
-        add(Box.createRigidArea(new Dimension(200,40)));
-        JPanel panelBoton = new JPanel(new FlowLayout());
-        panelBoton.setOpaque(false);
-        add(panelBoton);
-        boton.setPreferredSize(new Dimension(100,40));
-
-        panelBoton.add(boton);
-
-        combo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String opcionSeleccionada = (String) combo.getSelectedItem();
-
-                if ("".equals(opcionSeleccionada)) {
-                    boton.setEnabled(false);
-                    elegido = true;
-
-
-                } else if("PROFESOR".equals(opcionSeleccionada)){
-                    JLabel asignatura = new JLabel("Asignatura:");
-                    Font fuente = new Font("Arial", Font.BOLD, 15);
-                    asignatura.setFont(fuente);
-                    asignatura.setForeground(Color.GRAY);
-
-                    JLabel capacidad = new JLabel("Capacidad de Estudiantes:");
-                    capacidad.setFont(fuente);
-                    JTextField cantidad = new JTextField();
-
-                    JComboBox comboAsignatura = new JComboBox<Asignatura>();
-                    for(Asignatura asignatura1: Asignatura.values()){
-                        comboAsignatura.addItem(asignatura1);
-                    }
-
-
-                    JLabel horario = new JLabel("Horario:");
-                    horario.setFont(fuente);
-                    JComboBox comboHorario = new JComboBox<String>();
-                    for(Horario horario1: Horario.values()){
-                        comboHorario.addItem(horario1.toString());
-                    }
-
-                    JLabel dia = new JLabel("Dia:");
-                    dia.setFont(fuente);
-                    JComboBox comboDia = new JComboBox<String>();
-                    for(String dia1: dias){
-                        comboDia.addItem(dia1);
-                    }
-
-                    asignatura.setForeground(Color.GRAY);
-                    capacidad.setForeground(Color.GRAY);
-                    horario.setForeground(Color.GRAY);
-                    dia.setForeground(Color.GRAY);
-
-                    panel.add(asignatura);
-                    panel.add(comboAsignatura);
-                    panel.add(capacidad);
-                    panel.add(cantidad);
-                    panel.add(horario);
-                    panel.add(comboHorario);
-                    panel.add(dia);
-                    panel.add(comboDia);
-                    panel.revalidate();
-                    panel.repaint();
-                    Ventana.refrescar();
-
-
-                    boton.setEnabled(true);
-                    if (elegido == true){
-                        elegido = false;
-                        panel.remove(comboAsignatura);
-                    }else{
-                        elegido = false;
-                        panel.remove(asignatura);
-                        panel.remove(comboAsignatura);
-                        panel.remove(capacidad);
-                        panel.remove(cantidad);
-                        panel.remove(horario);
-                        panel.remove(comboHorario);
-                        panel.remove(dia);
-                        panel.remove(comboDia);
-                    }
-                }
+        JRadioButton radio1=new JRadioButton("Profesor");
+        radio1.setFont(fuente);
+        radio1.setForeground(Color.white);
+        radio1.setOpaque(false);
+        radio1.addItemListener(e -> {
+            if (radio1.isSelected()) {
+                Ventana.agregarProfesor();
             }
         });
+
+        JRadioButton radio2 =new JRadioButton("Estudiante");
+        radio2.setFont(fuente);
+        radio2.setForeground(Color.white);
+        radio2.setOpaque(false);
+        radio2.addItemListener(e -> {
+            if (radio2.isSelected()) {
+                Ventana.agregarEstudiante();
+            }
+        });
+        panel.add(radio1);
+        panel.add(radio2);
+        add(panel);
     }
 }
