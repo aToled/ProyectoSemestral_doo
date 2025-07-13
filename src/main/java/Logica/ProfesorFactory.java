@@ -5,6 +5,10 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.Set;
 
+/**
+ * Clase que se encarga de la creación y gestión de los objetos tipo Profesor mediante persistencia en JSON,
+ * se extiende de ManejoGenericoJSON para operar sobre un conjunto de profesores almacenados localmente.
+ */
 public class ProfesorFactory extends ManejoGenericoJSON<Profesor>{
     private static final Type listType = new TypeToken<Set<Profesor>>(){}.getType();
     private static final ProfesorFactory instancia = new ProfesorFactory();
@@ -14,16 +18,9 @@ public class ProfesorFactory extends ManejoGenericoJSON<Profesor>{
     }
 
     /**
-     * Clase usada para crear nuvas instancias dentro de sacarArchivo
-     * @param nombre:
-     * @param apellido:
-     * @param correo:
-     * @param id:
-     * @param capacidadesMaximasAlumnos:
-     * @param tarifas:
-     * @param materiasQueDicta:
-     * @param disponibilidad:
-     * @return .
+     * Crea una instancia de Profesor validando sus atributos.
+     * @return Un Profesor válido.
+     * @throws IllegalArgumentException: si es que falla alguna validación.
      */
     public static Profesor crearProfesor(String nombre, String apellido, String correo, String id, Set<Integer> capacidadesMaximasAlumnos, Set<Long> tarifas, Set<Asignatura> materiasQueDicta, Set<BloqueHorario> disponibilidad) {
         for(Integer capacidad : capacidadesMaximasAlumnos)

@@ -6,6 +6,11 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.*;
 
+/**
+ * Clase encargada de gestionar solicitudes de estudiantes, esto siendo su: creación, resolución y notificación a observadores, además,
+ * se extiende de ManejoGenericoJSON para operar sobre un conjunto de Solicitudes almacenadas localmente.
+ * @see ManejoGenericoJSON
+ */
 public class GestorSolicitudes extends ManejoGenericoJSON<Solicitud> {
     private static final Type listType = new TypeToken<Set<Solicitud>>(){}.getType();
 

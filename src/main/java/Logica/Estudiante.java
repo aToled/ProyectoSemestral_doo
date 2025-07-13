@@ -6,6 +6,11 @@ import Logica.Enums.Horario;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Representa un Estudiante que puede asignar sus preferencias para enviar una solicitud sobre
+ * alguna Asignatura especifica que desea cursar, se extiende de Persona.
+ * @see Persona
+ */
 public class Estudiante extends Persona {
     private final Set<Asignatura> materiasInteres;
     private final Set<BloqueHorario> bloquesHorariosInteres;
@@ -27,7 +32,7 @@ public class Estudiante extends Persona {
 
     /**
      * Crea una solicitud en el sistema sobre alguna asignatura en particular, y retorna la solicitud creada. (para mostrarla en la GUI)
-     * (en realidad agrega una solicitud con un ID única a la lista interna de solicitudes, para que esta despues
+     * (en realidad agrega una solicitud con un ID única a la lista interna de solicitudes, para que esta después
      * pueda ser evaluada con el método resolver())
      * @param a: tal asignatura.
      * @return la solicitud.
@@ -38,7 +43,7 @@ public class Estudiante extends Persona {
         GestorSolicitudes.getInstancia().agregar(s);
         return s;
     }
-
+    // setters/adders:
     public void addMateriasInteres(Asignatura a) {materiasInteres.add(a);}
     public void addBloquesHorariosInteres(BloqueHorario b) {bloquesHorariosInteres.add(b);}
     public void addDiasInteres(Dia d) {diasInteres.add(d);}
@@ -46,6 +51,7 @@ public class Estudiante extends Persona {
     public void setPreferirMenorTarifa(boolean b) {this.preferirMenorTarifa = b;}
     public void setPreferirClaseConMenosEstudiantes(boolean b) {this.preferirClaseConMenosEstudiantes = b;}
 
+    // getters:
     public Set<Asignatura> getMateriasInteres() {return materiasInteres;}
     public Set<BloqueHorario> getBloquesHorariosInteres() {return bloquesHorariosInteres;}
     public Set<Dia> getDiasInteres() {return diasInteres;}

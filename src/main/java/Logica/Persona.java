@@ -1,5 +1,10 @@
 package Logica;
 
+/**
+ * Clase genérica de Persona la cual contiene varios atributos básicos como nombre, apellido, correo.
+ * Las personas son Identificables.
+ * @see IdentificableAbstracta
+ */
 public abstract class Persona extends IdentificableAbstracta {
     private final String nombre, apellido, correo;
 
@@ -10,6 +15,7 @@ public abstract class Persona extends IdentificableAbstracta {
         this.correo = correo;
     }
 
+    // getters:
     public String getNombre() {
         return nombre;
     }

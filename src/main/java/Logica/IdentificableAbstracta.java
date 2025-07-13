@@ -1,5 +1,10 @@
 package Logica;
 
+/**
+ * Clase base abstracta para entidades identificables mediante un ID único, además,
+ * proporciona implementaciones estándar de equals() y hashCode() basadas en el ID.
+ * @see Identificable
+ */
 public abstract class IdentificableAbstracta implements Identificable{
     protected final String id;
 

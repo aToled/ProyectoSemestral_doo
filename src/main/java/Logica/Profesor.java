@@ -3,6 +3,10 @@ package Logica;
 import Logica.Enums.Asignatura;
 import java.util.Set;
 
+/**
+ * Representa un Profesor creado por el administrador para ser asignado a Clases válidas, se extiende de Persona.
+ * @see Persona
+ */
 public class Profesor extends Persona {
     private final Set<Long> tarifas;
     private final Set<Integer> capacidadesMaximasAlumnos;
@@ -17,6 +21,7 @@ public class Profesor extends Persona {
         this.disponibilidad = disponibilidad;
     }
 
+    // setters:
     public Set<Integer> getCapacidadesMaximasAlumnos(){
         return capacidadesMaximasAlumnos;
     }

@@ -4,6 +4,11 @@ import Logica.Enums.Asignatura;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Representa una Clase de alguna Asignatura en un bloque específico del Horario, son creadas por el administrador
+ * basándose en los atributos del Profesor que desee asignarle a la clase, es Identificable.
+ * @see IdentificableAbstracta
+ */
 public class Clase extends IdentificableAbstracta{
 
     private final Profesor profesor;
@@ -13,6 +18,10 @@ public class Clase extends IdentificableAbstracta{
     private final int capacidadMaximaAlumnos;
     private final long tarifa;
 
+    /**
+     * Crea una instancia de Clase validando sus atributos basándose en el Profesor asignado.
+     * @throws IllegalArgumentException: si es que falla alguna validación.
+     */
     public Clase(Profesor profesor, String id, Asignatura asignatura, BloqueHorario bloque, int capacidadMaximaAlumnos, long tarifa) {
         super(id);
         if(!profesor.getMateriasQueDicta().contains(asignatura)){
@@ -58,14 +67,19 @@ public class Clase extends IdentificableAbstracta{
         return listaEstudiantes.size() >= capacidadMaximaAlumnos;
     }
 
-    public void eliminarEstudiante(String idEstudiante) {
-        listaEstudiantes.remove(idEstudiante);
-    }
+    /**
+     * Elimina a un Estudiante de la Clase al identificarlo por su ID.
+     * @param idEstudiante: la ID del Estudiante.
+     */
+    public void eliminarEstudiante(String idEstudiante) {listaEstudiantes.remove(idEstudiante);}
 
-    public int cantidadEstudiantes(){
-        return listaEstudiantes.size();
-    }
+    /**
+     * Retorna el total de estudiantes que posee la Clase.
+     * @return la cantidad entera de estudiantes.
+     */
+    public int cantidadEstudiantes(){return listaEstudiantes.size();}
 
+    // getters:
     public Map<String, Estudiante> getListaEstudiantes() {return listaEstudiantes;}
     public BloqueHorario getBloqueHorario() {return bloqueHorario;}
     public Asignatura getAsignatura() {return asignatura;}
