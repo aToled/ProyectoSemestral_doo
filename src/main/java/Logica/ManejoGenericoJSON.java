@@ -8,13 +8,11 @@ import java.io.Writer;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Clase cuyo único propósito es proporcionar métodos para el Manejo de un Set de Objetos <T> dentro de un archivo JSON.
- * (Estudiantes, Profesores, Solicitudes)
+ * (Estudiantes, Profesores, Tes)
  * @param <T>: El tipo de Objeto que con el que se Trabaja.
  */
 public abstract class ManejoGenericoJSON <T extends Identificable> {
@@ -97,5 +95,19 @@ public abstract class ManejoGenericoJSON <T extends Identificable> {
      */
     public int getCantidadObjetos() {
         return objetos.size();
+    }
+
+    /**
+     * Dado el ID busca entre la lista de Objetos si hay alguno que coincida.
+     * @param id: Id del objeto.
+     * @return La referencia al objeto encontrado o null si no la encuentra.
+     */
+    public T buscarObjeto(String id){
+        for(T o: objetos){
+            if(Objects.equals(o.getId(), id)){
+                return o;
+            }
+        }
+        throw new NoSuchElementException("Objeto: " + id + " no encontrada");
     }
 }

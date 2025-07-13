@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class SolicitudesObserverTest {
 
@@ -23,7 +23,10 @@ class SolicitudesObserverTest {
         private Set<Solicitud> solicitudesRecibidas = new HashSet<>();
 
         @Override
-        public void actualizar(Set<Solicitud> nuevasSolicitudes) {solicitudesRecibidas = nuevasSolicitudes;}
+        public void actualizar(Set<Solicitud> nuevasSolicitudes) {
+            solicitudesRecibidas = new HashSet<>();
+            solicitudesRecibidas.addAll(nuevasSolicitudes);
+        }
         public Set<Solicitud> getSolicitudesRecibidas() {return solicitudesRecibidas;}
     }
 

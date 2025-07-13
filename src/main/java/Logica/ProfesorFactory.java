@@ -18,6 +18,14 @@ public class ProfesorFactory extends ManejoGenericoJSON<Profesor>{
     }
 
     /**
+     * Creación de la instancia. (uso de singleton)
+     * @return Retorna la instancia.
+     */
+    public static ProfesorFactory getInstancia(){
+        return instancia;
+    }
+
+    /**
      * Crea una instancia de Profesor validando sus atributos.
      * @return Un Profesor válido.
      * @throws IllegalArgumentException: si es que falla alguna validación.
@@ -52,12 +60,5 @@ public class ProfesorFactory extends ManejoGenericoJSON<Profesor>{
      */
     public static void eliminarProfesor(String id){
         instancia.eliminar(id);
-    }
-
-    /**
-     * @see ManejoGenericoJSON
-     */
-    public static int getCantidadProfesores(){
-        return instancia.getCantidadObjetos();
     }
 }

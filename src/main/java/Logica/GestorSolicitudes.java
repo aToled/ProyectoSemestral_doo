@@ -55,7 +55,7 @@ public class GestorSolicitudes extends ManejoGenericoJSON<Solicitud> {
      */
     public boolean resolver(String id, EstrategiaSolicitud... estrategias){
         Set<Clase> sugerencias = new LinkedHashSet<>();
-        Solicitud sol = buscarSolicitud(id);
+        Solicitud sol = buscarObjeto(id);
 
         for(EstrategiaSolicitud e : estrategias){
             if(e.puedeAplicar(sol)){
@@ -82,7 +82,7 @@ public class GestorSolicitudes extends ManejoGenericoJSON<Solicitud> {
      * @param id: id de la solicitud.
      */
     public void aceptar(String id){
-        Solicitud s = buscarSolicitud(id);
+        Solicitud s = buscarObjeto(id);
         s.getClaseElegida().agregarEstudiante(s.getEstudiante());
         s.setEstadoSolicitud(EstadoSolicitud.ACEPTADA);
         guardar();
@@ -95,24 +95,10 @@ public class GestorSolicitudes extends ManejoGenericoJSON<Solicitud> {
      * @param id: id de la solicitud.
      */
     public void rechazar(String id){
-        Solicitud s = buscarSolicitud(id);
+        Solicitud s = buscarObjeto(id);
         s.setEstadoSolicitud(EstadoSolicitud.RECHAZADA);
         guardar();
         notificar();
-    }
-
-    /**
-     * Dado el ID busca entre la lista de solicitudes si hay alguna que coincida.
-     * @param id: Id de la solicitud.
-     * @return La referencia a la solicitud encontrada o null si no la encuentra.
-     */
-    private Solicitud buscarSolicitud(String id){
-        for(Solicitud s : super.objetos){
-            if(Objects.equals(s.getId(), id)){
-                return s;
-            }
-        }
-        throw new NoSuchElementException("Solicitud: " + id + " no encontrada");
     }
 
     /**
