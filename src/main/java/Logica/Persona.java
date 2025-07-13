@@ -28,6 +28,6 @@ public abstract class Persona extends IdentificableAbstracta {
 
     @Override
     public String toString(){
-        return "Nombre: "+nombre+", Apellido: "+apellido+", Correo: "+correo+", ID: "+id;
+        return "Nombre: "+nombre+", Apellido: "+apellido+", Correo: "+correo+", ID: "+this.getId();
     }
 }

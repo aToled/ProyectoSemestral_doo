@@ -73,4 +73,13 @@ class CalendarioTest {
         assertTrue(clasesLunes.contains(clase1));
         assertTrue(clasesLunes.contains(clase3));
     }
+
+    @Test
+    void testEliminarClase(){
+        calendario.removeClase(clase1.getId());
+        List<Clase> clases = calendario.getTodasLasClases();
+
+        assertFalse(clases.contains(clase1));
+        assertEquals(1, clases.size());
+    }
 }

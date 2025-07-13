@@ -89,6 +89,18 @@ public class Calendario {
     }
 
     /**
+     * Elimina una clase del calendario al buscar entre todas las clases la que
+     * coincida con el ID de la clase.
+     * @param id: Id de la clase a quitar.
+     */
+    public void removeClase(String id){
+        for (Map.Entry<BloqueHorario, List<Clase>> entry : calendario.entrySet()) {
+            List<Clase> clases = entry.getValue();
+            clases.removeIf(clase -> id.equals(clase.getId()));
+        }
+    }
+
+    /**
      * Limpia el calendario.
      */
     public void clear(){

@@ -18,13 +18,10 @@ public class Ventana extends JFrame {
         this.repaint();
     }
     public static JFrame getInstancia(){
-        if(instancia != null){
-            return instancia;
-        }
-        else{
+        if (instancia == null) {
             instancia = new Ventana();
-            return instancia;
         }
+        return instancia;
     }
     protected static void admin(){
         instancia.remove(panel);

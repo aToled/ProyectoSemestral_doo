@@ -10,11 +10,12 @@ class ClaseTest {
     private Profesor profLen;
     private Clase claseLen;
     private Estudiante eLen1, eLen2, eLen3, eLen4, eMat1;
-    private BloqueHorario Jueves10;
+    private BloqueHorario Jueves10, Lunes16;
 
     @BeforeEach
     void setUp(){
         Jueves10 = new BloqueHorario(Dia.JUEVES, Horario.BLOQUE10);
+        Lunes16 = new BloqueHorario(Dia.LUNES, Horario.BLOQUE12);
         profLen = new Profesor("Prof", "Len", "hola@gmail.com", "14", Set.of(3), Set.of(19999L), Set.of(Asignatura.LENGUAJE), Set.of(Jueves10));
         claseLen = new Clase(profLen, "1465", Asignatura.LENGUAJE, Jueves10, 3, 19999);
         eLen1 = new Estudiante("A", "B", "a@b.com", "1");
@@ -73,7 +74,6 @@ class ClaseTest {
 
     @Test
     void testProfesorNoDisponibleException(){
-        BloqueHorario Lunes16 = new BloqueHorario(Dia.LUNES, Horario.BLOQUE12);
         assertThrows(IllegalArgumentException.class, ()-> new Clase(profLen, "1123", Asignatura.LENGUAJE, Lunes16, 3, 19999), "El profesor no esta disponible en ese horario");
     }
 
@@ -84,5 +84,29 @@ class ClaseTest {
     @Test
     void testProfesorNoAceptaTarifaException(){
         assertThrows(IllegalArgumentException.class, ()-> new Clase(profLen, "1123", Asignatura.LENGUAJE, Jueves10, 3, 23332), "El profesor cobra 19999$ por clase");
+    }
+
+    @DisplayName("Tests relacionados a manejo de Clases: ")
+    @Test
+    void testCancelarClase(){
+        claseLen.agregarEstudiante(eLen1);
+        claseLen.cancelarClase();
+
+        assertNull(claseLen.getProfesor());
+        assertNull(claseLen.getAsignatura());
+        assertNull(claseLen.getBloqueHorario());
+        assertEquals(0, claseLen.getTarifa());
+        assertEquals(0, claseLen.getCapacidadMaximaAlumnos());
+        assertTrue(claseLen.getListaEstudiantes().isEmpty());
+    }
+
+    @Test
+    void testModificarCLase(){
+        Profesor newProfLen = new Profesor("test", "2", "t@mai.cl", "p2",Set.of(10), Set.of(19999L, 20000L), Set.of(Asignatura.LENGUAJE, Asignatura.MATEMATICA), Set.of(Jueves10, Lunes16));
+        assertDoesNotThrow(() -> claseLen.setProfesor(newProfLen));
+        assertDoesNotThrow(() -> claseLen.setAsignatura(Asignatura.MATEMATICA));
+        assertDoesNotThrow(() -> claseLen.setCapacidadMaximaAlumnos(6));
+        assertDoesNotThrow(() -> claseLen.setBloqueHorario(Lunes16));
+        assertDoesNotThrow(() -> claseLen.setTarifa(20000L));
     }
 }

@@ -6,7 +6,7 @@ package Logica;
  * @see Identificable
  */
 public abstract class IdentificableAbstracta implements Identificable{
-    protected final String id;
+    private final String id;
 
     protected IdentificableAbstracta(String id){
         this.id=id;

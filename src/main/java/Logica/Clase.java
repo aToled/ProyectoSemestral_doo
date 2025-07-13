@@ -11,12 +11,12 @@ import java.util.Map;
  */
 public class Clase extends IdentificableAbstracta{
 
-    private final Profesor profesor;
+    private Profesor profesor;
     private final Map<String,Estudiante> listaEstudiantes;
-    private final Asignatura asignatura;
-    private final BloqueHorario bloqueHorario;
-    private final int capacidadMaximaAlumnos;
-    private final long tarifa;
+    private Asignatura asignatura;
+    private BloqueHorario bloqueHorario;
+    private int capacidadMaximaAlumnos;
+    private long tarifa;
 
     /**
      * Crea una instancia de Clase validando sus atributos basándose en el Profesor asignado.
@@ -79,6 +79,20 @@ public class Clase extends IdentificableAbstracta{
      */
     public int cantidadEstudiantes(){return listaEstudiantes.size();}
 
+    /**
+     * Este método simula lo que sería la cancelación de una Clase al limpiar sus atributos
+     * y quitar la clase del calendario.
+     */
+    public void cancelarClase(){
+        profesor = null;
+        listaEstudiantes.clear();
+        asignatura = null;
+        bloqueHorario = null;
+        capacidadMaximaAlumnos = 0;
+        tarifa = 0;
+        Calendario.getInstancia().removeClase(this.getId());
+    }
+
     // getters:
     public Map<String, Estudiante> getListaEstudiantes() {return listaEstudiantes;}
     public BloqueHorario getBloqueHorario() {return bloqueHorario;}
@@ -86,4 +100,69 @@ public class Clase extends IdentificableAbstracta{
     public Profesor getProfesor() {return profesor;}
     public int getCapacidadMaximaAlumnos() {return capacidadMaximaAlumnos;}
     public long getTarifa() {return tarifa;}
+
+    //setters
+
+    /**
+     * Asigna un nuevo profesor a la clase tras verificar que el profesor cumpla con la
+     * asignatura, horario, tarifa y capacidad requeridos para poder asignarlo a la Clase.
+     * @param profesor: tal profesor.
+     */
+    public void setProfesor(Profesor profesor) {
+        if(!profesor.getMateriasQueDicta().contains(asignatura)){throw new IllegalArgumentException("El Profesor no dicta: "+asignatura);}
+        if(!profesor.getDisponibilidad().contains(bloqueHorario)){throw new IllegalArgumentException("El Profesor no esta disponible en: "+ bloqueHorario);}
+        if(!profesor.getTarifas().contains(tarifa)){throw new IllegalArgumentException("El Profesor no acepta esta tarifa: "+ tarifa);}
+        boolean aceptado = false;
+        for (Integer capacidadPermitida : profesor.getCapacidadesMaximasAlumnos()) {
+            if (capacidadPermitida >= capacidadMaximaAlumnos) {
+                aceptado = true;
+                break;
+            }
+        }
+        if (!aceptado) {throw new IllegalArgumentException("El Profesor no acepta esta cantidad de alumnos: " + capacidadMaximaAlumnos);}
+        this.profesor = profesor;
+    }
+
+    /**
+     * Asigna una nueva asignatura a la clase tras hacer validaciones.
+     * @param asignatura: tal asignatura.
+     */
+    public void setAsignatura(Asignatura asignatura) {
+        if(!profesor.getMateriasQueDicta().contains(asignatura)){throw new IllegalArgumentException("El Profesor no dicta: "+asignatura);}
+        this.asignatura = asignatura;
+    }
+
+    /**
+     * Asigna un nuevo bloque a la clase tras hacer validaciones.
+     * @param bloqueHorario: tal bloque.
+     */
+    public void setBloqueHorario(BloqueHorario bloqueHorario) {
+        if(!profesor.getDisponibilidad().contains(bloqueHorario)){throw new IllegalArgumentException("El Profesor no esta disponible en: "+ bloqueHorario);}
+        this.bloqueHorario = bloqueHorario;
+    }
+
+    /**
+     * Asigna una nueva capacidad maxima de alumnos a la clase tras validar que el profesor
+     * acepta esa cantidad de alumnos o más.
+     * @param capacidadMaximaAlumnos: tal capacidad.
+     */
+    public void setCapacidadMaximaAlumnos(int capacidadMaximaAlumnos) {
+        boolean aceptado = false;
+        for (Integer capacidadPermitida : profesor.getCapacidadesMaximasAlumnos()) {
+            if (capacidadPermitida >= capacidadMaximaAlumnos) {
+                aceptado = true;
+                break;
+            }
+        }
+        if (!aceptado) {throw new IllegalArgumentException("El Profesor no acepta esta cantidad de alumnos: " + capacidadMaximaAlumnos);}
+    }
+
+    /**
+     * Asigna una nueva tarifa a la clase tras hacer validaciones.
+     * @param tarifa: tal tarifa.
+     */
+    public void setTarifa(long tarifa) {
+        if(!profesor.getTarifas().contains(tarifa)){throw new IllegalArgumentException("El Profesor no acepta esta tarifa: "+ tarifa);}
+        this.tarifa = tarifa;
+    }
 }
