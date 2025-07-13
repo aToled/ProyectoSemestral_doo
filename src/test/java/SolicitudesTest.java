@@ -25,8 +25,8 @@ class SolicitudesTest {
         BloqueHorario Lunes8AM = new BloqueHorario(Dia.LUNES, Horario.BLOQUE1);
         estudiante = new Estudiante("est", "Dante", "estudiante@gmail.com", "e1");
         estudiante.addMateriasInteres(Asignatura.MATEMATICA);
-        Profesor profesor = new Profesor("prof", "lessor", "profesor@gmail.com", "p1", 2, 10000, Set.of(Asignatura.MATEMATICA), Set.of(Lunes8AM));
-        clase = new Clase(profesor, "C01", Asignatura.MATEMATICA, Lunes8AM);
+        Profesor profesor = new Profesor("prof", "lessor", "profesor@gmail.com", "p1", Set.of(2), Set.of(10000L), Set.of(Asignatura.MATEMATICA), Set.of(Lunes8AM));
+        clase = new Clase(profesor, "C01", Asignatura.MATEMATICA, Lunes8AM, 2, 10000);
 
         Calendario calendario = Calendario.getInstancia();
         calendario.clear();
@@ -56,7 +56,7 @@ class SolicitudesTest {
         assertEquals(estudiante, solicitud.getEstudiante());
         assertEquals(Asignatura.MATEMATICA, solicitud.getAsignatura());
         assertEquals(EstadoSolicitud.PENDIENTE, solicitud.getEstadoSolicitud());
-        assertTrue(gestor.getSolicitudesNoModificable().contains(solicitud));
+        assertTrue(gestor.getObjetosNoModificable().contains(solicitud));
     }
 
     @Test
@@ -113,7 +113,7 @@ class SolicitudesTest {
 
     @Test
     void testListaSolicitudesNoModificable() {
-        Set<Solicitud> set = gestor.getSolicitudesNoModificable();
+        Set<Solicitud> set = gestor.getObjetosNoModificable();
         assertThrows(UnsupportedOperationException.class, () -> set.add(solicitud));
     }
 }

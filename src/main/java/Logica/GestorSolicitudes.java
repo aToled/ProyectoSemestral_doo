@@ -154,16 +154,6 @@ public class GestorSolicitudes extends ManejoGenericoJSON<Solicitud> {
     }
 
     /**
-     * Devuelve el Set de solicitudes, pero no modificable. (para obligar a usar los métodos agregar(), eliminar()
-     * y eliminarTodas(), ya que podrían generarse incongruencias entre el JSON y la lista de solicitudes
-     * si se modificase la lista interna sin usar esos métodos)
-     * @return tal lista.
-     */
-    public Set<Solicitud> getSolicitudesNoModificable() {
-        return Collections.unmodifiableSet(super.objetos);
-    }
-
-    /**
      * Actualiza las solicitudes en el JSON y notifica a los Listener.
      */
     public static void actualizar(){

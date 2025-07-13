@@ -8,6 +8,7 @@ import java.io.Writer;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -79,5 +80,15 @@ public abstract class ManejoGenericoJSON <T extends Identificable> {
     protected void eliminarTodas(){
         objetos.clear();
         guardar();
+    }
+
+    /**
+     * Devuelve el Set de objetos, pero no modificable. (para obligar a usar los métodos agregar(), eliminar()
+     * y eliminarTodas(), ya que podrían generarse incongruencias entre el JSON y la lista de objetos
+     * si se modificase la lista interna sin usar esos métodos)
+     * @return tal lista.
+     */
+    public Set<T> getObjetosNoModificable() {
+        return Collections.unmodifiableSet(objetos);
     }
 }

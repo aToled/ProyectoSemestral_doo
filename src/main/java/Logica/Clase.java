@@ -1,7 +1,6 @@
 package Logica;
 
 import Logica.Enums.Asignatura;
-import Logica.Excepciones.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,19 +11,29 @@ public class Clase implements Identificable{
     private final Asignatura asignatura;
     private final String id;
     private final BloqueHorario bloqueHorario;
+    private final int capacidadMaximaAlumnos;
+    private final long tarifa;
 
-    public Clase(Profesor profesor, String id, Asignatura asignatura, BloqueHorario bloque) throws ProfesorNoDictaMateriaException {
+    public Clase(Profesor profesor, String id, Asignatura asignatura, BloqueHorario bloque, int capacidadMaximaAlumnos, long tarifa) {
         if(!profesor.getMateriasQueDicta().contains(asignatura)){
-            throw new ProfesorNoDictaMateriaException("El Profesor no dicta: "+asignatura);
+            throw new IllegalArgumentException("El Profesor no dicta: "+asignatura);
         }
         if(!profesor.getDisponibilidad().contains(bloque)){
-            throw new ProfesorNoDisponibleException("Profesor no disponible en "+ bloque);
+            throw new IllegalArgumentException("El Profesor no esta disponible en: "+ bloque);
+        }
+        if(!profesor.getCapacidadesMaximasAlumnos().contains(capacidadMaximaAlumnos)){
+            throw new IllegalArgumentException("El Profesor no acepta esta cantidad de alumnos: "+ capacidadMaximaAlumnos);
+        }
+        if(!profesor.getTarifas().contains(tarifa)){
+            throw new IllegalArgumentException("El Profesor no acepta esta tarifa: "+ tarifa);
         }
         listaEstudiantes = new HashMap<>();
         this.profesor = profesor;
         this.id = id;
         this.asignatura = asignatura;
         this.bloqueHorario = bloque;
+        this.capacidadMaximaAlumnos = capacidadMaximaAlumnos;
+        this.tarifa = tarifa;
     }
 
     /**
@@ -34,7 +43,7 @@ public class Clase implements Identificable{
      */
     public boolean agregarEstudiante(Estudiante e) {
         if (e.getMateriasInteres().contains(asignatura)) {
-            if (listaEstudiantes.size() < profesor.getCapacidadMaximaAlumnos()) {
+            if (listaEstudiantes.size() < capacidadMaximaAlumnos) {
                 listaEstudiantes.putIfAbsent(e.getId(), e);
                 System.out.println(e.getNombre()+" "+ e.getApellido()+" Se agrego con éxito");
                 return true;
@@ -53,16 +62,7 @@ public class Clase implements Identificable{
      * @return True si la lista es mayor o igual a la cantidad maxima permitida por el profesor.
      */
     public boolean isLlena(){
-        return listaEstudiantes.size() >= profesor.getCapacidadMaximaAlumnos();
-    }
-
-    /**
-     * Método utilitario que válida si un estudiante pertenece o no a la clase.
-     * @param e: dicho estudiante.
-     * @return valor booleano que depende de si el estudiante está en el Map.
-     */
-    public boolean estudianteEnClase(Estudiante e){
-        return listaEstudiantes.containsValue(e);
+        return listaEstudiantes.size() >= capacidadMaximaAlumnos;
     }
 
     public void eliminarEstudiante(String idEstudiante) {
@@ -73,21 +73,13 @@ public class Clase implements Identificable{
         return listaEstudiantes.size();
     }
 
-    public Map<String, Estudiante> getListaEstudiantes() {
-        return listaEstudiantes;
-    }
-    public BloqueHorario getBloqueHorario() {
-        return bloqueHorario;
-    }
-    public Asignatura getAsignatura() {
-        return asignatura;
-    }
-    public Profesor getProfesor() {
-        return profesor;
-    }
-    public String getId(){
-        return id;
-    }
+    public Map<String, Estudiante> getListaEstudiantes() {return listaEstudiantes;}
+    public BloqueHorario getBloqueHorario() {return bloqueHorario;}
+    public Asignatura getAsignatura() {return asignatura;}
+    public Profesor getProfesor() {return profesor;}
+    public String getId(){return id;}
+    public int getCapacidadMaximaAlumnos() {return capacidadMaximaAlumnos;}
+    public long getTarifa() {return tarifa;}
 
     @Override
     public boolean equals(Object o){

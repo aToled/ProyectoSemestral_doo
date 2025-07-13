@@ -149,7 +149,7 @@ public class PanelAgregarProfesorAdmin extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Ventana.perfil();
-                Profesor profesor = ProfesorFactory.crearProfesor(campo1.getText(), campo2.getText(), campo3.getText(), campo4.getText(), Integer.parseInt(campo5.getText()),Long.parseLong(campo6.getText()), (Set<Asignatura>) comboAsignatura.getSelectedItem(), (Set<BloqueHorario>) comboHorario.getSelectedItem());
+                //Profesor profesor = ProfesorFactory.crearProfesor(campo1.getText(), campo2.getText(), campo3.getText(), campo4.getText(), Integer.parseInt(campo5.getText()),Long.parseLong(campo6.getText()), (Set<Asignatura>) comboAsignatura.getSelectedItem(), (Set<BloqueHorario>) comboHorario.getSelectedItem());
             }
         });
         botonSalida.addActionListener(new ActionListener() {

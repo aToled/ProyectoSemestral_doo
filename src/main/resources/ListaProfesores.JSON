@@ -1,7 +1,15 @@
 [
   {
-    "tarifa": 35000,
-    "capacidadMaximaAlumnos": 25,
+    "tarifas": [
+      35000,
+      30000,
+      40000
+    ],
+    "capacidadesMaximasAlumnos": [
+      25,
+      20,
+      30
+    ],
     "materiasQueDicta": [
       "MATEMATICA"
     ],
@@ -21,8 +29,17 @@
     "id": "0"
   },
   {
-    "tarifa": 32000,
-    "capacidadMaximaAlumnos": 30,
+    "tarifas": [
+      32000,
+      28000,
+      35000,
+      30000
+    ],
+    "capacidadesMaximasAlumnos": [
+      30,
+      25,
+      35
+    ],
     "materiasQueDicta": [
       "INGLES",
       "HISTORIA"
@@ -43,8 +60,17 @@
     "id": "1"
   },
   {
-    "tarifa": 40000,
-    "capacidadMaximaAlumnos": 28,
+    "tarifas": [
+      40000,
+      38000,
+      45000
+    ],
+    "capacidadesMaximasAlumnos": [
+      28,
+      25,
+      30,
+      22
+    ],
     "materiasQueDicta": [
       "CIENCIAS"
     ],
@@ -60,8 +86,16 @@
     "id": "2"
   },
   {
-    "tarifa": 31000,
-    "capacidadMaximaAlumnos": 22,
+    "tarifas": [
+      31000,
+      29000,
+      33000
+    ],
+    "capacidadesMaximasAlumnos": [
+      22,
+      20,
+      25
+    ],
     "materiasQueDicta": [
       "LENGUAJE",
       "MATEMATICA"
@@ -80,8 +114,16 @@
     "id": "3"
   },
   {
-    "tarifa": 36000,
-    "capacidadMaximaAlumnos": 26,
+    "tarifas": [
+      36000,
+      32000,
+      38000
+    ],
+    "capacidadesMaximasAlumnos": [
+      26,
+      23,
+      29
+    ],
     "materiasQueDicta": [
       "HISTORIA"
     ],
@@ -101,8 +143,17 @@
     "id": "4"
   },
   {
-    "tarifa": 37000,
-    "capacidadMaximaAlumnos": 29,
+    "tarifas": [
+      37000,
+      35000,
+      40000,
+      39000
+    ],
+    "capacidadesMaximasAlumnos": [
+      29,
+      25,
+      32
+    ],
     "materiasQueDicta": [
       "INGLES"
     ],
@@ -118,8 +169,16 @@
     "id": "5"
   },
   {
-    "tarifa": 42000,
-    "capacidadMaximaAlumnos": 31,
+    "tarifas": [
+      42000,
+      39000,
+      45000
+    ],
+    "capacidadesMaximasAlumnos": [
+      31,
+      28,
+      34
+    ],
     "materiasQueDicta": [
       "CIENCIAS",
       "HISTORIA"
@@ -139,8 +198,16 @@
     "id": "6"
   },
   {
-    "tarifa": 33000,
-    "capacidadMaximaAlumnos": 24,
+    "tarifas": [
+      33000,
+      30000,
+      35000
+    ],
+    "capacidadesMaximasAlumnos": [
+      24,
+      20,
+      28
+    ],
     "materiasQueDicta": [
       "MATEMATICA",
       "CIENCIAS"
@@ -156,8 +223,17 @@
     "id": "7"
   },
   {
-    "tarifa": 39000,
-    "capacidadMaximaAlumnos": 27,
+    "tarifas": [
+      39000,
+      36000,
+      42000,
+      40000
+    ],
+    "capacidadesMaximasAlumnos": [
+      27,
+      24,
+      30
+    ],
     "materiasQueDicta": [
       "LENGUAJE"
     ],
@@ -177,8 +253,16 @@
     "id": "8"
   },
   {
-    "tarifa": 34000,
-    "capacidadMaximaAlumnos": 23,
+    "tarifas": [
+      34000,
+      31000,
+      37000
+    ],
+    "capacidadesMaximasAlumnos": [
+      23,
+      20,
+      26
+    ],
     "materiasQueDicta": [
       "INGLES",
       "MATEMATICA"

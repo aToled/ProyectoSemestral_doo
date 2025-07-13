@@ -21,7 +21,7 @@ public class EstrategiaMenorTarifa implements EstrategiaSolicitud{
             if(!sol.getEstudiante().getMateriasInteres().contains(sol.getAsignatura())) continue;
             if(clase.getAsignatura() != sol.getAsignatura()) continue;
             if(clase.isLlena()) continue;
-            long tarifa = clase.getProfesor().getTarifa();
+            long tarifa = clase.getTarifa();
             if(tarifa < menorTarifa){
                 menorTarifa = tarifa;
                 mejorClase = clase;

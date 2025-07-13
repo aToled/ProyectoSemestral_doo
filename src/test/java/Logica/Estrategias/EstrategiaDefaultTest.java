@@ -25,12 +25,12 @@ class EstrategiaDefaultTest {
         Estudiante e2 = new Estudiante("a","a","a","a");
         e2.addMateriasInteres(Asignatura.MATEMATICA);
 
-        Profesor p1 = new Profesor("p1", "prof", "p1@mail.com", "p1", 2, 10000, Set.of(Asignatura.MATEMATICA), Set.of(new BloqueHorario(Dia.LUNES, Horario.BLOQUE6), new BloqueHorario(Dia.MARTES, Horario.BLOQUE8)));
-        Profesor p2 = new Profesor("p2", "prof", "p2@mail.com", "p2", 1, 10000, Set.of(Asignatura.MATEMATICA), Set.of(new BloqueHorario(Dia.JUEVES, Horario.BLOQUE10)));
+        Profesor p1 = new Profesor("p1", "prof", "p1@mail.com", "p1", Set.of(2), Set.of(10000L), Set.of(Asignatura.MATEMATICA), Set.of(new BloqueHorario(Dia.LUNES, Horario.BLOQUE6), new BloqueHorario(Dia.MARTES, Horario.BLOQUE8)));
+        Profesor p2 = new Profesor("p2", "prof", "p2@mail.com", "p2", Set.of(1), Set.of(10000L), Set.of(Asignatura.MATEMATICA), Set.of(new BloqueHorario(Dia.JUEVES, Horario.BLOQUE10)));
 
-        claseBuena1 = new Clase(p1, "C01", Asignatura.MATEMATICA, new BloqueHorario(Dia.LUNES, Horario.BLOQUE6));
-        claseBuena2 = new Clase(p1, "C02", Asignatura.MATEMATICA, new BloqueHorario(Dia.MARTES, Horario.BLOQUE8));
-        claseMala = new Clase(p2, "C03", Asignatura.MATEMATICA, new BloqueHorario(Dia.JUEVES, Horario.BLOQUE10));
+        claseBuena1 = new Clase(p1, "C01", Asignatura.MATEMATICA, new BloqueHorario(Dia.LUNES, Horario.BLOQUE6), 2, 10000);
+        claseBuena2 = new Clase(p1, "C02", Asignatura.MATEMATICA, new BloqueHorario(Dia.MARTES, Horario.BLOQUE8), 2, 10000);
+        claseMala = new Clase(p2, "C03", Asignatura.MATEMATICA, new BloqueHorario(Dia.JUEVES, Horario.BLOQUE10), 1, 10000);
         claseMala.agregarEstudiante(e2);
 
         Calendario.getInstancia().clear();

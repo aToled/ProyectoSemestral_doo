@@ -31,8 +31,8 @@ class SolicitudesObserverTest {
     void setUp() {
         observadorTest = new ObservadorTest();
         BloqueHorario Lunes8AM = new BloqueHorario(Dia.LUNES, Horario.BLOQUE1);
-        Profesor profesor = new Profesor("prof", "lessor", "profesor@gmail.com", "p1", 2, 10000, Set.of(Asignatura.MATEMATICA), Set.of(Lunes8AM));
-        Clase clase = new Clase(profesor, "C01", Asignatura.MATEMATICA, Lunes8AM);
+        Profesor profesor = new Profesor("prof", "lessor", "profesor@gmail.com", "p1", Set.of(2), Set.of(10000L), Set.of(Asignatura.MATEMATICA), Set.of(Lunes8AM));
+        Clase clase = new Clase(profesor, "C01", Asignatura.MATEMATICA, Lunes8AM, 2, 10000);
 
         Calendario calendario = Calendario.getInstancia();
         calendario.clear();

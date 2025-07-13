@@ -16,7 +16,7 @@ public class PanelCalendario extends JPanel {
     }
 
     private void cuerpo() {
-        JTable = new JTable(null, dias);
+        //JTable = new JTable(null, dias);
     }
 
     private void titulo(){

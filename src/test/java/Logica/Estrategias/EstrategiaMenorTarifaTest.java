@@ -22,11 +22,11 @@ class EstrategiaMenorTarifaTest {
         BloqueHorario bloque = new BloqueHorario(Dia.LUNES, Horario.BLOQUE1);
         Estudiante e1 = new Estudiante("e1", "est", "e1@mail.com", "e1");
         e1.addMateriasInteres(Asignatura.MATEMATICA);
-        Profesor p1 = new Profesor("p1", "prof", "p1@mail.com", "p1", 3, 1000, Set.of(Asignatura.MATEMATICA), Set.of(bloque));
-        Profesor p2 = new Profesor("p2", "prof", "p2@mail.com", "p2", 3, 100000, Set.of(Asignatura.MATEMATICA), Set.of(bloque));
+        Profesor p1 = new Profesor("p1", "prof", "p1@mail.com", "p1", Set.of(3), Set.of(1000L), Set.of(Asignatura.MATEMATICA), Set.of(bloque));
+        Profesor p2 = new Profesor("p2", "prof", "p2@mail.com", "p2", Set.of(3), Set.of(100000L), Set.of(Asignatura.MATEMATICA), Set.of(bloque));
 
-        claseBuena = new Clase(p1, "C01", Asignatura.MATEMATICA, bloque);
-        claseMala = new Clase(p2, "C02", Asignatura.MATEMATICA, bloque);
+        claseBuena = new Clase(p1, "C01", Asignatura.MATEMATICA, bloque, 3, 1000);
+        claseMala = new Clase(p2, "C02", Asignatura.MATEMATICA, bloque, 3, 100000);
 
         Calendario.getInstancia().clear();
         Calendario.getInstancia().addClaseToBloque(claseBuena);

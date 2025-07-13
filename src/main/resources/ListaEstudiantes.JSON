@@ -9,7 +9,7 @@
     "nombre": "Carlos",
     "apellido": "Gómez",
     "correo": "cgomez@gmail.com",
-    "id": 0
+    "id": "0"
   },
   {
     "materiasInteres": [
@@ -20,7 +20,7 @@
     "nombre": "Ana",
     "apellido": "Pérez",
     "correo": "aperez@gmail.com",
-    "id": 1
+    "id": "1"
   },
   {
     "materiasInteres": [
@@ -32,7 +32,7 @@
     "nombre": "Luis",
     "apellido": "Martínez",
     "correo": "lmartinez@gmail.com",
-    "id": 2
+    "id": "2"
   },
   {
     "materiasInteres": [
@@ -43,7 +43,7 @@
     "nombre": "Sofía",
     "apellido": "Ramírez",
     "correo": "sramirez@gmail.com",
-    "id": 3
+    "id": "3"
   },
   {
     "materiasInteres": [
@@ -55,7 +55,7 @@
     "nombre": "Pedro",
     "apellido": "Torres",
     "correo": "ptorres@gmail.com",
-    "id": 4
+    "id": "4"
   },
   {
     "materiasInteres": [
@@ -67,7 +67,7 @@
     "nombre": "Valeria",
     "apellido": "Núñez",
     "correo": "vnunez@gmail.com",
-    "id": 5
+    "id": "5"
   },
   {
     "materiasInteres": [
@@ -79,7 +79,7 @@
     "nombre": "Jorge",
     "apellido": "Castro",
     "correo": "jcastro@gmail.com",
-    "id": 6
+    "id": "6"
   },
   {
     "materiasInteres": [
@@ -90,7 +90,7 @@
     "nombre": "Lucía",
     "apellido": "Mendoza",
     "correo": "lmendoza@gmail.com",
-    "id": 7
+    "id": "7"
   },
   {
     "materiasInteres": [
@@ -101,7 +101,7 @@
     "nombre": "María",
     "apellido": "Díaz",
     "correo": "mdiaz@gmail.com",
-    "id": 8
+    "id": "8"
   },
   {
     "materiasInteres": [
@@ -113,7 +113,7 @@
     "nombre": "Tomás",
     "apellido": "Santos",
     "correo": "tsantos@gmail.com",
-    "id": 9
+    "id": "9"
   },
   {
     "materiasInteres": [
@@ -124,7 +124,7 @@
     "nombre": "Camila",
     "apellido": "Vargas",
     "correo": "cvargas@gmail.com",
-    "id": 10
+    "id": "10"
   },
   {
     "materiasInteres": [
@@ -136,7 +136,7 @@
     "nombre": "Felipe",
     "apellido": "Rojas",
     "correo": "frojas@gmail.com",
-    "id": 11
+    "id": "11"
   },
   {
     "materiasInteres": [
@@ -148,7 +148,7 @@
     "nombre": "Elena",
     "apellido": "Silva",
     "correo": "esilva@gmail.com",
-    "id": 12
+    "id": "12"
   },
   {
     "materiasInteres": [
@@ -160,7 +160,7 @@
     "nombre": "Hugo",
     "apellido": "Morales",
     "correo": "hmorales@gmail.com",
-    "id": 13
+    "id": "13"
   },
   {
     "materiasInteres": [
@@ -172,7 +172,7 @@
     "nombre": "Isabel",
     "apellido": "Luna",
     "correo": "iluna@gmail.com",
-    "id": 14
+    "id": "14"
   },
   {
     "materiasInteres": [
@@ -184,7 +184,7 @@
     "nombre": "Diego",
     "apellido": "Reyes",
     "correo": "dreyes@gmail.com",
-    "id": 15
+    "id": "15"
   },
   {
     "materiasInteres": [
@@ -196,7 +196,7 @@
     "nombre": "Patricia",
     "apellido": "Herrera",
     "correo": "pherrera@gmail.com",
-    "id": 16
+    "id": "16"
   },
   {
     "materiasInteres": [
@@ -208,7 +208,7 @@
     "nombre": "Miguel",
     "apellido": "Cruz",
     "correo": "mcruz@gmail.com",
-    "id": 17
+    "id": "17"
   },
   {
     "materiasInteres": [
@@ -221,7 +221,7 @@
     "nombre": "Laura",
     "apellido": "Paredes",
     "correo": "lparedes@gmail.com",
-    "id": 18
+    "id": "18"
   },
   {
     "materiasInteres": [
@@ -234,6 +234,6 @@
     "nombre": "Javier",
     "apellido": "Ortega",
     "correo": "jortega@gmail.com",
-    "id": 19
+    "id": "19"
   }
 ]

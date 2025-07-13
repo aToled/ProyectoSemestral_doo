@@ -3,7 +3,6 @@ import Logica.Clase;
 import Logica.Estudiante;
 import Logica.Profesor;
 import org.junit.jupiter.api.*;
-import Logica.Excepciones.*;
 import Logica.Enums.*;
 import java.util.Set;
 
@@ -18,8 +17,8 @@ class ClaseTest {
     @BeforeEach
     void setUp(){
         Jueves10 = new BloqueHorario(Dia.JUEVES, Horario.BLOQUE10);
-        profLen = new Profesor("Prof", "Len", "hola@gmail.com", "14", 3, 19999, Set.of(Asignatura.LENGUAJE), Set.of(Jueves10));
-        claseLen = new Clase(profLen, "1465", Asignatura.LENGUAJE, Jueves10);
+        profLen = new Profesor("Prof", "Len", "hola@gmail.com", "14", Set.of(3), Set.of(19999L), Set.of(Asignatura.LENGUAJE), Set.of(Jueves10));
+        claseLen = new Clase(profLen, "1465", Asignatura.LENGUAJE, Jueves10, 3, 19999);
         eLen1 = new Estudiante("A", "B", "a@b.com", "1");
         eLen1.addMateriasInteres(Asignatura.LENGUAJE);
         eLen2 = new Estudiante("C", "D", "c@d.com", "2");
@@ -58,12 +57,21 @@ class ClaseTest {
     @DisplayName("Tests relacionados a manejo de profesores: ")
     @Test
     void testProfesorNoDictaMateriaException(){
-        assertThrows(ProfesorNoDictaMateriaException.class, ()-> new Clase(profLen, "1001", Asignatura.HISTORIA, Jueves10), "El profesor no dicta historia");
+        assertThrows(IllegalArgumentException.class, ()-> new Clase(profLen, "1001", Asignatura.HISTORIA, Jueves10, 3, 19999), "El profesor no dicta historia");
     }
 
     @Test
     void testProfesorNoDisponibleException(){
         BloqueHorario Lunes16 = new BloqueHorario(Dia.LUNES, Horario.BLOQUE12);
-        assertThrows(ProfesorNoDisponibleException.class, ()-> new Clase(profLen, "1123", Asignatura.LENGUAJE, Lunes16), "El profesor no esta disponible en ese horario");
+        assertThrows(IllegalArgumentException.class, ()-> new Clase(profLen, "1123", Asignatura.LENGUAJE, Lunes16, 3, 19999), "El profesor no esta disponible en ese horario");
+    }
+
+    @Test
+    void testProfesorNoAceptaCanitdadEstudiantesException(){
+        assertThrows(IllegalArgumentException.class, ()-> new Clase(profLen, "1123", Asignatura.LENGUAJE, Jueves10, 10, 19999), "El profesor solo acepta hasta 3 Estudiantes");
+    }
+    @Test
+    void testProfesorNoAceptaTarifaException(){
+        assertThrows(IllegalArgumentException.class, ()-> new Clase(profLen, "1123", Asignatura.LENGUAJE, Jueves10, 3, 23332), "El profesor cobra 19999$ por clase");
     }
 }

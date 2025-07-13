@@ -19,20 +19,21 @@ public class ProfesorFactory extends ManejoGenericoJSON<Profesor>{
      * @param apellido:
      * @param correo:
      * @param id:
-     * @param capacidadMaximaAlumnos:
-     * @param tarifa:
+     * @param capacidadesMaximasAlumnos:
+     * @param tarifas:
      * @param materiasQueDicta:
      * @param disponibilidad:
      * @return .
      */
-    public static Profesor crearProfesor(String nombre, String apellido, String correo, String id, int capacidadMaximaAlumnos, long tarifa, Set<Asignatura> materiasQueDicta, Set<BloqueHorario> disponibilidad) {
-        if(capacidadMaximaAlumnos<=0)
-            throw new IllegalArgumentException("La capacidad maxima debe ser mayor a 0");
+    public static Profesor crearProfesor(String nombre, String apellido, String correo, String id, Set<Integer> capacidadesMaximasAlumnos, Set<Long> tarifas, Set<Asignatura> materiasQueDicta, Set<BloqueHorario> disponibilidad) {
+        for(Integer capacidad : capacidadesMaximasAlumnos)
+            if(capacidad <=0)
+                throw new IllegalArgumentException("La capacidad maxima debe ser mayor a 0");
         if(materiasQueDicta==null || materiasQueDicta.isEmpty())
             throw new IllegalArgumentException("El Profesor debe dictar como mínimo 1 asignatura");
         if(disponibilidad==null || disponibilidad.isEmpty())
             throw new IllegalArgumentException("El Profesor debe tener al menos un bloque disponible");
-        return new Profesor(nombre, apellido, correo, id, capacidadMaximaAlumnos, tarifa, materiasQueDicta, disponibilidad); //agregar los atributos por el Json
+        return new Profesor(nombre, apellido, correo, id, capacidadesMaximasAlumnos, tarifas, materiasQueDicta, disponibilidad); //agregar los atributos por el Json
     }
 
     /**
