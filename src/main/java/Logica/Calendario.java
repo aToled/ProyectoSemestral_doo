@@ -35,7 +35,7 @@ public class Calendario {
      * @param clase: la clase en cuestión.
      * @throws ConflictoHorarioException .
      */
-    public void addClaseToBloque(Clase clase) throws ConflictoHorarioException {
+    public void addClaseToBloque(Clase clase) {
         BloqueHorario bloque = clase.getBloqueHorario();
         List<Clase> clasesEnBloque = calendario.computeIfAbsent(bloque, _ -> new ArrayList<>());
 
@@ -69,6 +69,23 @@ public class Calendario {
             clases.addAll(listaClases);
         }
         return clases;
+    }
+
+    /**
+     * Retorna una lista con todas las clases de un Día en específico, al iterar sobre el calendario
+     * verificando que el Día del BloqueHorario coincida con el Día del parámetro para acumular todas las clases de ese día
+     * y devolverlas en la salida, si no encuentra clases devuelve una lista vacía.
+     * @param dia: tal dia.
+     * @return la lista con las clases del Día.
+     */
+    public List<Clase> getClasesEnDia(Dia dia){
+        List<Clase> clasesEnDia = new ArrayList<>();
+        for(Map.Entry<BloqueHorario, List<Clase>> entry : calendario.entrySet()){
+            if(entry.getKey().dia() == dia){
+                clasesEnDia.addAll(entry.getValue());
+            }
+        }
+        return clasesEnDia;
     }
 
     /**
