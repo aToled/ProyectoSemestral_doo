@@ -10,7 +10,7 @@ public class GestorSolicitudes extends ManejoGenericoJSON<Solicitud> {
     private static final Type listType = new TypeToken<Set<Solicitud>>(){}.getType();
 
     private static GestorSolicitudes instancia;
-    private final List<ObservadorSolicitudes> listeners = new ArrayList<>();
+    private final Set<ObservadorSolicitudes> listeners = new HashSet<>();
 
     /**
      * Carga las solicitudes del archivo JSON.
@@ -42,7 +42,7 @@ public class GestorSolicitudes extends ManejoGenericoJSON<Solicitud> {
     /**
      * Intenta resolver una solicitud utilizando distintas estrategias, se busca la solicitud según el ID proporcionado
      * y luego se recorren las estrategias para ver si alguna puede aplicarse.
-     * Si una estrategia propone una coleccion de clases válida (no nulas), esta se agrega a las clases sugeridas de la Solicitud,
+     * Si una estrategia propone una colección de clases válida (no nulas), esta se agrega a las clases sugeridas de la Solicitud,
      * después de asignarla, se guarda el estado y se notifica a los listeners, si fallan todas las estrategias se le asigna INCONCLUSO a la solicitud.
      * @param id: Id de la solicitud.
      * @param estrategias: Las estrategias disponibles.
@@ -126,6 +126,7 @@ public class GestorSolicitudes extends ManejoGenericoJSON<Solicitud> {
      */
     public void suscribir(ObservadorSolicitudes o){
         listeners.add(o);
+        o.actualizar(super.objetos);
     }
 
     /**

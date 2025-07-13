@@ -7,10 +7,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Estudiante extends Persona {
-    private Set<Asignatura> materiasInteres;
-    private Set<BloqueHorario> bloquesHorariosInteres;
-    private Set<Dia> diasInteres;
-    private Set<Horario> horariosInteres;
+    private final Set<Asignatura> materiasInteres;
+    private final Set<BloqueHorario> bloquesHorariosInteres;
+    private final Set<Dia> diasInteres;
+    private final Set<Horario> horariosInteres;
     private boolean preferirMenorTarifa;
     private boolean preferirClaseConMenosEstudiantes;
 

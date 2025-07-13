@@ -9,6 +9,7 @@ import Logica.Estrategias.EstrategiaSolicitud;
 import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
@@ -88,6 +89,18 @@ class SolicitudesTest {
     }
 
     @Test
+    void testResolverDosVecesUnaSolicitud() {
+        gestor.resolver(solicitud.getId(), new EstrategiaDefault());
+        List<Clase> primera = new ArrayList<>(solicitud.getClasesSugeridas());
+        gestor.resolver(solicitud.getId(), new EstrategiaDefault());
+        List<Clase> segunda = new ArrayList<>(solicitud.getClasesSugeridas());
+
+        assertEquals(primera.size(), segunda.size(), "Verifica que no se acumulen las clases sugeridas");
+        assertEquals(EstadoSolicitud.PENDIENTE, solicitud.getEstadoSolicitud(),"Verifica que se asigne el Estado correctamente");
+    }
+
+    @DisplayName("Tests relacionados a la Aceptación y Rechazo de Solicitudes: ")
+    @Test
     void testAceptar() {
         gestor.resolver(solicitud.getId(), new EstrategiaDefault());
         Clase elegida = new ArrayList<>(solicitud.getClasesSugeridas()).getFirst();
@@ -113,8 +126,34 @@ class SolicitudesTest {
     }
 
     @Test
+    void testEliminarSolicitudYAcceder() {
+        gestor.rechazar(solicitud.getId());
+        gestor.eliminar(solicitud.getId());
+
+        assertThrows(NoSuchElementException.class, () -> gestor.aceptar(solicitud.getId()));
+    }
+
+    @Test
+    void testClaseElegidaNoSugerida() {
+        gestor.resolver(solicitud.getId(), new EstrategiaDefault());
+        Clase claseFalsa = new Clase(clase.getProfesor(), "-1", Asignatura.MATEMATICA, clase.getBloqueHorario(), 2, 10000);
+
+        assertThrows(IllegalArgumentException.class, () -> solicitud.setClaseElegida(claseFalsa));
+    }
+
+    @DisplayName("Tests misceláneos: ")
+    @Test
     void testListaSolicitudesNoModificable() {
         Set<Solicitud> set = gestor.getObjetosNoModificable();
         assertThrows(UnsupportedOperationException.class, () -> set.add(solicitud));
+    }
+
+    @Test
+    void testDuplicacionDeSolicitud() {
+        Solicitud otra = new Solicitud(solicitud.getId(), estudiante, Asignatura.MATEMATICA);
+        gestor.agregar(otra);
+
+        Set<Solicitud> solicitudes = gestor.getObjetosNoModificable();
+        assertEquals(1, solicitudes.size());
     }
 }

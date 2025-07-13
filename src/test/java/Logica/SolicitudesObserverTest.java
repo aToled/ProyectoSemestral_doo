@@ -6,7 +6,6 @@ import Logica.Enums.EstadoSolicitud;
 import Logica.Enums.Horario;
 import Logica.Estrategias.EstrategiaDefault;
 import org.junit.jupiter.api.*;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -83,5 +82,33 @@ class SolicitudesObserverTest {
         e.addMateriasInteres(Asignatura.MATEMATICA);
         e.crearSolicitud(Asignatura.MATEMATICA);
         assertTrue(observadorTest.getSolicitudesRecibidas().isEmpty());
+    }
+
+    @Test
+    void testObservadorSuscritoDespuesRecibeEstadoActual() {
+        Estudiante e2 = new Estudiante("E", "S", "e@s.com", "e2");
+        e2.addMateriasInteres(Asignatura.MATEMATICA);
+        Solicitud s2 = e2.crearSolicitud(Asignatura.MATEMATICA);
+
+        ObservadorTest obs = new ObservadorTest();
+        gestor.suscribir(obs);
+
+        Set<Solicitud> recibidas = obs.getSolicitudesRecibidas();
+        assertTrue(recibidas.contains(s2));
+    }
+
+    @Test
+    void testMultiplesObservadoresRecibenActualizacion() {
+        ObservadorTest obs1 = new ObservadorTest();
+        ObservadorTest obs2 = new ObservadorTest();
+        gestor.suscribir(obs1);
+        gestor.suscribir(obs2);
+
+        Estudiante e2 = new Estudiante("E2", "S2", "e2@s.com", "e3");
+        e2.addMateriasInteres(Asignatura.MATEMATICA);
+        Solicitud s2 = e2.crearSolicitud(Asignatura.MATEMATICA);
+
+        assertTrue(obs1.getSolicitudesRecibidas().contains(s2));
+        assertTrue(obs2.getSolicitudesRecibidas().contains(s2));
     }
 }
