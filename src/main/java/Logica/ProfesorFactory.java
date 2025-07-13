@@ -53,4 +53,11 @@ public class ProfesorFactory extends ManejoGenericoJSON<Profesor>{
     public static void eliminarProfesor(String id){
         instancia.eliminar(id);
     }
+
+    /**
+     * @see ManejoGenericoJSON
+     */
+    public static int getCantidadProfesores(){
+        return instancia.getCantidadObjetos();
+    }
 }

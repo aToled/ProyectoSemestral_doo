@@ -91,4 +91,11 @@ public abstract class ManejoGenericoJSON <T extends Identificable> {
     public Set<T> getObjetosNoModificable() {
         return Collections.unmodifiableSet(objetos);
     }
+
+    /**
+     * @return la cantidad de elementos en el Set.
+     */
+    public int getCantidadObjetos() {
+        return objetos.size();
+    }
 }
