@@ -4,17 +4,17 @@ import Logica.Enums.Asignatura;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Clase implements Identificable{
+public class Clase extends IdentificableAbstracta{
 
     private final Profesor profesor;
     private final Map<String,Estudiante> listaEstudiantes;
     private final Asignatura asignatura;
-    private final String id;
     private final BloqueHorario bloqueHorario;
     private final int capacidadMaximaAlumnos;
     private final long tarifa;
 
     public Clase(Profesor profesor, String id, Asignatura asignatura, BloqueHorario bloque, int capacidadMaximaAlumnos, long tarifa) {
+        super(id);
         if(!profesor.getMateriasQueDicta().contains(asignatura)){
             throw new IllegalArgumentException("El Profesor no dicta: "+asignatura);
         }
@@ -29,7 +29,6 @@ public class Clase implements Identificable{
         }
         listaEstudiantes = new HashMap<>();
         this.profesor = profesor;
-        this.id = id;
         this.asignatura = asignatura;
         this.bloqueHorario = bloque;
         this.capacidadMaximaAlumnos = capacidadMaximaAlumnos;
@@ -38,23 +37,17 @@ public class Clase implements Identificable{
 
     /**
      * Agrega un Estudiante a la clase tras hacer las verificaciones necesarias.
+     * (si este está interesado en la asignatura, si es que no se encuentra ya en la lista de clases, y si no está llena la clase)
      * @param e: tal Estudiante
      * @return Booleano si es que se pudo realizar la operación
      */
     public boolean agregarEstudiante(Estudiante e) {
-        if (e.getMateriasInteres().contains(asignatura)) {
-            if (listaEstudiantes.size() < capacidadMaximaAlumnos) {
-                listaEstudiantes.putIfAbsent(e.getId(), e);
-                System.out.println(e.getNombre()+" "+ e.getApellido()+" Se agrego con éxito");
-                return true;
-            }else{
-                System.out.println(e.getNombre()+" "+ e.getApellido()+" No se pudo agregar");
-                return false;
-            }
-        }else{
-            System.out.println(e.getNombre()+" "+ e.getApellido()+" No se pudo agregar");
-            return false;
-        }
+        if (!e.getMateriasInteres().contains(asignatura)) return false;
+        if(listaEstudiantes.containsKey(e.getId())) return false;
+        if(listaEstudiantes.size() >= capacidadMaximaAlumnos) return false;
+
+        listaEstudiantes.put(e.getId(), e);
+        return true;
     }
 
     /**
@@ -77,23 +70,6 @@ public class Clase implements Identificable{
     public BloqueHorario getBloqueHorario() {return bloqueHorario;}
     public Asignatura getAsignatura() {return asignatura;}
     public Profesor getProfesor() {return profesor;}
-    public String getId(){return id;}
     public int getCapacidadMaximaAlumnos() {return capacidadMaximaAlumnos;}
     public long getTarifa() {return tarifa;}
-
-    @Override
-    public boolean equals(Object o){
-        if(o == this) return true;
-        if(!(o instanceof Persona otro)) return false;
-        return getId().equals(otro.getId());
-    }
-
-    @Override
-    public final int hashCode() {
-        if(id != null){
-            return id.hashCode();
-        } else {
-            return 0;
-        }
-    }
 }

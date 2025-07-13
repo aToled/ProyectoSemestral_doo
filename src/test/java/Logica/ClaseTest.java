@@ -1,7 +1,5 @@
-import Logica.BloqueHorario;
-import Logica.Clase;
-import Logica.Estudiante;
-import Logica.Profesor;
+package Logica;
+
 import org.junit.jupiter.api.*;
 import Logica.Enums.*;
 import java.util.Set;
@@ -52,6 +50,19 @@ class ClaseTest {
         assertEquals(1, claseLen.cantidadEstudiantes(), "Clase con 1 Estudiante");
         claseLen.eliminarEstudiante("1");
         assertEquals(0, claseLen.cantidadEstudiantes(), "Vacía de nuevo");
+    }
+
+    @Test
+    void testAgregarEstudianteDuplicado(){
+        assertTrue(claseLen.agregarEstudiante(eLen1));
+        assertFalse(claseLen.agregarEstudiante(eLen1));
+        assertEquals(1, claseLen.cantidadEstudiantes());
+    }
+
+    @Test
+    void testEliminarEstudianteInexistente() {
+        claseLen.eliminarEstudiante("-1");
+        assertEquals(0, claseLen.cantidadEstudiantes());
     }
 
     @DisplayName("Tests relacionados a manejo de profesores: ")

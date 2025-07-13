@@ -1,9 +1,8 @@
-import Logica.BloqueHorario;
+package Logica;
+
 import Logica.Enums.Asignatura;
 import Logica.Enums.Dia;
 import Logica.Enums.Horario;
-import Logica.Profesor;
-import Logica.ProfesorFactory;
 import org.junit.jupiter.api.Test;
 import java.util.Set;
 

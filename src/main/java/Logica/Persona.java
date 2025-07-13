@@ -1,13 +1,13 @@
 package Logica;
 
-public abstract class Persona implements Identificable {
-    private final String nombre, apellido, correo, id;
+public abstract class Persona extends IdentificableAbstracta {
+    private final String nombre, apellido, correo;
 
     public Persona(String nombre, String apellido, String correo, String id) {
+        super(id);
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
-        this.id = id;
     }
 
     public String getNombre() {
@@ -19,28 +19,9 @@ public abstract class Persona implements Identificable {
     public String getCorreo() {
         return correo;
     }
-    public String getId() {
-        return id;
-    }
 
     @Override
     public String toString(){
         return "Nombre: "+nombre+", Apellido: "+apellido+", Correo: "+correo+", ID: "+id;
-    }
-
-    @Override
-    public boolean equals(Object o){
-        if(o == this) return true;
-        if(!(o instanceof Persona otro)) return false;
-        return getId().equals(otro.getId());
-    }
-
-    @Override
-    public final int hashCode() {
-        if(id != null){
-            return id.hashCode();
-        } else {
-            return 0;
-        }
     }
 }
