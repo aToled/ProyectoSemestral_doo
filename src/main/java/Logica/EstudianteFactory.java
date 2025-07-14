@@ -17,6 +17,14 @@ public class EstudianteFactory extends ManejoGenericoJSON<Estudiante> {
     }
 
     /**
+     * Creación de la instancia. (uso de singleton)
+     * @return Retorna la instancia.
+     */
+    public static EstudianteFactory getInstancia(){
+        return instancia;
+    }
+
+    /**
      * Crea una instancia de Estudiante validando sus atributos.
      * @return Un Estudiante válido.
      * @throws IllegalArgumentException: si es que falla alguna validación.
@@ -44,12 +52,5 @@ public class EstudianteFactory extends ManejoGenericoJSON<Estudiante> {
      */
     public static void eliminarEstudiante(String id) {
         instancia.eliminar(id);
-    }
-
-    /**
-     * @see ManejoGenericoJSON
-     */
-    public static int getCantidadEstudiantes(){
-        return instancia.getCantidadObjetos();
     }
 }

@@ -119,7 +119,7 @@ public class PanelAgregarProfesorAdmin extends JPanel {
             String nombre = campoNombre.getText();
             String apellido = campoApellido.getText();
             String correo = campoCorreo.getText();
-            String id = String.valueOf(ProfesorFactory.getCantidadProfesores() + 1);
+            String id = String.valueOf(ProfesorFactory.getInstancia().getCantidadObjetos() + 1);
 
             if (nombre.isEmpty() || apellido.isEmpty() || correo.isEmpty()){JOptionPane.showMessageDialog(null, "Nombre, Apellido y Correo no pueden estar vacíos.", "Error!", JOptionPane.ERROR_MESSAGE);return;}
 
