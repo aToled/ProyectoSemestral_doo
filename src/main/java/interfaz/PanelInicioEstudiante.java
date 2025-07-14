@@ -94,15 +94,14 @@ public class PanelInicioEstudiante extends JPanel {
         Set<Estudiante> estudiantes = EstudianteFactory.getInstancia().getObjetosNoModificable();
 
         for (Estudiante est : estudiantes) {
-            // Compara el correo y el ID (contraseña)
+            // Compara el correo y el password (contraseña)
             // Asegúrate de que getCorreo() y getId() existen en tu clase Estudiante
-            if (est.getCorreo().equals(correo) && est.getId().equals(password)) {
+            if (est.getCorreo().equals(correo) && est.getPassword().equals(password)) {
                 JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso para: " + est.getNombre() + " " + est.getApellido(), "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 Ventana.solicitudEstudiante(est); // Pasamos la instancia del estudiante encontrado
                 return; // Salimos del bucle una vez que lo encontramos
             }
         }
-
         JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos.", "Error de Inicio de Sesión", JOptionPane.ERROR_MESSAGE);
     }
 }

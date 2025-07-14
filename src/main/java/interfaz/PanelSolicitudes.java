@@ -12,17 +12,20 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Set;
 
+/**
+ * Panel utilizado por el administrador para gestionar solicitudes pendientes,
+ * permite aceptar o rechazar solicitudes usando estrategias definidas.
+ */
 public class PanelSolicitudes extends JPanel implements ObservadorSolicitudes {
     private JComboBox<String> comboSolicitudes;
     private JButton btnAceptar;
     private JButton btnRechazar;
-    private JButton btnSalir;
 
     public PanelSolicitudes(){
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setBackground(new Color(30, 30, 30));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setBackground(new Color(30, 30, 30));
 
-        titulo();
+        InterfazUtils.agregarTitulo("Solicitudes", this);
         add(Box.createRigidArea(new Dimension(0, 30)));
 
         configurarPanelAdmin();
@@ -32,19 +35,11 @@ public class PanelSolicitudes extends JPanel implements ObservadorSolicitudes {
         add(Box.createVerticalGlue());
     }
 
-    private void titulo(){
-        Font fuente = new Font("Arial", Font.BOLD, 90);
-        JLabel title = new JLabel("Solicitudes");
-        title.setForeground(Color.white);
-        title.setFont(fuente);
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(title);
-        title.setVisible(true);
-    }
-
+    /**
+     * Configura el panel con controles de gestión (aceptar/rechazar).
+     */
     private void configurarPanelAdmin() {
-        JPanel panelControles = new JPanel();
-        panelControles.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
+        JPanel panelControles = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         panelControles.setOpaque(false);
 
         comboSolicitudes = new JComboBox<>();
@@ -53,52 +48,82 @@ public class PanelSolicitudes extends JPanel implements ObservadorSolicitudes {
 
         btnAceptar = new JButton("Aceptar");
         btnRechazar = new JButton("Rechazar");
-        btnSalir = new JButton("Salir");
+        JButton btnSalir = new JButton("Salir");
 
         panelControles.add(btnAceptar);
         panelControles.add(btnRechazar);
         panelControles.add(btnSalir);
 
-        this.add(panelControles);
+        add(panelControles);
 
-        btnAceptar.addActionListener(_ -> {
-            String selectedItem = (String) comboSolicitudes.getSelectedItem();
-            if (selectedItem != null && !selectedItem.isEmpty() && !selectedItem.equals("No hay solicitudes pendientes")) {
-                String idSolicitud = extractIdFromComboBoxItem(selectedItem);
-                if (idSolicitud != null) {
-                    aceptarSolicitud(idSolicitud);
-                }
-            }
-        });
-
-        btnRechazar.addActionListener(_ -> {
-            String selectedItem = (String) comboSolicitudes.getSelectedItem();
-            if (selectedItem != null && !selectedItem.isEmpty() && !selectedItem.equals("No hay solicitudes pendientes")) {
-                String idSolicitud = extractIdFromComboBoxItem(selectedItem);
-                if (idSolicitud != null) {
-                    rechazarSolicitud(idSolicitud);
-                }
-            }
-        });
-
+        btnAceptar.addActionListener(_ -> manejarDecision(true));
+        btnRechazar.addActionListener(_ -> manejarDecision(false));
         btnSalir.addActionListener(_ -> Ventana.principal());
     }
 
+    /**
+     * Lógica compartida para aceptar o rechazar solicitudes.
+     * @param aceptar: true o false dependiendo si se busca aceptar o rechazar.
+     */
+    private void manejarDecision(boolean aceptar) {
+        String item = (String) comboSolicitudes.getSelectedItem();
+        if (item == null || item.isEmpty() || item.equals("No hay solicitudes pendientes")) return;
+
+        String id = InterfazUtils.extractIdFromComboBoxItem(item);
+        if (id == null) return;
+
+        if (aceptar) aceptarSolicitud(id);
+        else rechazarSolicitud(id);
+    }
+
+    /**
+     * Acepta una solicitud usando las estrategias definidas.
+     */
+    private void aceptarSolicitud(String idSolicitud) {
+        Solicitud solicitud = GestorSolicitudes.getInstancia().buscarObjeto(idSolicitud);
+        boolean resolucionExitosa = GestorSolicitudes.getInstancia().resolver(idSolicitud,
+                new EstrategiaMenorTarifa(),
+                new EstrategiaConMenosEstudiantes(),
+                new EstrategiaBloqueHorarioPreferido(),
+                new EstrategiaDiaPreferido(),
+                new EstrategiaHorarioPreferido(),
+                new EstrategiaDefault());
+
+        if (resolucionExitosa && solicitud.getClasesSugeridas() != null && !solicitud.getClasesSugeridas().isEmpty()) {
+            Clase claseElegida = new ArrayList<>(solicitud.getClasesSugeridas()).getFirst();
+            solicitud.setClaseElegida(claseElegida);
+            GestorSolicitudes.getInstancia().aceptar(idSolicitud);
+        } else {
+            GestorSolicitudes.getInstancia().rechazar(idSolicitud);
+        }
+    }
+
+    /**
+     * Rechaza la solicitud directamente.
+     */
+    private void rechazarSolicitud(String idSolicitud) {
+        GestorSolicitudes.getInstancia().rechazar(idSolicitud);
+    }
+
+
+    /**
+     * Actualiza el JComboBox con las solicitudes actuales.
+     */
     @Override
     public void actualizar(Set<Solicitud> nuevasSolicitudes) {
         comboSolicitudes.removeAllItems();
+        boolean hayPendientes = false;
 
-        boolean pendiente = false;
         if (nuevasSolicitudes != null && !nuevasSolicitudes.isEmpty()) {
             for (Solicitud sol : nuevasSolicitudes) {
                 if (sol.getEstadoSolicitud() == EstadoSolicitud.PENDIENTE) {
                     comboSolicitudes.addItem(sol.getEstudiante().getNombre() + " - " + sol.getAsignatura() + " (ID: " + sol.getId() + ")");
-                    pendiente = true;
+                    hayPendientes = true;
                 }
             }
         }
 
-        if (!pendiente) {
+        if (!hayPendientes) {
             comboSolicitudes.addItem("No hay solicitudes pendientes");
             btnAceptar.setEnabled(false);
             btnRechazar.setEnabled(false);
@@ -106,33 +131,5 @@ public class PanelSolicitudes extends JPanel implements ObservadorSolicitudes {
             btnAceptar.setEnabled(true);
             btnRechazar.setEnabled(true);
         }
-    }
-
-    private String extractIdFromComboBoxItem(String item) {
-        int startIndex = item.indexOf("(ID: ") + 4;
-        int endIndex = item.indexOf(")", startIndex);
-        if (endIndex != -1 && endIndex > startIndex) {
-            return item.substring(startIndex, endIndex);
-        }
-        return null;
-    }
-
-    private void aceptarSolicitud(String idSolicitud) {
-        Solicitud solicitud = GestorSolicitudes.getInstancia().buscarSolicitud(idSolicitud);
-
-        boolean resolucionExitosa = GestorSolicitudes.getInstancia().resolver(idSolicitud, new EstrategiaMenorTarifa(), new EstrategiaConMenosEstudiantes(), new EstrategiaBloqueHorarioPreferido(), new EstrategiaDiaPreferido(), new EstrategiaHorarioPreferido(), new EstrategiaDefault());
-
-        if (resolucionExitosa && solicitud.getClasesSugeridas() != null && !solicitud.getClasesSugeridas().isEmpty()) {
-            Clase claseElegida = new ArrayList<>(solicitud.getClasesSugeridas()).getFirst();
-            solicitud.setClaseElegida(claseElegida);
-
-            GestorSolicitudes.getInstancia().aceptar(idSolicitud);
-        } else {
-            GestorSolicitudes.getInstancia().rechazar(idSolicitud);
-        }
-    }
-
-    private void rechazarSolicitud(String idSolicitud) {
-        GestorSolicitudes.getInstancia().rechazar(idSolicitud);
     }
 }

@@ -18,7 +18,7 @@ public class Estudiante extends Persona {
     private final Set<Horario> horariosInteres;
     private boolean preferirMenorTarifa;
     private boolean preferirClaseConMenosEstudiantes;
-    private String password = "";
+    private String password;
 
     public Estudiante(String nombre, String apellido, String correo, String id) {
         super(nombre, apellido, correo, id);
@@ -52,7 +52,7 @@ public class Estudiante extends Persona {
     public void setPreferirMenorTarifa(boolean b) {this.preferirMenorTarifa = b;}
     public void setPreferirClaseConMenosEstudiantes(boolean b) {this.preferirClaseConMenosEstudiantes = b;}
     public boolean setPassword(String password){
-        if(this.password.isEmpty()){
+        if(this.password == null || this.password.isEmpty()){
             this.password = password;
             return true;
         }

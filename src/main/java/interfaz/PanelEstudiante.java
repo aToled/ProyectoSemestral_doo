@@ -3,6 +3,10 @@ package interfaz;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Panel que representa la vista principal del Estudiante
+ * con botones para acceder iniciar sesión o registrarse.
+ */
 public class PanelEstudiante extends JPanel {
     public PanelEstudiante(){
         setBackground(new Color(30, 30, 30));
