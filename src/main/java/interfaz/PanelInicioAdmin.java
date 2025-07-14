@@ -2,127 +2,109 @@ package interfaz;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
+/**
+ * Panel que permite al administrador iniciar sesión.
+ */
 public class PanelInicioAdmin extends JPanel {
-    private final String contrasena = "admin";
-    private final String usuario = "admin";
-    private JPasswordField password;
-    private JTextField field;
-    private boolean incorrecto = false;
+    private static final String password = "admin";
+    private static final String usuario = "admin";
 
+    private JPasswordField campoPassword;
+    private JTextField campoUsuario;
+    private boolean mensajeErrorMostrado = false;
+
+    /**
+     * Inicializa el panel con los componentes necesarios para el inicio de sesión.
+     */
     public PanelInicioAdmin(){
-        this.setBackground(Color.black);
-        this.setVisible(true);
-        this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-        this.titulo();
-        add(Box.createRigidArea(new Dimension(0,100)));
+        setBackground(new Color(30, 30, 30));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        InterfazUtils.agregarTitulo("Ingresar Como Admin", this);
+        add(Box.createRigidArea(new Dimension(0, 100)));
 
-        this.texto();
-        add(Box.createRigidArea(new Dimension(0,160)));
+        agregarTexto();
+        add(Box.createRigidArea(new Dimension(0, 160)));
 
-        this.botones();
+        agregarBotones();
+        add(Box.createRigidArea(new Dimension(0, 10)));
 
-        add(Box.createRigidArea(new Dimension(0,10)));
-
-
-        this.repaint();
-        this.revalidate();
+        repaint();
+        revalidate();
     }
-    private void titulo(){
-        Font fuente = new Font("Arial", Font.BOLD, 80);
-        JLabel title = new JLabel("Ingresar Como Admin");
-        title.setForeground(Color.white);
-        title.setFont(fuente);
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(title);
-        title.setVisible(true);
-    }
-    private void texto(){
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(5,4));
-        JLabel nombre = new JLabel("Usuario:");
-        Font fuente = new Font("Arial", Font.BOLD, 20);
-        nombre.setFont(fuente);
-        JLabel apellido = new JLabel("Contraseña:");
-        apellido.setFont(fuente);
 
-
-        field = new JTextField();
-        password = new JPasswordField();
-
-
-        nombre.setForeground(Color.GRAY);
-        apellido.setForeground(Color.GRAY);
-
-
-
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(nombre);
-        panel.add(field);
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(apellido);
-        panel.add(password);
-
-
+    /**
+     * Agrega los campos de texto para usuario y contraseña al panel.
+     */
+    private void agregarTexto(){
+        JPanel panel = new JPanel(new GridLayout(5, 4));
         panel.setOpaque(false);
+
+        Font fuente = new Font("Arial", Font.BOLD, 25);
+
+        campoUsuario = new JTextField();
+        campoPassword = new JPasswordField();
+
+        panel.add(Box.createRigidArea(new Dimension(350, 50)));
+        panel.add(Box.createRigidArea(new Dimension(350, 50)));
+        panel.add(Box.createRigidArea(new Dimension(350, 50)));
+        panel.add(Box.createRigidArea(new Dimension(350, 50)));
+
+        panel.add(InterfazUtils.label("Usuario:", fuente));
+        panel.add(campoUsuario);
+
+        panel.add(Box.createRigidArea(new Dimension(350, 50)));
+        panel.add(Box.createRigidArea(new Dimension(350, 50)));
+        panel.add(Box.createRigidArea(new Dimension(350, 50)));
+        panel.add(Box.createRigidArea(new Dimension(350, 50)));
+
+        panel.add(InterfazUtils.label("Contraseña:", fuente));
+        panel.add(campoPassword);
 
         panel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(panel);
+        add(panel);
     }
-    public void botones(){
-        JPanel panel = new JPanel();
-        panel.setLayout(new FlowLayout());
-        panel.setOpaque(false);
 
-        JButton boton1 = new JButton("Iniciar Sesion");
-        boton1.setPreferredSize(new Dimension(250,40));
-        panel.add(boton1);
+    /**
+     * Agrega los botones de iniciar sesión y salir.
+     */
+    public void agregarBotones(){
+        JPanel panelBotones = new JPanel(new FlowLayout());
+        panelBotones.setOpaque(false);
+
+        JButton botonIniciar = new JButton("Iniciar Sesión");
+        botonIniciar.setPreferredSize(new Dimension(250, 40));
+        panelBotones.add(botonIniciar);
 
         JButton botonSalida = new JButton("Salir");
-        botonSalida.setPreferredSize(new Dimension(250,40));
-        panel.add(botonSalida);
+        botonSalida.setPreferredSize(new Dimension(250, 40));
+        panelBotones.add(botonSalida);
 
-        add(panel);
+        add(panelBotones);
+        botonIniciar.addActionListener(_ -> verificarCredenciales(panelBotones));
+        botonSalida.addActionListener(_ -> Ventana.principal());
+    }
 
-        boton1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+    /**
+     * Verifica las credenciales ingresadas por el usuario, si son correctas, redirige al panel de administrador.
+     * Si no, muestra un mensaje de error una sola vez.
+     * @param panelBotones El panel donde se agrega el mensaje de error.
+     */
+    private void verificarCredenciales(JPanel panelBotones) {
+        String usuarioIngresado = campoUsuario.getText();
+        String contrasenaIngresada = campoPassword.getText();
 
-                System.out.println(usuario.equals(field.getText()));
-                System.out.println(contrasena.equals(password.getText()));
-
-                if(usuario.equals(field.getText()) && contrasena.equals(password.getText())){
-                    Ventana.admin();
-                }
-                else{
-                    if(incorrecto == false) {
-                        JLabel label = new JLabel("Campos Incorrectos");
-                        Font fuente = new Font("Arial", Font.BOLD, 15);
-                        label.setFont(fuente);
-                        label.setForeground(Color.RED);
-                        panel.add(label);
-                        panel.repaint();
-                        panel.revalidate();
-                        Ventana.refrescar();
-                        incorrecto = true;
-                    }
-                }
-            }
-        });
-        botonSalida.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Ventana.principal();
-            }
-        });
+        if (usuario.equals(usuarioIngresado) && password.equals(contrasenaIngresada)) {
+            Ventana.admin();
+        } else if (!mensajeErrorMostrado) {
+            JLabel errorLabel = InterfazUtils.label("Campos Incorrectos", new Font("Arial", Font.BOLD, 15));
+            errorLabel.setForeground(Color.RED);
+            panelBotones.add(errorLabel);
+            panelBotones.repaint();
+            panelBotones.revalidate();
+            Ventana.refrescar();
+            mensajeErrorMostrado = true;
+        }
     }
 }

@@ -27,7 +27,7 @@ public class PanelCalendario extends JPanel {
 
     public PanelCalendario(){
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-        setBackground(Color.black);
+        setBackground(new Color(30, 30, 30));
         titulo();
         add(Box.createRigidArea(new Dimension(0,70)));
         listaDeBotones();

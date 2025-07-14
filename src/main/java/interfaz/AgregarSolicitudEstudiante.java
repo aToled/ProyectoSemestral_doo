@@ -23,7 +23,7 @@ public class AgregarSolicitudEstudiante extends JPanel {
 
     public AgregarSolicitudEstudiante(Estudiante estudiante){
         this.estudiante = estudiante;
-        this.setBackground(Color.black);
+        this.setBackground(new Color(30, 30, 30));
         this.setVisible(true);
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         this.titulo();

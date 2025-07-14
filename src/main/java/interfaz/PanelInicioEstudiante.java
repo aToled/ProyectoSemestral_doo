@@ -18,7 +18,7 @@ public class PanelInicioEstudiante extends JPanel {
      * Inicializa el panel con los componentes necesarios para el inicio de sesión.
      */
     public PanelInicioEstudiante(){
-        setBackground(Color.black);
+        setBackground(new Color(30, 30, 30));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         InterfazUtils.agregarTitulo("Inicio Sesión Estudiante", this);

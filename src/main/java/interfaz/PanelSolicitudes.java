@@ -20,7 +20,7 @@ public class PanelSolicitudes extends JPanel implements ObservadorSolicitudes {
 
     public PanelSolicitudes(){
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setBackground(Color.black);
+        this.setBackground(new Color(30, 30, 30));
 
         titulo();
         add(Box.createRigidArea(new Dimension(0, 30)));

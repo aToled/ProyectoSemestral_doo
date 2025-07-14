@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 public class PanelEntrada extends JPanel {
     public PanelEntrada(){
-        this.setBackground(Color.black);
+        this.setBackground(new Color(30, 30, 30));
         this.setVisible(true);
         this.setLayout(new FlowLayout());
         this.titulo();
