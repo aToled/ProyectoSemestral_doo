@@ -2,15 +2,13 @@ package interfaz;
 
 import Logica.Clase;
 import Logica.Enums.EstadoSolicitud;
+import Logica.Estrategias.*;
 import Logica.GestorSolicitudes;
 import Logica.Solicitud;
-import Logica.Estrategias.EstrategiaDefault;
 import Logica.ObservadorSolicitudes;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -63,38 +61,27 @@ public class PanelSolicitudes extends JPanel implements ObservadorSolicitudes {
 
         this.add(panelControles);
 
-        btnAceptar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String selectedItem = (String) comboSolicitudes.getSelectedItem();
-                if (selectedItem != null && !selectedItem.isEmpty() && !selectedItem.equals("No hay solicitudes pendientes")) {
-                    String idSolicitud = extractIdFromComboBoxItem(selectedItem);
-                    if (idSolicitud != null) {
-                        aceptarSolicitud(idSolicitud);
-                    }
+        btnAceptar.addActionListener(_ -> {
+            String selectedItem = (String) comboSolicitudes.getSelectedItem();
+            if (selectedItem != null && !selectedItem.isEmpty() && !selectedItem.equals("No hay solicitudes pendientes")) {
+                String idSolicitud = extractIdFromComboBoxItem(selectedItem);
+                if (idSolicitud != null) {
+                    aceptarSolicitud(idSolicitud);
                 }
             }
         });
 
-        btnRechazar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String selectedItem = (String) comboSolicitudes.getSelectedItem();
-                if (selectedItem != null && !selectedItem.isEmpty() && !selectedItem.equals("No hay solicitudes pendientes")) {
-                    String idSolicitud = extractIdFromComboBoxItem(selectedItem);
-                    if (idSolicitud != null) {
-                        rechazarSolicitud(idSolicitud);
-                    }
+        btnRechazar.addActionListener(_ -> {
+            String selectedItem = (String) comboSolicitudes.getSelectedItem();
+            if (selectedItem != null && !selectedItem.isEmpty() && !selectedItem.equals("No hay solicitudes pendientes")) {
+                String idSolicitud = extractIdFromComboBoxItem(selectedItem);
+                if (idSolicitud != null) {
+                    rechazarSolicitud(idSolicitud);
                 }
             }
         });
 
-        btnSalir.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Ventana.principal();
-            }
-        });
+        btnSalir.addActionListener(_ -> Ventana.principal());
     }
 
     @Override
@@ -124,7 +111,7 @@ public class PanelSolicitudes extends JPanel implements ObservadorSolicitudes {
     private String extractIdFromComboBoxItem(String item) {
         int startIndex = item.indexOf("(ID: ") + 4;
         int endIndex = item.indexOf(")", startIndex);
-        if (startIndex != -1 && endIndex != -1 && endIndex > startIndex) {
+        if (endIndex != -1 && endIndex > startIndex) {
             return item.substring(startIndex, endIndex);
         }
         return null;
@@ -133,10 +120,10 @@ public class PanelSolicitudes extends JPanel implements ObservadorSolicitudes {
     private void aceptarSolicitud(String idSolicitud) {
         Solicitud solicitud = GestorSolicitudes.getInstancia().buscarSolicitud(idSolicitud);
 
-        boolean resolucionExitosa = GestorSolicitudes.getInstancia().resolver(idSolicitud, new EstrategiaDefault());
+        boolean resolucionExitosa = GestorSolicitudes.getInstancia().resolver(idSolicitud, new EstrategiaMenorTarifa(), new EstrategiaConMenosEstudiantes(), new EstrategiaBloqueHorarioPreferido(), new EstrategiaDiaPreferido(), new EstrategiaHorarioPreferido(), new EstrategiaDefault());
 
         if (resolucionExitosa && solicitud.getClasesSugeridas() != null && !solicitud.getClasesSugeridas().isEmpty()) {
-            Clase claseElegida = new ArrayList<>(solicitud.getClasesSugeridas()).get(0);
+            Clase claseElegida = new ArrayList<>(solicitud.getClasesSugeridas()).getFirst();
             solicitud.setClaseElegida(claseElegida);
 
             GestorSolicitudes.getInstancia().aceptar(idSolicitud);

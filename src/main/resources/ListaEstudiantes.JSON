@@ -9,7 +9,8 @@
     "nombre": "Carlos",
     "apellido": "Gómez",
     "correo": "cgomez@gmail.com",
-    "id": "0"
+    "id": "0",
+    "password": "a"
   },
   {
     "materiasInteres": [

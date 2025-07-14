@@ -102,6 +102,7 @@ public class PanelRegistroEstudiante extends JPanel {
                 campoCorreo.getText(),
                 String.valueOf(id)
         );
+        EstudianteFactory.agregarEstudiante(estudiante);
 
         if (estudiante.setPassword(campoPassword.getText())) {
             Ventana.solicitudEstudiante(estudiante);

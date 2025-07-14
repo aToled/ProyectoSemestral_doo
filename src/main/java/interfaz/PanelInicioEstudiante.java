@@ -5,140 +5,104 @@ import Logica.EstudianteFactory;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Set;
 
+/**
+ * Panel que permite al Estudiante iniciar sesión.
+ */
 public class PanelInicioEstudiante extends JPanel {
+    JTextField campoCorreo;
+    JTextField campoPassword;
 
-    JTextField campo1;
-    JTextField campo2;
-
+    /**
+     * Inicializa el panel con los componentes necesarios para el inicio de sesión.
+     */
     public PanelInicioEstudiante(){
-        this.setBackground(Color.black);
-        this.setVisible(true);
-        this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-        this.titulo();
-        add(Box.createRigidArea(new Dimension(0,100)));
+        setBackground(Color.black);
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        InterfazUtils.agregarTitulo("Inicio Sesión Estudiante", this);
+        add(Box.createRigidArea(new Dimension(0, 100)));
 
-        this.texto();
-        add(Box.createRigidArea(new Dimension(0,160)));
+        agregarTexto();
+        add(Box.createRigidArea(new Dimension(0, 160)));
+        agregarBotones();
 
-        this.botones();
-
-        add(Box.createRigidArea(new Dimension(0,10)));
-
-
-        this.repaint();
-        this.revalidate();
-    }
-    private void titulo(){
-        Font fuente = new Font("Arial", Font.BOLD, 80);
-        JLabel title = new JLabel("Registro Estudiante");
-        title.setForeground(Color.white);
-        title.setFont(fuente);
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(title);
-        title.setVisible(true);
+        repaint();
+        revalidate();
     }
 
-
-    private void texto(){
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(5,4));
-        Font fuente = new Font("Arial", Font.BOLD, 25);
-        JLabel correo = new JLabel("Correo:");
-        correo.setFont(fuente);
-        JLabel id = new JLabel("Contraseña:");
-        id.setFont(fuente);
-        campo1 = new JTextField("Ingrese su Correo");
-        campo2 = new JPasswordField("");
-
-        correo.setForeground(Color.GRAY);
-        id.setForeground(Color.GRAY);
-
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(correo);
-        panel.add(campo1);
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(id);
-        panel.add(campo2);
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-
-
-
-
+    /**
+     * Agrega los campos de texto para correo y contraseña al panel.
+     */
+    private void agregarTexto(){
+        JPanel panel = new JPanel(new GridLayout(5, 4));
         panel.setOpaque(false);
-
         panel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(panel);
-    }
 
-    public void botones(){
-        JPanel panel = new JPanel();
-        panel.setLayout(new FlowLayout());
-        panel.setOpaque(false);
+        Font fuente = new Font("Arial", Font.BOLD, 25);
+        JLabel labelCorreo = InterfazUtils.label("Correo:", fuente);
+        JLabel labelPassword = InterfazUtils.label("Contraseña:", fuente);
 
-        JButton boton1 = new JButton("Iniciar Sesion");
-        boton1.setPreferredSize(new Dimension(250,40));
-        panel.add(boton1);
+        campoCorreo = new JTextField();
+        campoPassword = new JPasswordField();
 
-        JButton botonSalida = new JButton("Salir");
-        botonSalida.setPreferredSize(new Dimension(250,40));
-        panel.add(botonSalida);
+        // Fila vacía
+        for (int i = 0; i < 4; i++) panel.add(Box.createRigidArea(new Dimension(350, 50)));
+
+        panel.add(Box.createRigidArea(new Dimension(350, 50)));
+        panel.add(labelCorreo);
+        panel.add(campoCorreo);
+        panel.add(Box.createRigidArea(new Dimension(350, 50)));
+
+        for (int i = 0; i < 4; i++) panel.add(Box.createRigidArea(new Dimension(350, 50)));
+        panel.add(Box.createRigidArea(new Dimension(350, 50)));
+        panel.add(labelPassword);
+        panel.add(campoPassword);
+        panel.add(Box.createRigidArea(new Dimension(350, 50)));
 
         add(panel);
+    }
 
-        boton1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String correo = campo1.getText();
-                String contraseña = campo2.getText();
-                Estudiante estudiante = null;
+    /**
+     * Agrega los botones de iniciar sesión y salir.
+     */
+    public void agregarBotones(){
+        JPanel panel = new JPanel(new FlowLayout());
+        panel.setOpaque(false);
 
+        JButton botonIniciar = new JButton("Iniciar Sesión");
+        botonIniciar.setPreferredSize(new Dimension(250, 40));
+        panel.add(botonIniciar);
 
-                Set<Estudiante> todosLosEstudiantes = EstudianteFactory.cargarEstudiantes();
-                if (todosLosEstudiantes != null) {
-                    for (Estudiante est : todosLosEstudiantes) {
-                        // Compara el correo y el ID (contraseña)
-                        // Asegúrate de que getCorreo() y getId() existen en tu clase Estudiante
-                        if (est.getCorreo().equals(correo) && est.getId().equals(contraseña)) {
-                            estudiante = est; // ¡Encontramos al estudiante!
-                            break; // Salimos del bucle una vez que lo encontramos
-                        }
-                    }
-                }
+        JButton botonSalida = new JButton("Salir");
+        botonSalida.setPreferredSize(new Dimension(250, 40));
+        panel.add(botonSalida);
 
-                if (estudiante != null) {
-                    JOptionPane.showMessageDialog(PanelInicioEstudiante.this,
-                            "Inicio de sesión exitoso para: " + estudiante.getNombre() + " " + estudiante.getApellido(),
-                            "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                    Ventana.solicitudEstudiante(estudiante); // Pasamos la instancia del estudiante encontrado
-                } else {
-                    JOptionPane.showMessageDialog(PanelInicioEstudiante.this,
-                            "Correo o contraseña incorrectos.",
-                            "Error de Inicio de Sesión", JOptionPane.ERROR_MESSAGE);
-                }
+        botonIniciar.addActionListener(_ -> procesarInicioSesion());
+        botonSalida.addActionListener(_ -> Ventana.principal());
+
+        add(panel);
+    }
+
+    /**
+     * Válida los datos ingresados y busca el estudiante entre los que están en el JSON.
+     */
+    private void procesarInicioSesion(){
+        String correo = campoCorreo.getText();
+        String password = campoPassword.getText();
+        Set<Estudiante> estudiantes = EstudianteFactory.getInstancia().getObjetosNoModificable();
+
+        for (Estudiante est : estudiantes) {
+            // Compara el correo y el ID (contraseña)
+            // Asegúrate de que getCorreo() y getId() existen en tu clase Estudiante
+            if (est.getCorreo().equals(correo) && est.getId().equals(password)) {
+                JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso para: " + est.getNombre() + " " + est.getApellido(), "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                Ventana.solicitudEstudiante(est); // Pasamos la instancia del estudiante encontrado
+                return; // Salimos del bucle una vez que lo encontramos
             }
-        });
-        botonSalida.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Ventana.principal();
-            }
-        });
+        }
+
+        JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos.", "Error de Inicio de Sesión", JOptionPane.ERROR_MESSAGE);
     }
 }
