@@ -1,11 +1,13 @@
 package interfaz;
 
 import Logica.Estudiante;
+import Logica.EstudianteFactory;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Set;
 
 public class PanelInicioEstudiante extends JPanel {
 
@@ -107,9 +109,29 @@ public class PanelInicioEstudiante extends JPanel {
                 String contraseña = campo2.getText();
                 Estudiante estudiante = null;
 
-                //inicio de sesion
 
-                Ventana.solicitudEstudiante(estudiante);
+                Set<Estudiante> todosLosEstudiantes = EstudianteFactory.cargarEstudiantes();
+                if (todosLosEstudiantes != null) {
+                    for (Estudiante est : todosLosEstudiantes) {
+                        // Compara el correo y el ID (contraseña)
+                        // Asegúrate de que getCorreo() y getId() existen en tu clase Estudiante
+                        if (est.getCorreo().equals(correo) && est.getId().equals(contraseña)) {
+                            estudiante = est; // ¡Encontramos al estudiante!
+                            break; // Salimos del bucle una vez que lo encontramos
+                        }
+                    }
+                }
+
+                if (estudiante != null) {
+                    JOptionPane.showMessageDialog(PanelInicioEstudiante.this,
+                            "Inicio de sesión exitoso para: " + estudiante.getNombre() + " " + estudiante.getApellido(),
+                            "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    Ventana.solicitudEstudiante(estudiante); // Pasamos la instancia del estudiante encontrado
+                } else {
+                    JOptionPane.showMessageDialog(PanelInicioEstudiante.this,
+                            "Correo o contraseña incorrectos.",
+                            "Error de Inicio de Sesión", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
         botonSalida.addActionListener(new ActionListener() {

@@ -64,7 +64,7 @@ public class Ventana extends JFrame {
     }
     protected static void solicitudEstudiante(Estudiante estudiante){
         instancia.remove(panel);
-        //panel = new AgregarSolicitudEstudiante(estudiante);
+        panel = new AgregarSolicitudEstudiante(estudiante);
         instancia.add(panel);
         instancia.repaint();
         instancia.revalidate();
@@ -100,6 +100,13 @@ public class Ventana extends JFrame {
     protected static void agregarProfesor() {
         instancia.remove(panel);
         panel = new PanelAgregarProfesorAdmin();
+        instancia.add(panel);
+        instancia.repaint();
+        instancia.revalidate();
+    }
+    protected static void solicitudes() {
+        instancia.remove(panel);
+        panel = new PanelSolicitudes();
         instancia.add(panel);
         instancia.repaint();
         instancia.revalidate();

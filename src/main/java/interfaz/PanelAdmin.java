@@ -32,6 +32,12 @@ public class PanelAdmin extends JPanel {
                 Ventana.perfil();
             }
         });
+        boton3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Ventana.solicitudes();
+            }
+        });
     }
 
     private void titulo(){

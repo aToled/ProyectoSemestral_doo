@@ -2,15 +2,20 @@ package interfaz;
 
 import Logica.Enums.Asignatura;
 import Logica.Enums.Horario;
+import Logica.Estudiante;
+import Logica.EstudianteFactory;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Set;
 
 public class PanelPerfil extends JPanel {
     JPanel panel;
     int valor = 0;
+    private JComboBox<String> comboEstudiantes;
+
     private final String dias[] = {"LUNES","MARTES","MIERCOLES","JUEVES","VIERNES"};
 
     public PanelPerfil(){
@@ -41,9 +46,12 @@ public class PanelPerfil extends JPanel {
     private void eliminar(){
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel.setOpaque(false);
-        JComboBox combo = new JComboBox<String>();
-        combo.setPreferredSize(new Dimension(250,30));
-        panel.add(combo);
+        comboEstudiantes = new JComboBox<String>();
+        comboEstudiantes.setPreferredSize(new Dimension(250,30));
+        panel.add(comboEstudiantes);
+
+        cargarEstudiantesEnComboBox();
+
         JButton boton = new JButton("Eliminar");
         panel.add(boton);
         add(panel);
@@ -51,10 +59,55 @@ public class PanelPerfil extends JPanel {
         boton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // --- Solo esta parte la necesitas agregar o reemplazar en tu ActionListener ---
+                String itemSeleccionado = (String) comboEstudiantes.getSelectedItem();
 
-                //eliminar lo que esta en el jcombobox
+                if (itemSeleccionado != null && !itemSeleccionado.isEmpty() && !itemSeleccionado.equals("No hay estudiantes para eliminar")) {
+                    String idAEliminar = null;
+                    int inicio = itemSeleccionado.indexOf("(ID: ") + 4;
+                    int termino = itemSeleccionado.indexOf(")", inicio);
+
+                    if (inicio != -1 && termino != -1) {
+                        idAEliminar = itemSeleccionado.substring(inicio, termino);
+                    } else {
+                        JOptionPane.showMessageDialog(PanelPerfil.this,
+                                "No se pudo extraer el ID del estudiante seleccionado.",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+
+                    int confirm = JOptionPane.showConfirmDialog(PanelPerfil.this,
+                            "¿Confirmas que deseas eliminar a " + itemSeleccionado + "?",
+                            "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
+
+                    if (confirm == JOptionPane.YES_OPTION) {
+                        EstudianteFactory.eliminarEstudiante(idAEliminar);
+                        JOptionPane.showMessageDialog(PanelPerfil.this,
+                                "Estudiante eliminado exitosamente.", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                        cargarEstudiantesEnComboBox(); // Recargar el JComboBox para actualizar la lista
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(PanelPerfil.this,
+                            "No hay estudiantes seleccionados o la lista esta vacia.",
+                            "Advertencia", JOptionPane.WARNING_MESSAGE);
+                }
             }
         });
+    }
+
+    private void cargarEstudiantesEnComboBox() {
+        comboEstudiantes.removeAllItems(); // Limpiar ítems existentes
+
+        Set<Estudiante> estudiantes = EstudianteFactory.cargarEstudiantes();
+
+        if (estudiantes != null && !estudiantes.isEmpty()) {
+            for (Estudiante est : estudiantes) {
+
+                comboEstudiantes.addItem(est.getNombre() + " " + est.getApellido() + " (ID: " + est.getId() + ")");
+            }
+        } else {
+            comboEstudiantes.addItem("No hay estudiantes para eliminar");
+        }
     }
 
     private void cualAgregar(){

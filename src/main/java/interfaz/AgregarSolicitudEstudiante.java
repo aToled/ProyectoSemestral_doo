@@ -2,7 +2,10 @@ package interfaz;
 
 import Logica.Enums.Asignatura;
 import Logica.Enums.Dia;
+import Logica.Enums.EstadoSolicitud;
 import Logica.Enums.Horario;
+import Logica.Estudiante;
+import Logica.Solicitud;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +14,15 @@ import java.awt.event.ActionListener;
 
 public class AgregarSolicitudEstudiante extends JPanel {
     private final String dias[] = {"LUNES","MARTES","MIERCOLES","JUEVES","VIERNES"};
-    public AgregarSolicitudEstudiante(){
+    private Estudiante estudiante;
+    private JComboBox<Asignatura> comboAsignatura;
+    private JComboBox<String> comboHorario;
+    private JComboBox<String> comboDia;
+    private JCheckBox menorEstudiantes;
+    private JCheckBox menorTarifa;
+
+    public AgregarSolicitudEstudiante(Estudiante estudiante){
+        this.estudiante = estudiante;
         this.setBackground(Color.black);
         this.setVisible(true);
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
@@ -34,7 +45,23 @@ public class AgregarSolicitudEstudiante extends JPanel {
         boton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Ventana.admin();
+                Asignatura asignaturaSeleccionada = (Asignatura) comboAsignatura.getSelectedItem();
+                Horario horarioSeleccionado = Horario.valueOf((String) comboHorario.getSelectedItem());
+                Dia diaSeleccionado = Dia.valueOf((String) comboDia.getSelectedItem());
+
+                boolean prefiereMenorEstudiantes = menorEstudiantes.isSelected();
+                boolean prefiereMenorTarifa = menorTarifa.isSelected();
+
+                estudiante.addDiasInteres(diaSeleccionado);
+                estudiante.addHorariosInteres(horarioSeleccionado);
+                estudiante.setPreferirMenorTarifa(prefiereMenorTarifa);
+                estudiante.setPreferirClaseConMenosEstudiantes(prefiereMenorEstudiantes);
+
+                Solicitud nuevaSolicitud = estudiante.crearSolicitud(asignaturaSeleccionada);
+
+                JOptionPane.showMessageDialog(AgregarSolicitudEstudiante.this, "Solicitud enviada con exito", "Solicitud Enviada", JOptionPane.INFORMATION_MESSAGE);
+
+                Ventana.solicitudEstudiante(estudiante);
             }
         });
     }
@@ -66,27 +93,27 @@ public class AgregarSolicitudEstudiante extends JPanel {
         JLabel preferencias = new JLabel("Preferencias:");
         preferencias.setFont(fuente);
 
-        JComboBox comboAsignatura = new JComboBox<Asignatura>();
+        JComboBox comboAsignatura = new JComboBox<>();
         for(Asignatura asignatura1: Asignatura.values()){
             comboAsignatura.addItem(asignatura1);
         }
 
-        JComboBox comboHorario = new JComboBox<String>();
+        JComboBox comboHorario = new JComboBox<>();
         for(Horario horario1: Horario.values()){
             comboHorario.addItem(horario1.toString());
         }
 
 
-        JComboBox comboDia = new JComboBox<String>();
+        JComboBox comboDia = new JComboBox<>();
         for(String dia1: dias){
             comboDia.addItem(dia1);
         }
 
-        JCheckBox menorEstudiantes = new JCheckBox("Clase con Menor Cantidad De Estuantes");
+        menorEstudiantes = new JCheckBox("Clase con Menor Cantidad De Estuantes");
         menorEstudiantes.setFont(fuente2);
         menorEstudiantes.setOpaque(false);
 
-        JCheckBox menorTarifa = new JCheckBox("Menor Tarifa Posible");
+        menorTarifa = new JCheckBox("Menor Tarifa Posible");
         menorTarifa.setFont(fuente2);
         menorTarifa.setOpaque(false);
 
@@ -138,47 +165,3 @@ public class AgregarSolicitudEstudiante extends JPanel {
         this.add(panel);
     }
 }
-
-/**
- *
- * para Inicio y Registro
-public void botones(){
-    JPanel panel = new JPanel();
-    panel.setLayout(new FlowLayout());
-    panel.setOpaque(false);
-
-    JButton boton1 = new JButton("Registrarme");
-    boton1.setPreferredSize(new Dimension(250,40));
-    panel.add(boton1);
-
-    JButton botonSalida = new JButton("Salir");
-    botonSalida.setPreferredSize(new Dimension(250,40));
-    panel.add(botonSalida);
-
-    add(panel);
-
-    boton1.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            Ventana.solicitudEstudiante();
-        }
-    });
-    botonSalida.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            Ventana.principal();
-        }
-    });
-}
-
-
- para ventana
-
- protected static void solicitudEstudiante(){
- instancia.remove(panel);
- panel = new AgregarSolicitudEstudiante();
- instancia.add(panel);
- instancia.repaint();
- instancia.revalidate();
- }
- */

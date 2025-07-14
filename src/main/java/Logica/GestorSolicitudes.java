@@ -106,7 +106,7 @@ public class GestorSolicitudes extends ManejoGenericoJSON<Solicitud> {
      * @param id: Id de la solicitud.
      * @return La referencia a la solicitud encontrada o null si no la encuentra.
      */
-    private Solicitud buscarSolicitud(String id){
+    public Solicitud buscarSolicitud(String id){
         for(Solicitud s : super.objetos){
             if(Objects.equals(s.getId(), id)){
                 return s;

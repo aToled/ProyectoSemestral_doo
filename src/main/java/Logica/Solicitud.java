@@ -17,6 +17,7 @@ public class Solicitud extends IdentificableAbstracta {
     private Set<Clase> clasesSugeridas;
     private Clase claseElegida;
 
+
     public Solicitud(String id, Estudiante estudiante, Asignatura asignatura){
         super(id);
         this.estudiante = estudiante;

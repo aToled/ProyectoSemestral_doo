@@ -33,6 +33,7 @@ public class PanelCalendario extends JPanel {
         listaDeBotones();
         cuerpo();
         add(Box.createRigidArea(new Dimension(0,40)));
+        agregarBotonSalir();
     }
 
     public void listaDeBotones(){
@@ -233,5 +234,22 @@ public class PanelCalendario extends JPanel {
         title.setFont(fuente);
         this.add(title);
         title.setVisible(true);
+    }
+    private void agregarBotonSalir() {
+
+        JPanel panelBotonSalir = new JPanel();
+        panelBotonSalir.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        panelBotonSalir.setOpaque(false);
+        JButton btnSalir = new JButton("Salir");
+
+
+        btnSalir.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Ventana.principal();
+            }
+        });
+        panelBotonSalir.add(btnSalir);
+        this.add(panelBotonSalir);
     }
 }
