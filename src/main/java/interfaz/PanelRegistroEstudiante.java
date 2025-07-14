@@ -96,18 +96,10 @@ public class PanelRegistroEstudiante extends JPanel {
 
     private void registrarEstudiante() {
         int id = EstudianteFactory.getInstancia().getCantidadObjetos() + 1;
-        Estudiante estudiante = EstudianteFactory.crearEstudiante(
-                campoNombre.getText(),
-                campoApellido.getText(),
-                campoCorreo.getText(),
-                String.valueOf(id)
-        );
-        EstudianteFactory.agregarEstudiante(estudiante);
-
+        Estudiante estudiante = EstudianteFactory.crearEstudiante(campoNombre.getText(), campoApellido.getText(), campoCorreo.getText(), String.valueOf(id));
         if (estudiante.setPassword(campoPassword.getText())) {
             Ventana.solicitudEstudiante(estudiante);
-        } else {
-            EstudianteFactory.eliminarEstudiante(String.valueOf(id));
+            EstudianteFactory.agregarEstudiante(estudiante);
         }
     }
 }

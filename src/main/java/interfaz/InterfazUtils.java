@@ -46,4 +46,13 @@ public class InterfazUtils {
         panel.add(boton);
         return boton;
     }
+
+    public static String extractIdFromComboBoxItem(String item) {
+        int startIndex = item.indexOf("(ID: ") + 4;
+        int endIndex = item.indexOf(")", startIndex);
+        if (endIndex != -1 && endIndex > startIndex) {
+            return item.substring(startIndex, endIndex);
+        }
+        return null;
+    }
 }

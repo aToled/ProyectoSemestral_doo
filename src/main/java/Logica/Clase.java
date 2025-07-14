@@ -165,4 +165,9 @@ public class Clase extends IdentificableAbstracta{
         if(!profesor.getTarifas().contains(tarifa)){throw new IllegalArgumentException("El Profesor no acepta esta tarifa: "+ tarifa);}
         this.tarifa = tarifa;
     }
+
+    @Override
+    public String toString(){
+        return "Clase: "+getId()+", Profesor: "+profesor+", BloqueHorario: "+bloqueHorario+", Tarifa: $"+tarifa+", Cantidad actual de Estudiantes: "+cantidadEstudiantes()+", Cantidad máxima de Estudiantes: "+capacidadMaximaAlumnos;
+    }
 }

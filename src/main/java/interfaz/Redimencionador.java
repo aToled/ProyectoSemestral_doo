@@ -1,20 +1,16 @@
 package interfaz;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.net.URL;
 
 /**
- * Ayuda a redimencionar imagenes para usarlas despues
+ * Ayuda a redimensionar imágenes para usarlas después.
  */
 public class Redimencionador {
-
-    public Redimencionador(){};
-
     public static ImageIcon red(String ruta, int porciento) {
         URL url = Redimencionador.class.getResource(ruta);
+        assert url != null;
         ImageIcon imagne = new ImageIcon(url);
         Image imagen = imagne.getImage();
         int y = imagen.getHeight(null);

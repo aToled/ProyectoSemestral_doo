@@ -6,11 +6,11 @@
     ],
     "preferirMenorTarifa": false,
     "preferirClaseConMenosEstudiantes": false,
+    "password": "a",
     "nombre": "Carlos",
     "apellido": "Gómez",
     "correo": "cgomez@gmail.com",
-    "id": "0",
-    "password": "a"
+    "id": "0"
   },
   {
     "materiasInteres": [
@@ -236,5 +236,18 @@
     "apellido": "Ortega",
     "correo": "jortega@gmail.com",
     "id": "19"
+  },
+  {
+    "materiasInteres": [],
+    "bloquesHorariosInteres": [],
+    "diasInteres": [],
+    "horariosInteres": [],
+    "preferirMenorTarifa": false,
+    "preferirClaseConMenosEstudiantes": false,
+    "password": "a",
+    "nombre": "a",
+    "apellido": "a",
+    "correo": "a",
+    "id": "21"
   }
 ]
