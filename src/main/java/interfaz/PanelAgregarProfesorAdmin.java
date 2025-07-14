@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Panel que permite al administrador registrar a un nuevo profesor.
+ * Panel que permite al administrador registrar a un nuevo Profesor.
  */
 public class PanelAgregarProfesorAdmin extends JPanel {
 
@@ -30,7 +30,7 @@ public class PanelAgregarProfesorAdmin extends JPanel {
         setVisible(true);
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 
-        titulo();
+        InterfazUtils.agregarTitulo("Agregar Profesor", this);
         add(Box.createRigidArea(new Dimension(0, 40)));
         texto();
         add(Box.createRigidArea(new Dimension(0, 30)));
@@ -41,19 +41,7 @@ public class PanelAgregarProfesorAdmin extends JPanel {
     }
 
     /**
-     * Agrega el título principal al panel.
-     */
-    private void titulo(){
-        Font fuente = new Font("Arial", Font.BOLD, 80);
-        JLabel title = new JLabel("Agregar Profesor");
-        title.setForeground(Color.white);
-        title.setFont(fuente);
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        add(title);
-    }
-
-    /**
-     * Agrega los campos de entrada para los datos del profesor, incluyendo nombre, correo, asignaturas, etc.
+     * Agrega los campos de entrada para los datos del Profesor, incluyendo nombre, correo, asignaturas, etc.
      */
     private void texto(){
         JPanel panel = new JPanel();
@@ -76,29 +64,22 @@ public class PanelAgregarProfesorAdmin extends JPanel {
         listaHorarios = new JList<>(Horario.values());
         listaHorarios.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
-        panel.add(label("Nombre:", fuente)); panel.add(campoNombre);
-        panel.add(label("Apellido:", fuente)); panel.add(campoApellido);
-        panel.add(label("Correo electrónico:", fuente)); panel.add(campoCorreo);
-        panel.add(label("Capacidad Máxima de Alumnos (separado por comas):", fuente)); panel.add(campoCapacidades);
-        panel.add(label("Tarifas (separado por comas):", fuente)); panel.add(campoTarifas);
-        panel.add(label("Asignaturas (Seleccionar Multiples con CTRL):", fuente)); panel.add(new JScrollPane(listaAsignaturas));
-        panel.add(label("Días disponibles (Seleccionar Multiples con CTRL):", fuente)); panel.add(new JScrollPane(listaDias));
-        panel.add(label("Horarios disponibles (Seleccionar Multiples con CTRL):", fuente)); panel.add(new JScrollPane(listaHorarios));
+        panel.add(InterfazUtils.label("Nombre:", fuente)); panel.add(campoNombre);
+        panel.add(InterfazUtils.label("Apellido:", fuente)); panel.add(campoApellido);
+        panel.add(InterfazUtils.label("Correo electrónico:", fuente)); panel.add(campoCorreo);
+        panel.add(InterfazUtils.label("Capacidad Máxima de Alumnos (separado por comas):", fuente)); panel.add(campoCapacidades);
+        panel.add(InterfazUtils.label("Tarifas (separado por comas):", fuente)); panel.add(campoTarifas);
+        panel.add(InterfazUtils.label("Asignaturas (Seleccionar Multiples con CTRL):", fuente)); panel.add(new JScrollPane(listaAsignaturas));
+        panel.add(InterfazUtils.label("Días disponibles (Seleccionar Multiples con CTRL):", fuente)); panel.add(new JScrollPane(listaDias));
+        panel.add(InterfazUtils.label("Horarios disponibles (Seleccionar Multiples con CTRL):", fuente)); panel.add(new JScrollPane(listaHorarios));
 
         panel.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(panel);
     }
 
-    private JLabel label(String texto, Font fuente) {
-        JLabel l = new JLabel(texto);
-        l.setFont(fuente);
-        l.setForeground(Color.GRAY);
-        return l;
-    }
-
     /**
-     * Agrega los botones para registrar al profesor o volver al menú principal, adémas, el botón para registrar al Profesor
-     * hace todas las validaciones necesarias para asegurarse que la información que se ingresa es válida.
+     * Agrega los botones para registrar al Profesor o volver al menú principal, adémas, el botón para registrar al Profesor
+     * hace todas las validaciones necesarias para asegurarse que la información que se ingresa es correcta.
      */
     private void botones() {
         JPanel panel = new JPanel();

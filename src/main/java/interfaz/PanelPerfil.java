@@ -9,18 +9,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Set;
 
+/**
+ * Panel que permite al usuario eliminar estudiantes o profesores y acceder a las opciones para registrar nuevos perfiles.
+ */
 public class PanelPerfil extends JPanel {
     private final JComboBox<String> comboEstudiantes = new JComboBox<>();
     private final JComboBox<String> comboProfesores = new JComboBox<>();
 
+    /**
+     * Inicializa el panel de perfil, estableciendo su diseño y componentes principales.
+     */
     public PanelPerfil(){
-        setBackground(Color.black);
+        setBackground(new Color(30, 30, 30));
         setLayout(new GridLayout(1, 2));
 
         JPanel panelEliminar = new JPanel();
         panelEliminar.setLayout(new BoxLayout(panelEliminar, BoxLayout.Y_AXIS));
         panelEliminar.setOpaque(false);
-        panelEliminar.add(crearTitulo("Eliminar"));
+        InterfazUtils.agregarTitulo("Eliminar", panelEliminar);
         panelEliminar.add(Box.createRigidArea(new Dimension(0, 30)));
         panelEliminar.add(crearSeccionEliminarEstudiante());
         panelEliminar.add(Box.createRigidArea(new Dimension(0, 20)));
@@ -29,7 +35,7 @@ public class PanelPerfil extends JPanel {
         JPanel panelAgregar = new JPanel();
         panelAgregar.setLayout(new BoxLayout(panelAgregar, BoxLayout.Y_AXIS));
         panelAgregar.setOpaque(false);
-        panelAgregar.add(crearTitulo("Agregar"));
+        InterfazUtils.agregarTitulo("Agregar", panelAgregar);
         panelAgregar.add(Box.createRigidArea(new Dimension(0, 30)));
         panelAgregar.add(crearSeccionAgregar());
 
@@ -37,14 +43,11 @@ public class PanelPerfil extends JPanel {
         add(panelAgregar);
     }
 
-    private JLabel crearTitulo(String texto){
-        JLabel title = new JLabel(texto);
-        title.setFont(new Font("Arial", Font.BOLD, 60));
-        title.setForeground(Color.white);
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        return title;
-    }
-
+    /**
+     * Crea la sección del panel dedicada a la eliminación de estudiantes.
+     * Contiene un JComboBox con los estudiantes actuales y un botón para eliminarlos.
+     * @return JPanel con los componentes para eliminar estudiantes.
+     */
     private JPanel crearSeccionEliminarEstudiante(){
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel.setOpaque(false);
@@ -60,6 +63,9 @@ public class PanelPerfil extends JPanel {
         return panel;
     }
 
+    /**
+     * Agrega el sub-panel para eliminar Estudiantes del sistema incluyendo un JComboBox y botón de confirmación.
+     */
     private void eliminarEstudiante(){
         String item = (String) comboEstudiantes.getSelectedItem();
 
@@ -85,6 +91,9 @@ public class PanelPerfil extends JPanel {
         }
     }
 
+    /**
+     * Carga los estudiantes desde el sistema y los muestra en el JComboBox.
+     */
     private void cargarEstudiantesEnComboBox() {
         comboEstudiantes.removeAllItems(); // Limpiar ítems existentes
         Set<Estudiante> estudiantes = EstudianteFactory.cargarEstudiantes();
@@ -98,6 +107,11 @@ public class PanelPerfil extends JPanel {
         }
     }
 
+    /**
+     * Crea la sección del panel dedicada a la eliminación de profesores.
+     * Contiene un JComboBox con los profesores actuales y un botón para eliminarlos.
+     * @return JPanel con los componentes para eliminar profesores.
+     */
     private JPanel crearSeccionEliminarProfesor() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel.setOpaque(false);
@@ -113,6 +127,9 @@ public class PanelPerfil extends JPanel {
         return panel;
     }
 
+    /**
+     * Agrega el sub-panel para eliminar Profesores del sistema incluyendo un JComboBox y botón de confirmación.
+     */
     private void eliminarProfesor() {
         String item = (String) comboProfesores.getSelectedItem();
 
@@ -137,6 +154,9 @@ public class PanelPerfil extends JPanel {
         }
     }
 
+    /**
+     * Carga los profesores desde el sistema y los muestra en el JComboBox.
+     */
     private void cargarProfesoresEnComboBox() {
         comboProfesores.removeAllItems();
         Set<Profesor> profesores = ProfesorFactory.cargarProfesores();
@@ -150,6 +170,11 @@ public class PanelPerfil extends JPanel {
         }
     }
 
+    /**
+     * Crea la sección del panel que permite agregar nuevos perfiles.
+     * Incluye botones de opción para agregar un profesor o un estudiante.
+     * @return JPanel con los componentes de selección para agregar perfiles.
+     */
     private JPanel crearSeccionAgregar() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel.setOpaque(false);

@@ -5,133 +5,86 @@ import Logica.EstudianteFactory;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
+/**
+ * Panel que permite al administrador registrar a un nuevo Estudiante.
+ */
 public class PanelAgregarEstudianteAdmin extends JPanel {
+    private JTextField campoNombre, campoApellido, campoCorreo, campoPassword;
 
-    private JTextField campo1,campo2,campo3,campo4;
-
+    /**
+     * Inicializa el panel con los componentes necesarios para el registro.
+     */
     public PanelAgregarEstudianteAdmin(){
-        this.setBackground(Color.black);
-        this.setVisible(true);
-        this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-        this.titulo();
-        add(Box.createRigidArea(new Dimension(0,40)));
+        setBackground(new Color(30, 30, 30));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        InterfazUtils.agregarTitulo("Agregar Estudiante", this);
+        add(Box.createRigidArea(new Dimension(0, 40)));
 
-        this.texto();
-        add(Box.createRigidArea(new Dimension(0,30)));
+        agregarTexto();
+        add(Box.createRigidArea(new Dimension(0, 30)));
 
-        this.botones();
+        agregarBotones();
+        add(Box.createRigidArea(new Dimension(0, 10)));
 
-
-        add(Box.createRigidArea(new Dimension(0,10)));
-
-
-        this.repaint();
-        this.revalidate();
-    }
-    private void titulo(){
-        Font fuente = new Font("Arial", Font.BOLD, 80);
-        JLabel title = new JLabel("Agregar Estudiante");
-        title.setForeground(Color.white);
-        title.setFont(fuente);
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(title);
-        title.setVisible(true);
+        repaint();
+        revalidate();
     }
 
-
-    private void texto(){
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(9,4));
-        JLabel nombre = new JLabel("Nombre:");
-        Font fuente = new Font("Arial", Font.BOLD, 20);
-        nombre.setFont(fuente);
-        JLabel apellido = new JLabel("Apellido:");
-        apellido.setFont(fuente);
-        JLabel correo = new JLabel("Correo electronico:");
-        correo.setFont(fuente);
-        JLabel id = new JLabel("Id(Guardar como identificador):");
-        id.setFont(fuente);
-
-        campo1 = new JTextField("Ingrese su Nombre");
-        campo2 = new JTextField("Ingrese su Apellido");
-        campo3 = new JTextField("ejemplo@gmail.com");
-        campo4 = new JTextField("Numero de id");
-
-
-        nombre.setForeground(Color.GRAY);
-        apellido.setForeground(Color.GRAY);
-        correo.setForeground(Color.GRAY);
-        id.setForeground(Color.GRAY);
-
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(nombre);
-        panel.add(campo1);
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(apellido);
-        panel.add(campo2);
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(correo);
-        panel.add(campo3);
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(id);
-        panel.add(campo4);
-
-
+    /**
+     * Agrega los campos de entrada para los datos del Estudiante, incluyendo nombre, correo, contraseña, etc.
+     */
+    private void agregarTexto() {
+        JPanel panel = new JPanel(new GridLayout(4, 2, 10, 15));
         panel.setOpaque(false);
+        panel.setMaximumSize(new Dimension(700, 200));
+
+        Font fuente = new Font("Arial", Font.BOLD, 20);
+
+        campoNombre = new JTextField();
+        campoApellido = new JTextField();
+        campoCorreo = new JTextField();
+        campoPassword = new JTextField();
+
+        panel.add(InterfazUtils.label( "Nombre:", fuente)); panel.add(campoNombre);
+        panel.add(InterfazUtils.label("Apellido:", fuente)); panel.add(campoApellido);
+        panel.add(InterfazUtils.label("Correo electrónico:", fuente)); panel.add(campoCorreo);
+        panel.add(InterfazUtils.label("Contraseña:", fuente)); panel.add(campoPassword);
 
         panel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(panel);
+        add(panel);
     }
-    public void botones(){
-        JPanel panel = new JPanel();
-        panel.setLayout(new FlowLayout());
+
+    /**
+     * Agrega los botones para registrar al Estudiante o volver al menú principal, adémas, el botón para registrar al Estudiante
+     * hace todas las validaciones necesarias para asegurarse que la información que se ingresa es correcta.
+     */
+    private void agregarBotones() {
+        JPanel panel = new JPanel(new FlowLayout());
         panel.setOpaque(false);
 
-        JButton boton1 = new JButton("Agregar");
-        boton1.setPreferredSize(new Dimension(250,40));
-        panel.add(boton1);
+        JButton botonAgregar = new JButton("Agregar");
+        botonAgregar.setPreferredSize(new Dimension(250, 40));
+        panel.add(botonAgregar);
 
-        JButton botonSalida = new JButton("Salir");
-        botonSalida.setPreferredSize(new Dimension(250,40));
-        panel.add(botonSalida);
+        JButton botonSalir = new JButton("Salir");
+        botonSalir.setPreferredSize(new Dimension(250, 40));
+        panel.add(botonSalir);
 
-        add(panel);
-
-        boton1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        botonAgregar.addActionListener(_ -> {
+            int id = EstudianteFactory.getInstancia().getCantidadObjetos() + 1;
+            Estudiante  estudiante = EstudianteFactory.crearEstudiante(campoNombre.getText(), campoApellido.getText(), campoCorreo.getText(), String.valueOf(id));
+            if (estudiante.setPassword(campoPassword.getText())) {
+                JOptionPane.showMessageDialog(this, "Estudiante agregado correctamente.",
+                        "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 Ventana.perfil();
-                Estudiante estudiante = EstudianteFactory.crearEstudiante(campo1.getText(), campo2.getText(), campo3.getText(), campo4.getText());
+            } else {
+                EstudianteFactory.eliminarEstudiante(String.valueOf(id));
+                JOptionPane.showMessageDialog(this, "Contraseña inválida.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
-        botonSalida.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Ventana.principal();
-            }
-        });
+        botonSalir.addActionListener(_ -> Ventana.principal());
+        add(panel);
     }
 }
