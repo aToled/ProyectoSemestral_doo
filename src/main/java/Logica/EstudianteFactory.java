@@ -55,6 +55,7 @@ public class EstudianteFactory extends ManejoGenericoJSON<Estudiante> {
     }
 
     public static int getCantidadEstudiantes() {
-
+        Set<Estudiante> estudiantes = instancia.cargar();
+        return estudiantes.size();
     }
 }

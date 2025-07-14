@@ -1,11 +1,17 @@
 package interfaz;
 
+import Logica.Estudiante;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PanelInicioEstudiante extends JPanel {
+
+    JTextField campo1;
+    JTextField campo2;
+
     public PanelInicioEstudiante(){
         this.setBackground(Color.black);
         this.setVisible(true);
@@ -42,10 +48,10 @@ public class PanelInicioEstudiante extends JPanel {
         Font fuente = new Font("Arial", Font.BOLD, 25);
         JLabel correo = new JLabel("Correo:");
         correo.setFont(fuente);
-        JLabel id = new JLabel("Id:");
+        JLabel id = new JLabel("Contraseña:");
         id.setFont(fuente);
-        JTextField campo1 = new JTextField("Ingrese su Correo");
-        JTextField campo2 = new JTextField("Ingresar  Identificador");
+        campo1 = new JTextField("Ingrese su Correo");
+        campo2 = new JPasswordField("");
 
         correo.setForeground(Color.GRAY);
         id.setForeground(Color.GRAY);
@@ -97,7 +103,13 @@ public class PanelInicioEstudiante extends JPanel {
         boton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Ventana.solicitudEstudiante();
+                String correo = campo1.getText();
+                String contraseña = campo2.getText();
+                Estudiante estudiante = null;
+
+                //inicio de sesion
+
+                Ventana.solicitudEstudiante(estudiante);
             }
         });
         botonSalida.addActionListener(new ActionListener() {
