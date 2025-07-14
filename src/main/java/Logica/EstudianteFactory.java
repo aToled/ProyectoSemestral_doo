@@ -7,6 +7,7 @@ import java.util.Set;
 /**
  * Clase que se encarga de la creación y gestión de los objetos tipo Estudiante mediante persistencia en JSON,
  * se extiende de ManejoGenericoJSON para operar sobre un conjunto de estudiantes almacenados localmente.
+ * @see ManejoGenericoJSON
  */
 public class EstudianteFactory extends ManejoGenericoJSON<Estudiante> {
     private static final Type listType = new TypeToken<Set<Estudiante>>(){}.getType();
@@ -52,10 +53,5 @@ public class EstudianteFactory extends ManejoGenericoJSON<Estudiante> {
      */
     public static void eliminarEstudiante(String id) {
         instancia.eliminar(id);
-    }
-
-    public static int getCantidadEstudiantes() {
-        Set<Estudiante> estudiantes = instancia.cargar();
-        return estudiantes.size();
     }
 }

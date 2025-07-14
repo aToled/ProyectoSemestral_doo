@@ -12,7 +12,7 @@ import java.util.*;
 
 /**
  * Clase cuyo único propósito es proporcionar métodos para el Manejo de un Set de Objetos <T> dentro de un archivo JSON.
- * (Estudiantes, Profesores, Tes)
+ * (Estudiantes, Profesores, Solicitudes)
  * @param <T>: El tipo de Objeto que con el que se Trabaja.
  */
 public abstract class ManejoGenericoJSON <T extends Identificable> {
