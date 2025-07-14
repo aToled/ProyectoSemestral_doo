@@ -1,8 +1,8 @@
 package Logica.Enums;
 
 /**
- * Contiene los Bloques en los que se desarrollaran las clases
- * Va desde las 8:15 hasta las 20:00 horas
+ * Contiene los Bloques en los que se desarrollaran las clases.
+ * Va desde las 8:15 hasta las 20:00 horas.
  */
 public enum Horario {
     BLOQUE1, BLOQUE2, BLOQUE3, BLOQUE4, BLOQUE5, BLOQUE6, BLOQUE7, BLOQUE8, BLOQUE9, BLOQUE10, BLOQUE11, BLOQUE12;

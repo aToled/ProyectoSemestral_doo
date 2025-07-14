@@ -18,7 +18,7 @@ public class Estudiante extends Persona {
     private final Set<Horario> horariosInteres;
     private boolean preferirMenorTarifa;
     private boolean preferirClaseConMenosEstudiantes;
-    private String contraseña = "";
+    private String password = "";
 
     public Estudiante(String nombre, String apellido, String correo, String id) {
         super(nombre, apellido, correo, id);
@@ -51,9 +51,9 @@ public class Estudiante extends Persona {
     public void addHorariosInteres(Horario h) {horariosInteres.add(h);}
     public void setPreferirMenorTarifa(boolean b) {this.preferirMenorTarifa = b;}
     public void setPreferirClaseConMenosEstudiantes(boolean b) {this.preferirClaseConMenosEstudiantes = b;}
-    public boolean setContraseña(String contraseña){
-        if(this.contraseña.equals("")){
-            this.contraseña = contraseña;
+    public boolean setPassword(String password){
+        if(this.password.isEmpty()){
+            this.password = password;
             return true;
         }
         return false;
@@ -66,5 +66,5 @@ public class Estudiante extends Persona {
     public Set<Horario> getHorariosInteres() {return horariosInteres;}
     public boolean isPreferirMenorTarifa() {return preferirMenorTarifa;}
     public boolean isPreferirClaseConMenosEstudiantes() {return preferirClaseConMenosEstudiantes;}
-    public String getContraseña(){return contraseña;}
+    public String getPassword(){return password;}
 }

@@ -82,8 +82,8 @@ public class PanelAgregarProfesorAdmin extends JPanel {
         panel.add(label("Capacidad Máxima de Alumnos (separado por comas):", fuente)); panel.add(campoCapacidades);
         panel.add(label("Tarifas (separado por comas):", fuente)); panel.add(campoTarifas);
         panel.add(label("Asignaturas (Seleccionar Multiples con CTRL):", fuente)); panel.add(new JScrollPane(listaAsignaturas));
-        panel.add(label("Días disponibles (Seleccionar Multiples con CTRL:", fuente)); panel.add(new JScrollPane(listaDias));
-        panel.add(label("Horarios disponibles (Seleccionar Multiples con CTRL:", fuente)); panel.add(new JScrollPane(listaHorarios));
+        panel.add(label("Días disponibles (Seleccionar Multiples con CTRL):", fuente)); panel.add(new JScrollPane(listaDias));
+        panel.add(label("Horarios disponibles (Seleccionar Multiples con CTRL):", fuente)); panel.add(new JScrollPane(listaHorarios));
 
         panel.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(panel);

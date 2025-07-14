@@ -8,6 +8,7 @@ import java.util.Set;
 /**
  * Clase que se encarga de la creación y gestión de los objetos tipo Profesor mediante persistencia en JSON,
  * se extiende de ManejoGenericoJSON para operar sobre un conjunto de profesores almacenados localmente.
+ * @see ManejoGenericoJSON
  */
 public class ProfesorFactory extends ManejoGenericoJSON<Profesor>{
     private static final Type listType = new TypeToken<Set<Profesor>>(){}.getType();
