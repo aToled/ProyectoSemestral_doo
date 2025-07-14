@@ -2,6 +2,8 @@ package interfaz;
 
 import Logica.Estudiante;
 import Logica.EstudianteFactory;
+import Logica.ManejoGenericoJSON;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -53,19 +55,19 @@ public class PanelRegistroEstudiante extends JPanel {
         apellido.setFont(fuente);
         JLabel correo = new JLabel("Correo electronico:");
         correo.setFont(fuente);
-        JLabel id = new JLabel("Id(Guardar como identificador):");
-        id.setFont(fuente);
+        JLabel psw = new JLabel("Contraseña:");
+        psw.setFont(fuente);
 
         campo1 = new JTextField("Ingrese su Nombre");
         campo2 = new JTextField("Ingrese su Apellido");
         campo3 = new JTextField("ejemplo@gmail.com");
-        campo4 = new JTextField("Numero de id");
+        campo4 = new JPasswordField("");
 
 
         nombre.setForeground(Color.GRAY);
         apellido.setForeground(Color.GRAY);
         correo.setForeground(Color.GRAY);
-        id.setForeground(Color.GRAY);
+        psw.setForeground(Color.GRAY);
 
         panel.add(Box.createRigidArea(new Dimension(350,50)));
         panel.add(Box.createRigidArea(new Dimension(350,50)));
@@ -96,7 +98,7 @@ public class PanelRegistroEstudiante extends JPanel {
         panel.add(Box.createRigidArea(new Dimension(350,50)));
         panel.add(Box.createRigidArea(new Dimension(350,50)));
         panel.add(Box.createRigidArea(new Dimension(350,50)));
-        panel.add(id);
+        panel.add(psw);
         panel.add(campo4);
 
 
@@ -123,8 +125,13 @@ public class PanelRegistroEstudiante extends JPanel {
         boton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Ventana.solicitudEstudiante();
-                Estudiante estudiante = EstudianteFactory.crearEstudiante(campo1.getText(), campo2.getText(), campo3.getText(), campo4.getText());
+                int id = EstudianteFactory.getCantidadEstudiantes()+1;
+                Estudiante estudiante = EstudianteFactory.crearEstudiante(campo1.getText(), campo2.getText(), campo3.getText(), ((id)+""));
+                if(estudiante.setContraseña(campo4.getText())){
+                    Ventana.solicitudEstudiante(estudiante);}
+                else{
+                    EstudianteFactory.eliminarEstudiante(id+"");
+                }
             }
         });
         botonSalida.addActionListener(new ActionListener() {

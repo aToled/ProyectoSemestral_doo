@@ -1,5 +1,7 @@
 package interfaz;
 
+import Logica.Estudiante;
+
 import javax.swing.*;
 
 public class Ventana extends JFrame {
@@ -60,16 +62,16 @@ public class Ventana extends JFrame {
         instancia.repaint();
         instancia.revalidate();
     }
-    protected static void modificacioEstudiante(){
+    protected static void solicitudEstudiante(Estudiante estudiante){
         instancia.remove(panel);
-        panel = new PanelSolicitudesEstudiante();
+        //panel = new AgregarSolicitudEstudiante(estudiante);
         instancia.add(panel);
         instancia.repaint();
         instancia.revalidate();
     }
-    protected static void solicitudEstudiante(){
+    protected static void calendario(){
         instancia.remove(panel);
-        panel = new AgregarSolicitudEstudiante();
+        panel = new PanelCalendario();
         instancia.add(panel);
         instancia.repaint();
         instancia.revalidate();

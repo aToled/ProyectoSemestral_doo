@@ -115,6 +115,7 @@ public class GestorSolicitudes extends ManejoGenericoJSON<Solicitud> {
         throw new NoSuchElementException("Solicitud: " + id + " no encontrada");
     }
 
+
     /**
      * Método para notificar a los listeners, actualizando sus listas de solicitudes
      * cada vez que se modifica la lista de solicitudes en esta clase.

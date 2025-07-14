@@ -20,6 +20,12 @@ public class PanelAdmin extends JPanel {
         this.repaint();
         this.revalidate();
 
+        boton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Ventana.calendario();
+            }
+        });
         boton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
