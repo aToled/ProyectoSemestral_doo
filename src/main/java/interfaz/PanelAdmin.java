@@ -2,70 +2,34 @@ package interfaz;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
+/**
+ * Panel que representa la vista principal del administrador
+ * con botones para acceder a distintas funcionalidades del sistema.
+ */
 public class PanelAdmin extends JPanel {
 
     public PanelAdmin(){
-        this.setBackground(new Color(30, 30, 30));
-        this.setVisible(true);
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.titulo();
-        JButton boton1 = this.addBotones("/botonCalendario.png");
-        JButton boton2 = this.addBotones("/botonPerfil.png");
-        JButton boton3 = this.addBotones("/botonSolicitud.png");
-        this.botones();
+        setBackground(new Color(30, 30, 30));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        InterfazUtils.agregarTitulo("Administrador", this);
+
+        JButton botonCalendario = InterfazUtils.addBotonesConIcono("/botonCalendario.png", this, 23);
+        JButton botonPerfil = InterfazUtils.addBotonesConIcono("/botonPerfil.png", this, 23);
+        JButton botonSolicitudes = InterfazUtils.addBotonesConIcono("/botonSolicitud.png", this, 23);
+
+        AgregarBotonSalir();
         add(Box.createRigidArea(new Dimension(0,10)));
-        this.repaint();
-        this.revalidate();
 
-        boton1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Ventana.calendario();
-            }
-        });
-        boton2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Ventana.perfil();
-            }
-        });
-        boton3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Ventana.solicitudes();
-            }
-        });
+        botonCalendario.addActionListener(_ -> Ventana.calendario());
+        botonPerfil.addActionListener(_ -> Ventana.perfil());
+        botonSolicitudes.addActionListener(_ -> Ventana.solicitudes());
+
+        repaint();
+        revalidate();
     }
 
-    private void titulo(){
-        Font fuente = new Font("Arial", Font.BOLD, 70);
-        JLabel title = new JLabel("Administrador");
-        title.setForeground(Color.white);
-        title.setFont(fuente);
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(title);
-        title.setVisible(true);
-    }
-
-    private JButton addBotones(String ubicacion){
-        JButton boton = new JButton();
-        boton.setIcon(Redimencionador.red(ubicacion, 23));
-        boton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        boton.setContentAreaFilled(false);
-        boton.setBorderPainted(false);
-        boton.setFocusPainted(false);
-        boton.setOpaque(false);
-        this.add(boton);
-        boton.setVisible(true);
-        this.revalidate();
-        this.repaint();
-        return boton;
-    }
-
-    public void botones(){
+    public void AgregarBotonSalir(){
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout(FlowLayout.RIGHT));
         panel.setOpaque(false);
@@ -75,11 +39,6 @@ public class PanelAdmin extends JPanel {
         panel.add(botonSalida);
 
         add(panel);
-        botonSalida.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Ventana.principal();
-            }
-        });
+        botonSalida.addActionListener(_ -> Ventana.principal());
     }
 }

@@ -2,59 +2,22 @@ package interfaz;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class PanelEstudiante extends JPanel {
     public PanelEstudiante(){
-        this.setBackground(new Color(30, 30, 30));
-        this.setVisible(true);
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.titulo();
+        setBackground(new Color(30, 30, 30));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        InterfazUtils.agregarTitulo("Estudiante", this);
+
         add(Box.createRigidArea(new Dimension(0,40)));
-        JButton boton1 = this.addBotones("/botonInicio.png");
+        JButton botonInicio = InterfazUtils.addBotonesConIcono("/botonInicio.png", this, 30);
         add(Box.createRigidArea(new Dimension(0,20)));
-        JButton boton2 = this.addBotones("/botonRegistro.png");
-        this.repaint();
-        this.revalidate();
+        JButton botonRegistro = InterfazUtils.addBotonesConIcono("/botonRegistro.png", this, 30);
 
-        boton1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Ventana.estudianteInicio();
-            }
-        });
+        botonInicio.addActionListener(_ -> Ventana.estudianteInicio());
+        botonRegistro.addActionListener(_ -> Ventana.estudianteRegistro());
 
-        boton2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Ventana.estudianteRegistro();
-            }
-        });
-    }
-
-    private void titulo(){
-        Font fuente = new Font("Arial", Font.BOLD, 100);
-        JLabel title = new JLabel("Estudiante");
-        title.setForeground(Color.white);
-        title.setFont(fuente);
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(title);
-        title.setVisible(true);
-    }
-
-    private JButton addBotones(String ubicacion){
-        JButton boton = new JButton();
-        boton.setIcon(Redimencionador.red(ubicacion, 30));
-        boton.setContentAreaFilled(false);
-        boton.setBorderPainted(false);
-        boton.setFocusPainted(false);
-        boton.setOpaque(false);
-        boton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(boton);
-        boton.setVisible(true);
-        this.revalidate();
-        this.repaint();
-        return boton;
+        repaint();
+        revalidate();
     }
 }
