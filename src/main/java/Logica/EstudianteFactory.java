@@ -53,4 +53,8 @@ public class EstudianteFactory extends ManejoGenericoJSON<Estudiante> {
     public static void eliminarEstudiante(String id) {
         instancia.eliminar(id);
     }
+
+    public static int getCantidadEstudiantes() {
+
+    }
 }
