@@ -111,10 +111,23 @@ public class Ventana extends JFrame {
         instancia.repaint();
         instancia.revalidate();
     }
+    protected static void preferencias(Estudiante estudiante) {
+        instancia.remove(panel);
+        panel = new PanelPreferencias(estudiante);
+        instancia.add(panel);
+        instancia.repaint();
+        instancia.revalidate();
+    }
+    protected static void seleccionarClase(Estudiante estudiante) {
+        instancia.remove(panel);
+        panel = new PanelEnviarSolicitud(estudiante);
+        instancia.add(panel);
+        instancia.repaint();
+        instancia.revalidate();
+    }
     protected static void refrescar(){
         instancia.repaint();
         instancia.revalidate();
     }
-
 }
 

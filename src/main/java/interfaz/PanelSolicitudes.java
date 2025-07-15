@@ -33,6 +33,8 @@ public class PanelSolicitudes extends JPanel implements ObservadorSolicitudes {
         GestorSolicitudes.getInstancia().suscribir(this);
 
         add(Box.createVerticalGlue());
+
+
     }
 
     /**
