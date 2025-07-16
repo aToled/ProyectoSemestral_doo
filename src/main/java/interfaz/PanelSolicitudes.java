@@ -1,14 +1,14 @@
 package interfaz;
 
-import Logica.Clase;
+import Logica.*;
+import Logica.Enums.Asignatura;
 import Logica.Enums.EstadoSolicitud;
 import Logica.Estrategias.*;
-import Logica.GestorSolicitudes;
-import Logica.Solicitud;
-import Logica.ObservadorSolicitudes;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -20,6 +20,13 @@ public class PanelSolicitudes extends JPanel implements ObservadorSolicitudes {
     private JComboBox<String> comboSolicitudes;
     private JButton btnAceptar;
     private JButton btnRechazar;
+    private Profesor profesor;
+    private JComboBox<Profesor> combo1;
+    private JComboBox<Asignatura> combo2;
+    private JComboBox<BloqueHorario> combo3;
+    private JComboBox<Long> combo4;
+    private JComboBox<Integer> combo5;
+    private int id = 1000;
 
     public PanelSolicitudes(){
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -28,7 +35,14 @@ public class PanelSolicitudes extends JPanel implements ObservadorSolicitudes {
         InterfazUtils.agregarTitulo("Solicitudes", this);
         add(Box.createRigidArea(new Dimension(0, 30)));
 
+
+
         configurarPanelAdmin();
+        add(Box.createRigidArea(new Dimension(0, 15)));
+        InterfazUtils.agregarTitulo("Crear Clase", this);
+        add(Box.createRigidArea(new Dimension(0, 20)));
+
+        crearClase();
 
         GestorSolicitudes.getInstancia().suscribir(this);
 
@@ -50,17 +64,14 @@ public class PanelSolicitudes extends JPanel implements ObservadorSolicitudes {
 
         btnAceptar = new JButton("Aceptar");
         btnRechazar = new JButton("Rechazar");
-        JButton btnSalir = new JButton("Salir");
 
         panelControles.add(btnAceptar);
         panelControles.add(btnRechazar);
-        panelControles.add(btnSalir);
 
         add(panelControles);
 
         btnAceptar.addActionListener(_ -> manejarDecision(true));
         btnRechazar.addActionListener(_ -> manejarDecision(false));
-        btnSalir.addActionListener(_ -> Ventana.principal());
     }
 
     /**
@@ -132,6 +143,112 @@ public class PanelSolicitudes extends JPanel implements ObservadorSolicitudes {
         } else {
             btnAceptar.setEnabled(true);
             btnRechazar.setEnabled(true);
+        }
+    }
+
+    private void crearClase(){
+
+        Font fuente = new Font("Arial", Font.BOLD, 20);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(6,2, 5, 5));
+        panel.setOpaque(false);
+
+        combo1 = new JComboBox<Profesor>();
+        for(Profesor profe: ProfesorFactory.cargarProfesores()){
+            combo1.addItem(profe);
+        }
+
+        profesor = (Profesor) combo1.getSelectedItem();
+
+        combo2 = new JComboBox<>();
+        combo3 = new JComboBox<>();
+        combo4 = new JComboBox<>();
+        combo5 = new JComboBox<>();
+
+        actualizar();
+
+        combo1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                profesor = (Profesor) combo1.getSelectedItem();
+                actualizar();
+            }
+        });
+
+        panel.add(InterfazUtils.label("Profesor: ", fuente));
+        panel.add(combo1);
+
+        panel.add(InterfazUtils.label("Asignatura: ", fuente));
+        panel.add(combo2);
+
+        panel.add(InterfazUtils.label("Disponibilidad: ", fuente));
+        panel.add(combo3);
+
+        panel.add(InterfazUtils.label("Tarifa: ", fuente));
+        panel.add(combo4);
+
+        panel.add(InterfazUtils.label("Cantidad Maxima Estudiantes: ", fuente));
+        panel.add(combo5);
+
+        JPanel panelBoton = new JPanel();
+        panelBoton.setLayout(new FlowLayout(FlowLayout.CENTER));
+        panelBoton.setOpaque(false);
+        JButton crear = new JButton("Crear");
+        crear.setPreferredSize(new Dimension(150,30));
+        panelBoton.add(crear);
+        panel.add(panelBoton);
+
+
+        JPanel panelSalir = new JPanel();
+        panelSalir.setLayout(new FlowLayout(FlowLayout.CENTER));
+        panelSalir.setOpaque(false);
+        JButton salir = new JButton("Salir");
+        crear.setPreferredSize(new Dimension(150,30));
+        panelSalir.add(salir);
+        panel.add(panelSalir);
+
+        id++;
+        panel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        add(panel);
+
+        crear.addActionListener(_ -> {
+            Clase clase = new Clase((Profesor) combo1.getSelectedItem(),String.valueOf(id++), (Asignatura) combo2.getSelectedItem(), (BloqueHorario) combo3.getSelectedItem(), (Integer) combo5.getSelectedItem(), (Long) combo4.getSelectedItem());
+            JOptionPane.showMessageDialog(this, "Clase creada exitosamente.", "Clase Creada", JOptionPane.INFORMATION_MESSAGE);
+        });
+
+        salir.addActionListener(_ -> {
+            Ventana.principal();
+        });
+    }
+
+    private void actualizar() {
+        if (profesor != null) {
+            combo2.removeAllItems();
+            for (Asignatura asignatura : profesor.getMateriasQueDicta()) {
+                combo2.addItem(asignatura);
+            }
+
+            combo3.removeAllItems();
+
+            for (BloqueHorario bloque : profesor.getDisponibilidad()) {
+                combo3.addItem(bloque);
+            }
+
+            combo4.removeAllItems();
+            for (Long precio : profesor.getTarifas()) {
+                combo4.addItem(precio);
+            }
+            combo5.removeAllItems();
+            for (Integer cantidad : profesor.getCapacidadesMaximasAlumnos()) {
+                combo5.addItem(cantidad);
+            }
+        } else {
+            combo2.removeAllItems();
+            combo3.removeAllItems();
+            combo4.removeAllItems();
+            combo5.removeAllItems();
         }
     }
 }

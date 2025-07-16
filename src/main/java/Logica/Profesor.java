@@ -34,4 +34,10 @@ public class Profesor extends Persona {
     public Set<Long> getTarifas(){
         return tarifas;
     }
+
+    @Override
+    public String toString(){
+        String salida = getNombre() + " " + getApellido();
+        return salida;
+    }
 }
