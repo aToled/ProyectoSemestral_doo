@@ -14,18 +14,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- *Panel de creacion de solicitudes de estudiantes
+ * Panel de creación de solicitudes de estudiantes
  */
 public class PanelEnviarSolicitudEstudiante extends JPanel {
     private JComboBox listaAsignaturas;
     private JComboBox listaClases;
     private JList listaDias;
     private JList listaHorarios;
-    private Estudiante estudiante;
+    private final Estudiante estudiante;
     private Solicitud solicitud = null;
-    private GestorSolicitudes gestor = GestorSolicitudes.getInstancia();
-    private JPanel panelBoton;
-    private Set<Clase> clasesSugeridas;
+    private final GestorSolicitudes gestor = GestorSolicitudes.getInstancia();
     private JButton registrar;
 
     public PanelEnviarSolicitudEstudiante(Estudiante estudiante){
@@ -108,8 +106,8 @@ public class PanelEnviarSolicitudEstudiante extends JPanel {
                 }
 
                 PanelPreferencias.diaHoraPreferido = false;
-                PanelPreferencias.diaPreferido = (dias.size() > 0);
-                PanelPreferencias.horaPreferido = (horarios.size() > 0);
+                PanelPreferencias.diaPreferido = (!dias.isEmpty());
+                PanelPreferencias.horaPreferido = (!horarios.isEmpty());
             }
 
             solicitud = estudiante.crearSolicitud((Asignatura) listaAsignaturas.getSelectedItem());
@@ -148,7 +146,7 @@ public class PanelEnviarSolicitudEstudiante extends JPanel {
 
         Font fuente = new Font("Arial", Font.BOLD, 20);
 
-        panelBoton = new JPanel();
+        JPanel panelBoton = new JPanel();
         panelBoton.setLayout(new FlowLayout());
         panelBoton.setOpaque(false);
 
@@ -182,7 +180,7 @@ public class PanelEnviarSolicitudEstudiante extends JPanel {
     private void combo(){
         listaClases.removeAllItems();
 
-        clasesSugeridas = solicitud.getClasesSugeridas();
+        Set<Clase> clasesSugeridas = solicitud.getClasesSugeridas();
         if (clasesSugeridas != null && !clasesSugeridas.isEmpty()){
             registrar.setEnabled(true);
             for(Clase clase: clasesSugeridas){

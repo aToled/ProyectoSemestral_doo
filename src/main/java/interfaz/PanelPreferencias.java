@@ -4,13 +4,10 @@ import Logica.Estudiante;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
- * Crea la opcion con preferencias para el estudiante
- * Casilla con menor tarifa y menor cantidad de alumnos
- * ademas de la opcion para seleccionar ente dia, hora seleccionada
+ * Panel que permite al estudiante configurar sus preferencias de solicitud,
+ * como menor tarifa, menor cantidad de alumnos, y horario/día preferido.
  */
 public class PanelPreferencias extends JPanel {
     protected static boolean menorTarifa = false;
@@ -18,20 +15,24 @@ public class PanelPreferencias extends JPanel {
     protected static boolean diaPreferido = false;
     protected static boolean horaPreferido = false;
     protected static boolean diaHoraPreferido = false;
-    private Estudiante estudiante;
+    private final Estudiante estudiante;
 
+    /**Inicializa el panel con las opciones de preferencias y un botón de continuación.
+     * @param estudiante el estudiante que realiza la solicitud
+     */
     public PanelPreferencias(Estudiante estudiante){
-
         this.estudiante = estudiante;
-
         setBackground(new Color(30, 30, 30));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         InterfazUtils.agregarTitulo("Preferencias de Solicitud", this);
+
         opciones();
         botonContinuar();
-
     }
 
+    /**
+     * Crea y agrega al panel los componentes de selección de preferencias (checkboxes y radio buttons).
+     */
     private void opciones(){
      JPanel panel = new JPanel();
      panel.setOpaque(false);
@@ -68,90 +69,52 @@ public class PanelPreferencias extends JPanel {
      bg.add(radioHorario);
      bg.add(radioDiaHorario);
 
-         radioDia.addActionListener(new ActionListener() {
-             @Override
-             public void actionPerformed(ActionEvent e) {
+     radioDia.addActionListener(e -> {
+         JRadioButton boton = (JRadioButton) e.getSource();
+         diaPreferido = boton.isSelected();
+     });
 
-                 JRadioButton boton = (JRadioButton) e.getSource();
-                 if (boton.isSelected()) {
-                     diaPreferido = true;
-                 } else {
-                        diaPreferido = false;
-                 }
-             }
-         });
-        radioHorario.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+     radioHorario.addActionListener(e -> {
+         JRadioButton boton = (JRadioButton) e.getSource();
+         horaPreferido = boton.isSelected();
+     });
 
-                JRadioButton boton = (JRadioButton) e.getSource();
-                if (boton.isSelected()) {
-                    horaPreferido = true;
-                } else {
-                    horaPreferido = false;
-                }
-            }
-        });
-        radioDia.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+     radioDia.addActionListener(e -> {
+         JRadioButton boton = (JRadioButton) e.getSource();
+         diaHoraPreferido = boton.isSelected();
+     });
 
-                JRadioButton boton = (JRadioButton) e.getSource();
-                if (boton.isSelected()) {
-                    diaHoraPreferido = true;
-                } else {
-                    diaHoraPreferido = false;
-                }
-            }
-        });
+     checkTarifa.addActionListener(e -> {
+         JCheckBox source = (JCheckBox) e.getSource();
+         menorTarifa = source.isSelected();
+     });
 
-        checkTarifa.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JCheckBox source = (JCheckBox) e.getSource();
-                if (source.isSelected()) {
-                    menorTarifa = true;
-                } else {
-                    menorTarifa = false;
-                }
-            }
-        });
+     checkEstudiantes.addActionListener(e -> {
+         JCheckBox source = (JCheckBox) e.getSource();
+         menorCantidadEstudiantes = source.isSelected();
+     });
 
-        checkEstudiantes.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JCheckBox source = (JCheckBox) e.getSource();
-                if (source.isSelected()) {
-                    menorCantidadEstudiantes = true;
-                } else {
-                    menorCantidadEstudiantes = false;
-                }
-            }
-        });
-
-        panel.add(Box.createRigidArea(new Dimension(50, 50)));
-        panel.add(checkTarifa);
-        panel.add(Box.createRigidArea(new Dimension(50, 50)));
-
-        panel.add(Box.createRigidArea(new Dimension(50, 50)));
-        panel.add(Box.createRigidArea(new Dimension(50, 50)));
-        panel.add(Box.createRigidArea(new Dimension(50, 50)));
-
-        panel.add(Box.createRigidArea(new Dimension(50, 50)));
-        panel.add(checkEstudiantes);
-        panel.add(Box.createRigidArea(new Dimension(50, 50)));
-
-        panel.add(Box.createRigidArea(new Dimension(50, 50)));
-        panel.add(Box.createRigidArea(new Dimension(50, 50)));
-        panel.add(Box.createRigidArea(new Dimension(50, 50)));
-
-        panel.add(radioDia);
-        panel.add(radioHorario);
-        panel.add(radioDiaHorario);
-
-        add(panel);
+     panel.add(Box.createRigidArea(new Dimension(50, 50)));
+     panel.add(checkTarifa);
+     panel.add(Box.createRigidArea(new Dimension(50, 50)));
+     panel.add(Box.createRigidArea(new Dimension(50, 50)));
+     panel.add(Box.createRigidArea(new Dimension(50, 50)));
+     panel.add(Box.createRigidArea(new Dimension(50, 50)));
+     panel.add(Box.createRigidArea(new Dimension(50, 50)));
+     panel.add(checkEstudiantes);
+     panel.add(Box.createRigidArea(new Dimension(50, 50)));
+     panel.add(Box.createRigidArea(new Dimension(50, 50)));
+     panel.add(Box.createRigidArea(new Dimension(50, 50)));
+     panel.add(Box.createRigidArea(new Dimension(50, 50)));
+     panel.add(radioDia);
+     panel.add(radioHorario);
+     panel.add(radioDiaHorario);
+     add(panel);
     }
 
+    /**
+     * Agrega el botón "CONTINUAR", que redirige a la solicitud para el estudiante.
+     */
     private void botonContinuar(){
         JPanel panel = new JPanel();
         panel.setOpaque(false);
@@ -165,11 +128,6 @@ public class PanelPreferencias extends JPanel {
         add(panel);
         panel.add(Box.createRigidArea(new Dimension(0, 20)));
 
-        botonContinuar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Ventana.solicitudEstudiante(estudiante);
-            }
-        });
+        botonContinuar.addActionListener(_ -> Ventana.solicitudEstudiante(estudiante));
     }
 }
