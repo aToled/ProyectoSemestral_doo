@@ -50,6 +50,7 @@ public class Solicitud extends IdentificableAbstracta {
             this.claseElegida = claseElegida;
             clasesSugeridas.clear();
             GestorSolicitudes.actualizar();
+            this.estadoSolicitud = EstadoSolicitud.ESPERANDO;
         }
     }
 }

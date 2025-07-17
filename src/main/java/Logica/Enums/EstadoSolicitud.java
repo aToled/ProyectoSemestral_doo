@@ -5,5 +5,5 @@ package Logica.Enums;
  * y se modifica a la hora de resolver, aceptar o rechazar una solicitud.
  */
 public enum EstadoSolicitud {
-    ACEPTADA, RECHAZADA, INCONCLUSO, PENDIENTE
+    ACEPTADA, RECHAZADA, INCONCLUSO, PENDIENTE,ESPERANDO
 }

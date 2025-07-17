@@ -12,6 +12,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Panel que le da la opcion al estudiante de seleccionar preferencias, clases y enviar solicitud
+ */
 public class AgregarSolicitudEstudiante extends JPanel {
 
     private Estudiante estudiante;
@@ -21,10 +24,10 @@ public class AgregarSolicitudEstudiante extends JPanel {
         this.setBackground(new Color(30, 30, 30));
         this.setVisible(true);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.titulo();
-        JButton boton1 = InterfazUtils.addBotonesConIcono("/botonPreferencias.png", this,30);
+        InterfazUtils.agregarTitulo("Agregar Solicitud", this);
+        JButton boton1 = InterfazUtils.addBotonesConIcono("/botonPreferencias.png", this, 30);
 
-        JButton boton2 = InterfazUtils.addBotonesConIcono("/botonSolicitudClases.png", this,30);
+        JButton boton2 = InterfazUtils.addBotonesConIcono("/botonSolicitudClases.png", this, 30);
 
         add(Box.createRigidArea(new Dimension(0, 50)));
         add(boton1);
@@ -44,15 +47,5 @@ public class AgregarSolicitudEstudiante extends JPanel {
                 Ventana.seleccionarClase(estudiante);
             }
         });
-    }
-
-    private void titulo() {
-        Font fuente = new Font("Arial", Font.BOLD, 80);
-        JLabel title = new JLabel("Agregar Solicitud");
-        title.setForeground(Color.white);
-        title.setFont(fuente);
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(title);
-        title.setVisible(true);
     }
 }

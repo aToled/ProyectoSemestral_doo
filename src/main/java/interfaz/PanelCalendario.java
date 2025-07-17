@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Crea el calendario que visualizara el Admin
+ */
 public class PanelCalendario extends JPanel {
 
     private String[] dias = {"Lunes","Martes","Miercoles","Jueves","Viernes"};
@@ -28,7 +31,7 @@ public class PanelCalendario extends JPanel {
     public PanelCalendario(){
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         setBackground(new Color(30, 30, 30));
-        titulo();
+        InterfazUtils.agregarTitulo("Calendario", this);
         add(Box.createRigidArea(new Dimension(0,70)));
         listaDeBotones();
         cuerpo();
@@ -36,6 +39,9 @@ public class PanelCalendario extends JPanel {
         agregarBotonSalir();
     }
 
+    /**
+     * Agrega un boton por cada dia de la semana y le agrega la info de las clases que hay en ese dia
+     */
     public void listaDeBotones(){
         acumulador = 0;
         for(Horario horario: Horario.values()){
@@ -225,15 +231,6 @@ public class PanelCalendario extends JPanel {
             tabla.add(boton);
         }
         add(tabla);
-    }
-
-    private void titulo(){
-        Font fuente = new Font("Arial", Font.BOLD, 90);
-        JLabel title = new JLabel("Calendario");
-        title.setForeground(Color.white);
-        title.setFont(fuente);
-        this.add(title);
-        title.setVisible(true);
     }
     private void agregarBotonSalir() {
 

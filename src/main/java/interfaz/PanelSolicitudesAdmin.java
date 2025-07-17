@@ -3,20 +3,18 @@ package interfaz;
 import Logica.*;
 import Logica.Enums.Asignatura;
 import Logica.Enums.EstadoSolicitud;
-import Logica.Estrategias.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Set;
 
 /**
  * Panel utilizado por el administrador para gestionar solicitudes pendientes,
  * permite aceptar o rechazar solicitudes usando estrategias definidas.
  */
-public class PanelSolicitudes extends JPanel implements ObservadorSolicitudes {
+public class PanelSolicitudesAdmin extends JPanel{
     private JComboBox<String> comboSolicitudes;
     private JButton btnAceptar;
     private JButton btnRechazar;
@@ -28,7 +26,7 @@ public class PanelSolicitudes extends JPanel implements ObservadorSolicitudes {
     private JComboBox<Integer> combo5;
     private int id = 1000;
 
-    public PanelSolicitudes(){
+    public PanelSolicitudesAdmin(){
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(new Color(30, 30, 30));
 
@@ -43,9 +41,6 @@ public class PanelSolicitudes extends JPanel implements ObservadorSolicitudes {
         add(Box.createRigidArea(new Dimension(0, 20)));
 
         crearClase();
-
-        GestorSolicitudes.getInstancia().suscribir(this);
-
         add(Box.createVerticalGlue());
 
 
@@ -67,6 +62,7 @@ public class PanelSolicitudes extends JPanel implements ObservadorSolicitudes {
 
         panelControles.add(btnAceptar);
         panelControles.add(btnRechazar);
+        actualizar();
 
         add(panelControles);
 
@@ -85,36 +81,24 @@ public class PanelSolicitudes extends JPanel implements ObservadorSolicitudes {
         String id = InterfazUtils.extractIdFromComboBoxItem(item);
         if (id == null) return;
 
-        if (aceptar) aceptarSolicitud(id);
-        else rechazarSolicitud(id);
+        if (aceptar){
+            aceptarSolicitud(id);
+        } else {
+            rechazarSolicitud(id);}
     }
 
     /**
      * Acepta una solicitud usando las estrategias definidas.
      */
     private void aceptarSolicitud(String idSolicitud) {
-        Solicitud solicitud = GestorSolicitudes.getInstancia().buscarObjeto(idSolicitud);
-        boolean resolucionExitosa = GestorSolicitudes.getInstancia().resolver(idSolicitud,
-                new EstrategiaMenorTarifa(),
-                new EstrategiaConMenosEstudiantes(),
-                new EstrategiaBloqueHorarioPreferido(),
-                new EstrategiaDiaPreferido(),
-                new EstrategiaHorarioPreferido(),
-                new EstrategiaDefault());
-
-        if (resolucionExitosa && solicitud.getClasesSugeridas() != null && !solicitud.getClasesSugeridas().isEmpty()) {
-            Clase claseElegida = new ArrayList<>(solicitud.getClasesSugeridas()).getFirst();
-            solicitud.setClaseElegida(claseElegida);
-            GestorSolicitudes.getInstancia().aceptar(idSolicitud);
-        } else {
-            GestorSolicitudes.getInstancia().rechazar(idSolicitud);
-        }
+        GestorSolicitudes.getInstancia().aceptar(idSolicitud);
     }
 
     /**
      * Rechaza la solicitud directamente.
      */
     private void rechazarSolicitud(String idSolicitud) {
+
         GestorSolicitudes.getInstancia().rechazar(idSolicitud);
     }
 
@@ -122,14 +106,14 @@ public class PanelSolicitudes extends JPanel implements ObservadorSolicitudes {
     /**
      * Actualiza el JComboBox con las solicitudes actuales.
      */
-    @Override
-    public void actualizar(Set<Solicitud> nuevasSolicitudes) {
+    public void actualizar() {
         comboSolicitudes.removeAllItems();
+        Set<Solicitud> nuevasSolicitudes = GestorSolicitudes.getInstancia().getObjetosNoModificable();
         boolean hayPendientes = false;
 
         if (nuevasSolicitudes != null && !nuevasSolicitudes.isEmpty()) {
             for (Solicitud sol : nuevasSolicitudes) {
-                if (sol.getEstadoSolicitud() == EstadoSolicitud.PENDIENTE) {
+                if (sol.getEstadoSolicitud() == EstadoSolicitud.ESPERANDO) {
                     comboSolicitudes.addItem(sol.getEstudiante().getNombre() + " - " + sol.getAsignatura() + " (ID: " + sol.getId() + ")");
                     hayPendientes = true;
                 }
@@ -146,6 +130,9 @@ public class PanelSolicitudes extends JPanel implements ObservadorSolicitudes {
         }
     }
 
+    /**
+     * Crea los elementos necesarios para crear clases desde el panel del admin
+     */
     private void crearClase(){
 
         Font fuente = new Font("Arial", Font.BOLD, 20);
@@ -166,13 +153,13 @@ public class PanelSolicitudes extends JPanel implements ObservadorSolicitudes {
         combo4 = new JComboBox<>();
         combo5 = new JComboBox<>();
 
-        actualizar();
+        actualizar2();
 
         combo1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 profesor = (Profesor) combo1.getSelectedItem();
-                actualizar();
+                actualizar2();
             }
         });
 
@@ -223,7 +210,10 @@ public class PanelSolicitudes extends JPanel implements ObservadorSolicitudes {
         });
     }
 
-    private void actualizar() {
+    /**
+     * Actualiza los elementos de crear clase despues, esto ayuda ya que muestra solo lo disponible para el profesor
+     */
+    private void actualizar2() {
         if (profesor != null) {
             combo2.removeAllItems();
             for (Asignatura asignatura : profesor.getMateriasQueDicta()) {

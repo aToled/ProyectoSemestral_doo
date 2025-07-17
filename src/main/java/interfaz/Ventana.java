@@ -4,6 +4,9 @@ import Logica.Estudiante;
 
 import javax.swing.*;
 
+/**
+ * Crea la ventana del programa y hace manejo de los paneles
+ */
 public class Ventana extends JFrame {
     private static JFrame instancia = null;
     private static JPanel panel;
@@ -19,6 +22,11 @@ public class Ventana extends JFrame {
         this.revalidate();
         this.repaint();
     }
+
+    /**
+     * Crea o da la instancia ya que se trabaja con un singleton
+     * @return instancia del objeto
+     */
     public static JFrame getInstancia(){
         if (instancia == null) {
             instancia = new Ventana();
@@ -106,7 +114,7 @@ public class Ventana extends JFrame {
     }
     protected static void solicitudes() {
         instancia.remove(panel);
-        panel = new PanelSolicitudes();
+        panel = new PanelSolicitudesAdmin();
         instancia.add(panel);
         instancia.repaint();
         instancia.revalidate();
@@ -120,7 +128,7 @@ public class Ventana extends JFrame {
     }
     protected static void seleccionarClase(Estudiante estudiante) {
         instancia.remove(panel);
-        panel = new PanelEnviarSolicitud(estudiante);
+        panel = new PanelEnviarSolicitudEstudiante(estudiante);
         instancia.add(panel);
         instancia.repaint();
         instancia.revalidate();

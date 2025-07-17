@@ -7,6 +7,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Crea la opcion con preferencias para el estudiante
+ * Casilla con menor tarifa y menor cantidad de alumnos
+ * ademas de la opcion para seleccionar ente dia, hora seleccionada
+ */
 public class PanelPreferencias extends JPanel {
     protected static boolean menorTarifa = false;
     protected static boolean menorCantidadEstudiantes = false;

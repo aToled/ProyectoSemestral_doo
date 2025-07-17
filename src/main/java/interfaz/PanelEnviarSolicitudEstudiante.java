@@ -13,7 +13,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class PanelEnviarSolicitud extends JPanel {
+/**
+ *Panel de creacion de solicitudes de estudiantes
+ */
+public class PanelEnviarSolicitudEstudiante extends JPanel {
     private JComboBox listaAsignaturas;
     private JComboBox listaClases;
     private JList listaDias;
@@ -25,7 +28,7 @@ public class PanelEnviarSolicitud extends JPanel {
     private Set<Clase> clasesSugeridas;
     private JButton registrar;
 
-    public PanelEnviarSolicitud(Estudiante estudiante){
+    public PanelEnviarSolicitudEstudiante(Estudiante estudiante){
         this.estudiante = estudiante;
         setBackground(new Color(30, 30, 30));
         setLayout(new GridLayout(3,2,5,5));
@@ -40,6 +43,9 @@ public class PanelEnviarSolicitud extends JPanel {
 
     }
 
+    /**
+     * Crea los componentes para generar la creacion de una solicitud
+     */
     private void texto(){
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(5, 2, 5, 5));
@@ -65,6 +71,9 @@ public class PanelEnviarSolicitud extends JPanel {
         this.add(panel);
     }
 
+    /**
+     * Se crean los botonos para enviar solicitud y se le asignan las funcionalidades
+     */
     private void botones() {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
@@ -133,6 +142,9 @@ public class PanelEnviarSolicitud extends JPanel {
         });
     }
 
+    /**
+     * Creacion de los componentes para seleccionar clases dependiendo de las sugerencias
+     */
     public void seleccionarClase(){
 
         Font fuente = new Font("Arial", Font.BOLD, 20);
@@ -157,6 +169,7 @@ public class PanelEnviarSolicitud extends JPanel {
             if (listaClases.getSelectedItem() != null) {
                 Clase claseSeleccionada = (Clase) listaClases.getSelectedItem();
                 solicitud.setClaseElegida(claseSeleccionada);
+                gestor.agregar(solicitud);
                 JOptionPane.showMessageDialog(null, "Clase asignada a la solicitud.", "Clase Asignada", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor, seleccione una clase de la lista.", "Error de Selección", JOptionPane.WARNING_MESSAGE);
@@ -164,6 +177,9 @@ public class PanelEnviarSolicitud extends JPanel {
         });
     }
 
+    /**
+     * agrega las clases al JComboBox, sirve para mantener acstualizado
+     */
     private void combo(){
         listaClases.removeAllItems();
 
@@ -180,6 +196,9 @@ public class PanelEnviarSolicitud extends JPanel {
         }
     }
 
+    /**
+     * Agrega un boton para volver atras
+     */
     public void volver(){
         JPanel panel = new JPanel(new FlowLayout());
         panel.setOpaque(false);
