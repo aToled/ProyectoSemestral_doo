@@ -12,8 +12,6 @@ import java.util.*;
  * @see ManejoGenericoJSON
  */
 public class GestorSolicitudes extends ManejoGenericoJSON<Solicitud> {
-    private static final Type listType = new TypeToken<Set<Solicitud>>(){}.getType();
-
     private static GestorSolicitudes instancia;
     private final Set<ObservadorSolicitudes> listeners = new HashSet<>();
 
@@ -21,7 +19,7 @@ public class GestorSolicitudes extends ManejoGenericoJSON<Solicitud> {
      * Carga las solicitudes del archivo JSON.
      */
     private GestorSolicitudes(){
-        super("ListaSolicitudes", listType);
+        super("ListaSolicitudes", new TypeToken<Set<Solicitud>>(){}.getType());
     }
 
     /**
