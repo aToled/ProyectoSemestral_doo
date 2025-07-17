@@ -154,7 +154,7 @@ public class PanelEnviarSolicitudEstudiante extends JPanel {
 
         listaClases = new JComboBox<>();
 
-        panelBoton.add(InterfazUtils.label("Asignaturas:", fuente));
+        panelBoton.add(InterfazUtils.label("Clases Sugeridas:", fuente));
         panelBoton.add(listaClases);
 
         registrar = new JButton("Ingresar Clase Elegida");
@@ -177,7 +177,7 @@ public class PanelEnviarSolicitudEstudiante extends JPanel {
     }
 
     /**
-     * agrega las clases al JComboBox, sirve para mantener acstualizado
+     * agrega las clases al JComboBox, sirve para mantener actualizado
      */
     private void combo(){
         listaClases.removeAllItems();
