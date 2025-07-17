@@ -123,3 +123,9 @@ presentamos las áreas clave en las cuales nos gustaría mejorar a futuro:
 - Mejor desarrollo de las interfaces para Estudiantes y Admin para que sean más simples aún
 - Agragar la opcion para ingresar como profesor
 - Sistema de notificaciones aserca de las clases y solicitudes
+
+## Observaciones
+- Al ejecuatar el programa la CONTRASEÑA / USUARIO del admin son:
+- - - admin / admin
+- Lamentamos la entrega tardía de este trabajo y entendemos que es responsabilidad
+  nuestra, por eso agradecemos su comprensión.
