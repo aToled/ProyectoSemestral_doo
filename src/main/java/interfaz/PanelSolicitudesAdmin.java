@@ -6,120 +6,102 @@ import Logica.Enums.EstadoSolicitud;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.Objects;
 import java.util.Set;
 
 /**
  * Panel utilizado por el administrador para gestionar solicitudes pendientes,
  * permite aceptar o rechazar solicitudes usando estrategias definidas.
  */
-public class PanelSolicitudesAdmin extends JPanel{
+public class PanelSolicitudesAdmin extends JPanel {
     private JComboBox<String> comboSolicitudes;
     private JButton btnAceptar;
     private JButton btnRechazar;
     private Profesor profesor;
-    private JComboBox<Profesor> combo1;
-    private JComboBox<Asignatura> combo2;
-    private JComboBox<BloqueHorario> combo3;
-    private JComboBox<Long> combo4;
-    private JComboBox<Integer> combo5;
+    private JComboBox<Profesor> comboProfesores;
+    private JComboBox<Asignatura> comboAsignaturas;
+    private JComboBox<BloqueHorario> comboBloquesHorarios;
+    private JComboBox<Long> comboTarifas;
+    private JComboBox<Integer> comboCapacidades;
     private int id = 1000;
 
-    public PanelSolicitudesAdmin(){
+    /**
+     * Inicializa el panel de gestión de solicitudes y creación de clases.
+     */
+    public PanelSolicitudesAdmin() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(new Color(30, 30, 30));
 
         InterfazUtils.agregarTitulo("Solicitudes", this);
         add(Box.createRigidArea(new Dimension(0, 30)));
 
-
-
-        configurarPanelAdmin();
+        configurarGestionSolicitudes();
         add(Box.createRigidArea(new Dimension(0, 15)));
+
         InterfazUtils.agregarTitulo("Crear Clase", this);
         add(Box.createRigidArea(new Dimension(0, 20)));
 
-        crearClase();
+        configurarCreacionClases();
         add(Box.createVerticalGlue());
-
-
     }
 
     /**
-     * Configura el panel con controles de gestión (aceptar/rechazar).
+     * Configura los controles para aceptar o rechazar solicitudes.
      */
-    private void configurarPanelAdmin() {
-        JPanel panelControles = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
-        panelControles.setOpaque(false);
+    private void configurarGestionSolicitudes() {
+        JPanel panelControles = crearPanelFlow();
 
         comboSolicitudes = new JComboBox<>();
         comboSolicitudes.setPreferredSize(new Dimension(300, 30));
-        panelControles.add(comboSolicitudes);
 
         btnAceptar = new JButton("Aceptar");
         btnRechazar = new JButton("Rechazar");
 
+        panelControles.add(comboSolicitudes);
         panelControles.add(btnAceptar);
         panelControles.add(btnRechazar);
-        actualizar();
-
         add(panelControles);
 
-        btnAceptar.addActionListener(_ -> manejarDecision(true));
-        btnRechazar.addActionListener(_ -> manejarDecision(false));
+        btnAceptar.addActionListener(_ -> procesarSolicitud(true));
+        btnRechazar.addActionListener(_ -> procesarSolicitud(false));
+
+        actualizarSolicitudes();
     }
 
     /**
-     * Lógica compartida para aceptar o rechazar solicitudes.
-     * @param aceptar: true o false dependiendo si se busca aceptar o rechazar.
+     * Procesa la solicitud seleccionada según la acción (aceptar o rechazar).
+     * @param aceptar indica si se acepta la solicitud (true) o se rechaza (false)
      */
-    private void manejarDecision(boolean aceptar) {
+    private void procesarSolicitud(boolean aceptar) {
         String item = (String) comboSolicitudes.getSelectedItem();
         if (item == null || item.isEmpty() || item.equals("No hay solicitudes pendientes")) return;
 
         String id = InterfazUtils.extractIdFromComboBoxItem(item);
         if (id == null) return;
 
-        if (aceptar){
-            aceptarSolicitud(id);
+        if (aceptar) {
+            GestorSolicitudes.getInstancia().aceptar(id);
         } else {
-            rechazarSolicitud(id);}
-    }
-
-    /**
-     * Acepta una solicitud usando las estrategias definidas.
-     */
-    private void aceptarSolicitud(String idSolicitud) {
-        GestorSolicitudes.getInstancia().aceptar(idSolicitud);
-    }
-
-    /**
-     * Rechaza la solicitud directamente.
-     */
-    private void rechazarSolicitud(String idSolicitud) {
-
-        GestorSolicitudes.getInstancia().rechazar(idSolicitud);
-    }
-
-
-    /**
-     * Actualiza el JComboBox con las solicitudes actuales.
-     */
-    public void actualizar() {
-        comboSolicitudes.removeAllItems();
-        Set<Solicitud> nuevasSolicitudes = GestorSolicitudes.getInstancia().getObjetosNoModificable();
-        boolean hayPendientes = false;
-
-        if (nuevasSolicitudes != null && !nuevasSolicitudes.isEmpty()) {
-            for (Solicitud sol : nuevasSolicitudes) {
-                if (sol.getEstadoSolicitud() == EstadoSolicitud.ESPERANDO) {
-                    comboSolicitudes.addItem(sol.getEstudiante().getNombre() + " - " + sol.getAsignatura() + " (ID: " + sol.getId() + ")");
-                    hayPendientes = true;
-                }
-            }
+            GestorSolicitudes.getInstancia().rechazar(id);
         }
 
+        actualizarSolicitudes();
+    }
+
+    /**
+     * Actualiza el combo de solicitudes con las pendientes disponibles.
+     */
+    private void actualizarSolicitudes() {
+        comboSolicitudes.removeAllItems();
+        Set<Solicitud> solicitudes = GestorSolicitudes.getInstancia().getObjetosNoModificable();
+        boolean hayPendientes = false;
+
+        for (Solicitud sol : solicitudes) {
+            if (sol.getEstadoSolicitud() == EstadoSolicitud.ESPERANDO) {
+                comboSolicitudes.addItem(sol.getEstudiante().getNombre() + " - " + sol.getAsignatura() + " (ID: " + sol.getId() + ")");
+                hayPendientes = true;
+            }
+        }
         if (!hayPendientes) {
             comboSolicitudes.addItem("No hay solicitudes pendientes");
             btnAceptar.setEnabled(false);
@@ -131,114 +113,101 @@ public class PanelSolicitudesAdmin extends JPanel{
     }
 
     /**
-     * Crea los elementos necesarios para crear clases desde el panel del admin
+     * Configura el formulario para crear una clase nueva.
      */
-    private void crearClase(){
-
+    private void configurarCreacionClases() {
         Font fuente = new Font("Arial", Font.BOLD, 20);
+        JPanel panelFormulario = new JPanel(new GridLayout(6, 2, 5, 5));
+        panelFormulario.setOpaque(false);
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(6,2, 5, 5));
-        panel.setOpaque(false);
+        comboProfesores = new JComboBox<>();
+        for (Profesor p : ProfesorFactory.cargarProfesores()) comboProfesores.addItem(p);
+        profesor = (Profesor) comboProfesores.getSelectedItem();
 
-        combo1 = new JComboBox<Profesor>();
-        for(Profesor profe: ProfesorFactory.cargarProfesores()){
-            combo1.addItem(profe);
-        }
+        comboAsignaturas = new JComboBox<>();
+        comboBloquesHorarios = new JComboBox<>();
+        comboTarifas = new JComboBox<>();
+        comboCapacidades = new JComboBox<>();
 
-        profesor = (Profesor) combo1.getSelectedItem();
-
-        combo2 = new JComboBox<>();
-        combo3 = new JComboBox<>();
-        combo4 = new JComboBox<>();
-        combo5 = new JComboBox<>();
-
-        actualizar2();
-
-        combo1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                profesor = (Profesor) combo1.getSelectedItem();
-                actualizar2();
-            }
+        comboProfesores.addActionListener(_ -> {
+            profesor = (Profesor) comboProfesores.getSelectedItem();
+            actualizarDatosProfesor();
         });
 
-        panel.add(InterfazUtils.label("Profesor: ", fuente));
-        panel.add(combo1);
+        panelFormulario.add(InterfazUtils.label("Profesor:", fuente));
+        panelFormulario.add(comboProfesores);
+        panelFormulario.add(InterfazUtils.label("Asignatura:", fuente));
+        panelFormulario.add(comboAsignaturas);
+        panelFormulario.add(InterfazUtils.label("Disponibilidad:", fuente));
+        panelFormulario.add(comboBloquesHorarios);
+        panelFormulario.add(InterfazUtils.label("Tarifa:", fuente));
+        panelFormulario.add(comboTarifas);
+        panelFormulario.add(InterfazUtils.label("Capacidad Máxima:", fuente));
+        panelFormulario.add(comboCapacidades);
 
-        panel.add(InterfazUtils.label("Asignatura: ", fuente));
-        panel.add(combo2);
+        JButton btnCrear = new JButton("Crear");
+        btnCrear.setPreferredSize(new Dimension(150, 30));
+        btnCrear.addActionListener(_ -> crearClase());
 
-        panel.add(InterfazUtils.label("Disponibilidad: ", fuente));
-        panel.add(combo3);
+        JButton btnSalir = new JButton("Salir");
+        btnSalir.setPreferredSize(new Dimension(150, 30));
+        btnSalir.addActionListener(_ -> Ventana.principal());
 
-        panel.add(InterfazUtils.label("Tarifa: ", fuente));
-        panel.add(combo4);
+        JPanel panelCrear = crearPanelFlow();
+        panelCrear.add(btnCrear);
+        panelFormulario.add(panelCrear);
 
-        panel.add(InterfazUtils.label("Cantidad Maxima Estudiantes: ", fuente));
-        panel.add(combo5);
+        JPanel panelSalir = crearPanelFlow();
+        panelSalir.add(btnSalir);
+        panelFormulario.add(panelSalir);
 
-        JPanel panelBoton = new JPanel();
-        panelBoton.setLayout(new FlowLayout(FlowLayout.CENTER));
-        panelBoton.setOpaque(false);
-        JButton crear = new JButton("Crear");
-        crear.setPreferredSize(new Dimension(150,30));
-        panelBoton.add(crear);
-        panel.add(panelBoton);
+        panelFormulario.setAlignmentX(Component.CENTER_ALIGNMENT);
+        add(panelFormulario);
 
-
-        JPanel panelSalir = new JPanel();
-        panelSalir.setLayout(new FlowLayout(FlowLayout.CENTER));
-        panelSalir.setOpaque(false);
-        JButton salir = new JButton("Salir");
-        crear.setPreferredSize(new Dimension(150,30));
-        panelSalir.add(salir);
-        panel.add(panelSalir);
-
-        id++;
-        panel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        add(panel);
-
-        crear.addActionListener(_ -> {
-            Clase clase = new Clase((Profesor) combo1.getSelectedItem(),String.valueOf(id++), (Asignatura) combo2.getSelectedItem(), (BloqueHorario) combo3.getSelectedItem(), (Integer) combo5.getSelectedItem(), (Long) combo4.getSelectedItem());
-            JOptionPane.showMessageDialog(this, "Clase creada exitosamente.", "Clase Creada", JOptionPane.INFORMATION_MESSAGE);
-        });
-
-        salir.addActionListener(_ -> {
-            Ventana.principal();
-        });
+        actualizarDatosProfesor();
     }
 
     /**
-     * Actualiza los elementos de crear clase despues, esto ayuda ya que muestra solo lo disponible para el profesor
+     * Actualiza los combos del formulario según el profesor seleccionado.
      */
-    private void actualizar2() {
-        if (profesor != null) {
-            combo2.removeAllItems();
-            for (Asignatura asignatura : profesor.getMateriasQueDicta()) {
-                combo2.addItem(asignatura);
-            }
+    private void actualizarDatosProfesor() {
+        if (profesor == null) return;
 
-            combo3.removeAllItems();
+        comboAsignaturas.removeAllItems();
+        for (Asignatura a : profesor.getMateriasQueDicta()) comboAsignaturas.addItem(a);
 
-            for (BloqueHorario bloque : profesor.getDisponibilidad()) {
-                combo3.addItem(bloque);
-            }
+        comboBloquesHorarios.removeAllItems();
+        for (BloqueHorario h : profesor.getDisponibilidad()) comboBloquesHorarios.addItem(h);
 
-            combo4.removeAllItems();
-            for (Long precio : profesor.getTarifas()) {
-                combo4.addItem(precio);
-            }
-            combo5.removeAllItems();
-            for (Integer cantidad : profesor.getCapacidadesMaximasAlumnos()) {
-                combo5.addItem(cantidad);
-            }
-        } else {
-            combo2.removeAllItems();
-            combo3.removeAllItems();
-            combo4.removeAllItems();
-            combo5.removeAllItems();
+        comboTarifas.removeAllItems();
+        for (Long t : profesor.getTarifas()) comboTarifas.addItem(t);
+
+        comboCapacidades.removeAllItems();
+        for (Integer c : profesor.getCapacidadesMaximasAlumnos()) comboCapacidades.addItem(c);
+    }
+
+    /**
+     * Crea una clase nueva con los datos seleccionados en el formulario.
+     */
+    private void crearClase() {
+        Integer capacidad = (Integer) comboCapacidades.getSelectedItem();
+        Long tarifa = (Long) comboTarifas.getSelectedItem();
+        if (capacidad == null || tarifa == null) {
+            JOptionPane.showMessageDialog(null, "Por favor selecciona una capacidad y tarifa válida.");
+            return;
         }
+        Clase clase = new Clase((Profesor) Objects.requireNonNull(comboProfesores.getSelectedItem()), String.valueOf(id++), (Asignatura) comboAsignaturas.getSelectedItem(), (BloqueHorario) comboBloquesHorarios.getSelectedItem(), capacidad, tarifa);
+        Calendario.getInstancia().addClaseToBloque(clase);
+        JOptionPane.showMessageDialog(this, "Clase creada exitosamente.", "Clase Creada", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    /**
+     * Crea un panel con layout tipo Flow centrado.
+     * @return el panel creado
+     */
+    private JPanel crearPanelFlow() {
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panel.setOpaque(false);
+        return panel;
     }
 }
