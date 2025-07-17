@@ -63,6 +63,9 @@ del código.
 > - Ventana
 > - GestorSolicitudes
 > - Calendario
+> - ProfesorFactory
+> - EstudianteFactory
+> - ManejoClasesJSON
 - Mediator:
 > La implementación del patrón Mediator nos ayudó con la comunicación entre clases. Un ejemplo claro en
 nuestro código sería la clase Ventana, porque este patrón nos permite ejecutar acciones que trascienden
@@ -110,8 +113,8 @@ lo que implica una seguridad bastante baja. Así, cualquier persona con conocimi
 programación podría acceder y modificar estos datos a conveniencia.
 
 ## Mejoras Adicionales a Futuro: 
-Con el tiempo y la experiencia que hemos ganado, tenemos varias ideas para mejorar este programa a futuro. Aquí te
-presento las áreas clave en las que nos gustaría enfocarnos:
+Gracias a nuestra corta experiencia como programadores, generamos diversas ideas en las cual se puede mejorar este programa a futuro. Aquí
+presentamos las áreas clave en las cuales nos gustaría mejorar a futuro:
 - Seguridad de los datos
 - Conexión entre clases y archivos del programa
 - Mejoras Visuales para ser mas llamativo
