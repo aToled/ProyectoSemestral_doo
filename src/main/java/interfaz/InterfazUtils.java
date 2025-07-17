@@ -47,6 +47,11 @@ public class InterfazUtils {
         return boton;
     }
 
+    /**
+     * Extrae el ID desde un ítem con formato "(ID: XXXXX)".
+     * @param item texto del ítem
+     * @return el ID como cadena o null si no se encuentra.
+     */
     public static String extractIdFromComboBoxItem(String item) {
         int startIndex = item.indexOf("(ID: ") + 4;
         int endIndex = item.indexOf(")", startIndex);

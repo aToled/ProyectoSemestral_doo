@@ -3,7 +3,6 @@ package Logica;
 import Logica.Enums.EstadoSolicitud;
 import Logica.Estrategias.EstrategiaSolicitud;
 import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
 import java.util.*;
 
 /**

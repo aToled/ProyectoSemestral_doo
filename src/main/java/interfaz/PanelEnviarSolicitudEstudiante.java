@@ -40,7 +40,6 @@ public class PanelEnviarSolicitudEstudiante extends JPanel {
         seleccionarClase();
         botones();
         volver();
-
     }
 
     /**

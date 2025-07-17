@@ -7,246 +7,109 @@ import Logica.Enums.Horario;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 import java.util.List;
 
 /**
- * Crea el calendario que visualizara el Admin
+ * Crea el calendario que visualizara el Admin.
  */
 public class PanelCalendario extends JPanel {
 
-    private String[] dias = {"Lunes","Martes","Miercoles","Jueves","Viernes"};
-    private ArrayList lunes = new ArrayList<String>();
-    private ArrayList martes = new ArrayList<String>();
-    private ArrayList miercoles = new ArrayList<String>();
-    private ArrayList jueves = new ArrayList<String>();
-    private ArrayList viernes = new ArrayList<String>();
-    private JButton[] botones=new JButton[5];
-
-    private int acumulador = 0;
+    private final Dia[] dias = Dia.values();
+    private final Map<Dia, List<String>> clasesPorDia = new EnumMap<>(Dia.class);
+    private final JButton[] botones=new JButton[5];
 
     public PanelCalendario(){
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         setBackground(new Color(30, 30, 30));
         InterfazUtils.agregarTitulo("Calendario", this);
         add(Box.createRigidArea(new Dimension(0,70)));
-        listaDeBotones();
+
+        cargarClases();
         cuerpo();
         add(Box.createRigidArea(new Dimension(0,40)));
         agregarBotonSalir();
     }
 
     /**
-     * Agrega un boton por cada dia de la semana y le agrega la info de las clases que hay en ese dia
+     * Carga las clases por día desde el calendario y crea botones representativos con color dinámico.
      */
-    public void listaDeBotones(){
-        acumulador = 0;
-        for(Horario horario: Horario.values()){
-            List<Clase> clasesDelBloque = Calendario.getInstancia().getClasesEnBloque(Dia.LUNES, horario);
-            if (clasesDelBloque == null) {
-                clasesDelBloque = Collections.emptyList();
-            }
-            for(Clase clase : clasesDelBloque){
-                if(clase != null){
-                    lunes.add(clase.getProfesor().getNombre()+" "+clase.getProfesor().getApellido()+"  "+clase.getAsignatura().toString()+ "   Cantidad Maxima de Estudiandes: " +clase.getCapacidadMaximaAlumnos()+"  Valor: $"+clase.getTarifa());
-                    acumulador+=10;
-                }
-            }
-        }
-        Color color = new Color(255,255-acumulador, 255-acumulador);
-        JButton botonLunes = new JButton("");
-        botonLunes.setForeground(color);
+    private void cargarClases() {
+        for (Dia dia : dias) {
+            List<String> clases = new ArrayList<>();
+            int intensidadColor = 0;
 
-        botones[0] = botonLunes;
-
-
-
-        acumulador = 0;
-        for(Horario horario: Horario.values()){
-            List<Clase> clasesDelBloque = Calendario.getInstancia().getClasesEnBloque(Dia.MARTES, horario);
-            if (clasesDelBloque == null) {
-                clasesDelBloque = Collections.emptyList();
-            }
-            for(Clase clase : clasesDelBloque){
-                if(clase != null){
-                    martes.add(clase.getProfesor().getNombre()+" "+clase.getProfesor().getApellido()+"  "+clase.getAsignatura().toString()+ "   Cantidad Maxima de Estudiandes: " +clase.getCapacidadMaximaAlumnos()+"  Valor: $"+clase.getTarifa());
-                    acumulador+=10;
-                }
-            }
-        }
-        color = new Color(255,255-acumulador, 255-acumulador);
-        JButton botonMartes = new JButton("");
-        botonMartes.setForeground(color);
-
-        botones[1] = botonMartes;
-
-
-
-        acumulador = 0;
-        for(Horario horario: Horario.values()){
-            List<Clase> clasesDelBloque = Calendario.getInstancia().getClasesEnBloque(Dia.MIERCOLES, horario);
-            if (clasesDelBloque == null) {
-                clasesDelBloque = Collections.emptyList();
-            }
-            for(Clase clase : clasesDelBloque){
-                if(clase != null){
-                    miercoles.add(clase.getProfesor().getNombre()+" "+clase.getProfesor().getApellido()+"  "+clase.getAsignatura().toString()+ "   Cantidad Maxima de Estudiandes: " +clase.getCapacidadMaximaAlumnos()+"  Valor: $"+clase.getTarifa());
-                    acumulador+=10;
-                }
-            }
-        }
-        color = new Color(255,255-acumulador, 255-acumulador);
-        JButton botonMiercoles = new JButton("");
-        botonMiercoles.setForeground(color);
-
-        botones[2] = botonMiercoles;
-
-
-
-        acumulador = 0;
-        for(Horario horario: Horario.values()){
-            List<Clase> clasesDelBloque = Calendario.getInstancia().getClasesEnBloque(Dia.JUEVES, horario);
-            if (clasesDelBloque == null) {
-                clasesDelBloque = Collections.emptyList();
-            }
-            for(Clase clase : clasesDelBloque){
-                if(clase != null){
-                    jueves.add(clase.getProfesor().getNombre()+" "+clase.getProfesor().getApellido()+"  "+clase.getAsignatura().toString()+ "   Cantidad Maxima de Estudiandes: " +clase.getCapacidadMaximaAlumnos()+"  Valor: $"+clase.getTarifa());
-                    acumulador+=10;
-                }
-            }
-        }
-        color = new Color(255,255-acumulador, 255-acumulador);
-        JButton botonJueves = new JButton("");
-        botonJueves.setForeground(color);
-
-        botones[3] = botonJueves;
-
-
-
-        acumulador = 0;
-        for(Horario horario: Horario.values()){
-            List<Clase> clasesDelBloque = Calendario.getInstancia().getClasesEnBloque(Dia.VIERNES, horario);
-            if (clasesDelBloque == null) {
-                clasesDelBloque = Collections.emptyList();
-            }
-            for(Clase clase : clasesDelBloque){
-                if(clase != null){
-                    viernes.add(clase.getProfesor().getNombre()+" "+clase.getProfesor().getApellido()+"  "+clase.getAsignatura().toString()+ "   Cantidad Maxima de Estudiandes: " +clase.getCapacidadMaximaAlumnos()+"  Valor: $"+clase.getTarifa());
-                    acumulador+=10;
-                }
-            }
-        }
-        color = new Color(255,255-acumulador, 255-acumulador);
-        JButton botonViernes = new JButton("");
-        botonViernes.setForeground(color);
-
-        botones[4] = botonViernes;
-
-        botonLunes.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                StringBuilder mensajeLunes = new StringBuilder();
-                if (!lunes.isEmpty()) {
-                    for (Object info : lunes) {
-                        mensajeLunes.append(info.toString()).append("\n\n");
+            for (Horario horario : Horario.values()) {
+                List<Clase> clasesBloque = Calendario.getInstancia().getClasesEnBloque(dia, horario);
+                if (clasesBloque != null) {
+                    for (Clase clase : clasesBloque) {
+                        if (clase != null) {
+                            clases.add(clase.getProfesor().getNombre() + " " + clase.getProfesor().getApellido() + "  " + clase.getAsignatura() + "   Cantidad Máxima de Estudiantes: " + clase.getCapacidadMaximaAlumnos() + "  Valor: $" + clase.getTarifa());
+                            intensidadColor += 10;
+                        }
                     }
-                } else {
-                    mensajeLunes.append("No hay clases programadas para el Lunes.");
                 }
-                JOptionPane.showMessageDialog(PanelCalendario.this, mensajeLunes.toString(), "Clases del Lunes", JOptionPane.INFORMATION_MESSAGE);
             }
-        });
-        botonMartes.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                StringBuilder mensajeMartes = new StringBuilder();
-                if (!martes.isEmpty()) {
-                    for (Object info : martes) {
-                        mensajeMartes.append(info.toString()).append("\n\n");
-                    }
-                } else {
-                    mensajeMartes.append("No hay clases programadas para el Martes.");
-                }
-                JOptionPane.showMessageDialog(PanelCalendario.this, mensajeMartes.toString(), "Clases del Martes", JOptionPane.INFORMATION_MESSAGE);
-            }
-        });
-        botonMiercoles.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                StringBuilder mensajeMiercoles = new StringBuilder();
-                if (!miercoles.isEmpty()) {
-                    for (Object info : miercoles) {
-                        mensajeMiercoles.append(info.toString()).append("\n\n");
-                    }
-                } else {
-                    mensajeMiercoles.append("No hay clases programadas para el Miercoles.");
-                }
-                JOptionPane.showMessageDialog(PanelCalendario.this, mensajeMiercoles.toString(), "Clases del Miercoles", JOptionPane.INFORMATION_MESSAGE);
-            }
-        });
-        botonJueves.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                StringBuilder mensajeJueves = new StringBuilder();
-                if (!jueves.isEmpty()) {
-                    for (Object info : jueves) {
-                        mensajeJueves.append(info.toString()).append("\n\n");
-                    }
-                } else {
-                    mensajeJueves.append("No hay clases programadas para el Jueves.");
-                }
-                JOptionPane.showMessageDialog(PanelCalendario.this, mensajeJueves.toString(), "Clases del Jueves", JOptionPane.INFORMATION_MESSAGE);
-            }
-        });
-        botonViernes.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                StringBuilder mensajeViernes = new StringBuilder();
-                if (!viernes.isEmpty()) {
-                    for (Object info : viernes) {
-                        mensajeViernes.append(info.toString()).append("\n\n");
-                    }
-                } else {
-                    mensajeViernes.append("No hay clases programadas para el Viernes.");
-                }
-                JOptionPane.showMessageDialog(PanelCalendario.this, mensajeViernes.toString(), "Clases del Viernes", JOptionPane.INFORMATION_MESSAGE);
-            }
-        });
+
+            clasesPorDia.put(dia, clases);
+            Color color = new Color(255, Math.max(0, 255 - intensidadColor), Math.max(0, 255 - intensidadColor));
+
+            JButton boton = new JButton("");
+            boton.setForeground(color);
+            boton.addActionListener(_ -> mostrarClases(dia));
+            botones[dia.ordinal()] = boton;
+        }
     }
 
-    private void cuerpo() {
-        JPanel tabla = new JPanel();
-        tabla.setLayout(new GridLayout(2, 5, 5, 5));
-        Font fuente = new Font("Arial", Font.BOLD, 20);
-        for(String dia: dias){
-            JLabel str = new JLabel(dia);
-            str.setFont(fuente);
-            tabla.add(str);
+
+    /**
+     * Muestra en un diálogo las clases programadas para un día específico.
+     * @param dia el día para el que se consultan las clases.
+     */
+    private void mostrarClases(Dia dia) {
+        List<String> clases = clasesPorDia.getOrDefault(dia, Collections.emptyList());
+        StringBuilder mensaje = new StringBuilder();
+
+        if (clases.isEmpty()) {
+            mensaje.append("No hay clases programadas para el ").append(dia.name().toLowerCase(Locale.ROOT));
+        } else {
+            for (String info : clases) {
+                mensaje.append(info).append("\n\n");
+            }
         }
+
+        JOptionPane.showMessageDialog(this, mensaje.toString(), "Clases del " + dia.name(), JOptionPane.INFORMATION_MESSAGE);
+    }
+
+
+    /**
+     * Crea la tabla de etiquetas y botones para los días de la semana, y la agrega al panel.
+     */
+    private void cuerpo() {
+        JPanel tabla = new JPanel(new GridLayout(2, 5, 5, 5));
+
+        for (Dia dia : dias) {
+            JLabel etiqueta = new JLabel(dia.name().charAt(0) + dia.name().substring(1).toLowerCase());
+            etiqueta.setFont(new Font("Arial", Font.BOLD, 20));
+            tabla.add(etiqueta);
+        }
+
         for(JButton boton: botones){
             tabla.add(boton);
         }
         add(tabla);
     }
+
+    /**
+     * Agrega un botón de salida que redirige a la ventana principal.
+     */
     private void agregarBotonSalir() {
-
-        JPanel panelBotonSalir = new JPanel();
-        panelBotonSalir.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        JPanel panelBotonSalir = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panelBotonSalir.setOpaque(false);
+
         JButton btnSalir = new JButton("Salir");
-
-
-        btnSalir.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Ventana.principal();
-            }
-        });
+        btnSalir.addActionListener(_ -> Ventana.principal());
         panelBotonSalir.add(btnSalir);
-        this.add(panelBotonSalir);
+        add(panelBotonSalir);
     }
 }
