@@ -30,17 +30,20 @@ Strategy, Observer, Factory Method, Singleton, Mediator
 > si este marco que esa era una de sus preferencias.
 > - EstrategiaMenorTarifa: Como la ConMenosEstudiantes pero con tarifas.
 > - GestorSolicitudes: Contexto que aplica la/s estrategia/s.
-> - "ClaseInterfazHipotetica": Contexto que instancia la/s estrategia/s.
+> - PanelEnviarSolicitudEstudiante: Contexto que instancia la/s estrategia/s.
 
  - Observer:
-> La implementació del Observer es con la finalidad de que PanelSolicitudes se pueda actualizar autdomaticamente.
-Este pude suscribirce a GestorSolicitudes si se inicia mediante el medoto suscribirse. Así, PanelSolicitud estaria constantemente
-validando cambios en las solicitudes
+> La implementació del Observer es con la finalidad de que PanelSolicitudes se pueda actualizar automaticamente.
+Este puede suscribirse a GestorSolicitudes si se inicia mediante el metodo suscribirse. Así, PanelSolicitud estaria constantemente
+validando cambios en las solicitudes.
 > 
-> La finalidad principal de esto es poder ceparar la interfaz de usuario de la parte logica y todo lo que esta
+> La finalidad principal de esto es poder separar la interfaz de usuario de la parte logica y todo lo que esta
 detras de esto. Si se quiere modificar una solicitud esto es notificado a PanelSolicitudes y de esta manera
 se puede tener todo actualizado a lo más reciente posible, con esto logramos que el programa esté actualizado
-con los datos más recientes
+con los datos más recientes.
+> 
+> Clases Involucradas:
+> - GestorSolicitudes: Clase que notifica a los Observadores.
 - Factory Method:
 > Las clases Estudiante y Profesor presentan una complejidad considerable debido a la gran cantidad de
 parámetros y métodos que contienen. Sin embargo, con el patrón Factory Method, facilitamos la creación
@@ -49,9 +52,15 @@ de nuevas instancias de estas personas.
 esta puede ser agregada automáticamente al sistema. También podemos crear solicitudes, obtener listas
 y disponer de otras funciones necesarias para el uso normal del programa.
 > 
->  Clases Factory
-> - ProfesorFactory
-> - EstudianteFactory
+>  Clases Involucradas:
+> - ProfesorFactory: Factory.
+> - PanelAgregarProfesorAdmin: uso de ProfesorFactory.
+> - PanelSolicitudesADmin: uso de ProfesorFactory.
+> - EstudianteFactory: Factory.
+> - PanelAgregarEstudianteAdmin: uso de EstudianteFactory.
+> - PanelInicioEstudiantes: uso de EstudianteFactory.
+> - PanelPerfil: uso de EstudianteFactory.
+> - PanelRegistroEstudiante: uso de EstudianteFactory.
 - Singleton:
 > El patrón Singleton es un patrón de diseño utilizado comúnmente en la implementación de elementos
 como calendarios o ventanas. En general, este patrón se implementa con la finalidad de trabajar con
@@ -59,18 +68,21 @@ una sola instancia de un objeto, evitando así los problemas que podría traer l
 Al reducir la duplicación, se minimizan los desfases de información y, además, se logra mejorar la seguridad
 del código.
 > 
-> Donde está presente el Singleton en nuestro codigo
-> - Ventana
-> - GestorSolicitudes
-> - Calendario
-> - ProfesorFactory
-> - EstudianteFactory
-> - ManejoClasesJSON
+> Clases Involucradas:
+> - Ventana: Singleton.
+> - GestorSolicitudes: Singleton.
+> - Calendario: Singleton.
+> - EstudianteFactory: Singleton.
+> - ProfesorFactory: Singleton.
+> - ManejoClasesJSON: Singleton.
 - Mediator:
 > La implementación del patrón Mediator nos ayudó con la comunicación entre clases. Un ejemplo claro en
 nuestro código sería la clase Ventana, porque este patrón nos permite ejecutar acciones que trascienden
 a través de más de una clase. Sin embargo, mediante el Mediator, esto mejora tanto la calidad del código
 como también reduce la cantidad de errores, ya que podemos simplificar varias cosas gracias a esto.
+> 
+> Clases Involucradas:
+> - Ventana
 
 ## Decisiones Importantes:
 Algunas de las decisiones importantes que tuvimos que tomar fueron:  
@@ -126,6 +138,5 @@ presentamos las áreas clave en las cuales nos gustaría mejorar a futuro:
 
 ## Observaciones
 - Al ejecuatar el programa la CONTRASEÑA / USUARIO del admin son:
-- - - admin / admin
-- Lamentamos la entrega tardía de este trabajo y entendemos que es responsabilidad
-  nuestra, por eso agradecemos su comprensión.
+- admin / admin.
+- Lamentamos la entrega tardía de este trabajo y entendemos que es responsabilidad nuestra, por eso agradecemos su comprensión.

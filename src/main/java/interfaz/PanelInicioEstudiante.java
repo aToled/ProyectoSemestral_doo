@@ -11,8 +11,8 @@ import java.util.Set;
  * Panel que permite al Estudiante iniciar sesión.
  */
 public class PanelInicioEstudiante extends JPanel {
-    JTextField campoCorreo;
-    JTextField campoPassword;
+    private JTextField campoCorreo;
+    private JTextField campoPassword;
 
     /**
      * Inicializa el panel con los componentes necesarios para el inicio de sesión.
@@ -67,7 +67,7 @@ public class PanelInicioEstudiante extends JPanel {
     /**
      * Agrega los botones de iniciar sesión y salir.
      */
-    public void agregarBotones(){
+    private void agregarBotones(){
         JPanel panel = new JPanel(new FlowLayout());
         panel.setOpaque(false);
 

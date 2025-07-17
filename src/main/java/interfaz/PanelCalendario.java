@@ -61,7 +61,6 @@ public class PanelCalendario extends JPanel {
         }
     }
 
-
     /**
      * Muestra en un diálogo las clases programadas para un día específico.
      * @param dia el día para el que se consultan las clases.
@@ -80,7 +79,6 @@ public class PanelCalendario extends JPanel {
 
         JOptionPane.showMessageDialog(this, mensaje.toString(), "Clases del " + dia.name(), JOptionPane.INFORMATION_MESSAGE);
     }
-
 
     /**
      * Crea la tabla de etiquetas y botones para los días de la semana, y la agrega al panel.

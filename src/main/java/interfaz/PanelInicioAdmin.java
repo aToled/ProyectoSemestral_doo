@@ -69,7 +69,7 @@ public class PanelInicioAdmin extends JPanel {
     /**
      * Agrega los botones de iniciar sesión y salir.
      */
-    public void agregarBotones(){
+    private void agregarBotones(){
         JPanel panelBotones = new JPanel(new FlowLayout());
         panelBotones.setOpaque(false);
 

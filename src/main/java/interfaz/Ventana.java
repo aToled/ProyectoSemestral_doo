@@ -24,7 +24,7 @@ public class Ventana extends JFrame {
     }
 
     /**
-     * Crea o da la instancia ya que se trabaja con un singleton
+     * Crea o da la instancia, ya que se trabaja con un singleton
      * @return instancia del objeto
      */
     public static JFrame getInstancia(){
@@ -138,4 +138,3 @@ public class Ventana extends JFrame {
         instancia.revalidate();
     }
 }
-

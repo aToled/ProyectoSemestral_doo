@@ -77,7 +77,7 @@ public class PanelRegistroEstudiante extends JPanel {
      * el botón de registro crea un nuevo estudiante y navega a la pantalla correspondiente
      * y el botón de salida regresa al menú principal.
      */
-    public void botones(){
+    private void botones(){
         JPanel panel = new JPanel(new FlowLayout());
         panel.setOpaque(false);
 

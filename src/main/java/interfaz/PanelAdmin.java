@@ -29,7 +29,7 @@ public class PanelAdmin extends JPanel {
         revalidate();
     }
 
-    public void AgregarBotonSalir(){
+    private void AgregarBotonSalir(){
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout(FlowLayout.RIGHT));
         panel.setOpaque(false);

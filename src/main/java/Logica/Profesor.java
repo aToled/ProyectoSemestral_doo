@@ -37,7 +37,6 @@ public class Profesor extends Persona {
 
     @Override
     public String toString(){
-        String salida = getNombre() + " " + getApellido();
-        return salida;
+        return getNombre() + " " + getApellido();
     }
 }

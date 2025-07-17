@@ -14,13 +14,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Panel de creación de solicitudes de estudiantes
+ * Panel de creación de solicitudes de estudiantes.
  */
 public class PanelEnviarSolicitudEstudiante extends JPanel {
-    private JComboBox listaAsignaturas;
-    private JComboBox listaClases;
-    private JList listaDias;
-    private JList listaHorarios;
+    private JComboBox<Asignatura> listaAsignaturas;
+    private JComboBox<Clase> listaClases;
+    private JList<Dia> listaDias;
+    private JList<Horario> listaHorarios;
     private final Estudiante estudiante;
     private Solicitud solicitud = null;
     private final GestorSolicitudes gestor = GestorSolicitudes.getInstancia();
@@ -41,7 +41,7 @@ public class PanelEnviarSolicitudEstudiante extends JPanel {
     }
 
     /**
-     * Crea los componentes para generar la creacion de una solicitud
+     * Crea los componentes para generar la creación de una solicitud.
      */
     private void texto(){
         JPanel panel = new JPanel();
@@ -69,7 +69,7 @@ public class PanelEnviarSolicitudEstudiante extends JPanel {
     }
 
     /**
-     * Se crean los botonos para enviar solicitud y se le asignan las funcionalidades
+     * Se crean los botones para enviar solicitud y se le asignan las funcionalidades.
      */
     private void botones() {
         JPanel panel = new JPanel();
@@ -133,14 +133,14 @@ public class PanelEnviarSolicitudEstudiante extends JPanel {
 
             combo();
 
-            JOptionPane.showMessageDialog(null, "Su solicituda ha sido ingresada con exito.", "Solicitud Agregada", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Su solicitud ha sido ingresada con éxito.", "Solicitud Agregada", JOptionPane.INFORMATION_MESSAGE);
 
 
         });
     }
 
     /**
-     * Creacion de los componentes para seleccionar clases dependiendo de las sugerencias
+     * Creación de los componentes para seleccionar clases dependiendo de las sugerencias.
      */
     public void seleccionarClase(){
 
@@ -175,7 +175,7 @@ public class PanelEnviarSolicitudEstudiante extends JPanel {
     }
 
     /**
-     * agrega las clases al JComboBox, sirve para mantener actualizado
+     * Agrega las clases al JComboBox, sirve para mantener actualizado.
      */
     private void combo(){
         listaClases.removeAllItems();
@@ -194,9 +194,9 @@ public class PanelEnviarSolicitudEstudiante extends JPanel {
     }
 
     /**
-     * Agrega un boton para volver atras
+     * Agrega un botón para volver atrás.
      */
-    public void volver(){
+    private void volver(){
         JPanel panel = new JPanel(new FlowLayout());
         panel.setOpaque(false);
 
@@ -208,5 +208,3 @@ public class PanelEnviarSolicitudEstudiante extends JPanel {
         add(panel);
     }
 }
-
-
