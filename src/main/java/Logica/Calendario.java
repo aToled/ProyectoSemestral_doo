@@ -1,22 +1,22 @@
 package Logica;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 import Logica.Enums.*;
 import Logica.Excepciones.*;
 
 /**
- * Clase calendario donde se almacenaran las clases.
+ * Clase calendario donde se almacenaran las clases, las almacena en el disco.
+ * @see ManejoClasesJSON
  */
-public class Calendario {
+public class Calendario extends ManejoClasesJSON{
     private static Calendario instancia;
 
     private final Map<BloqueHorario, List<Clase>> calendario;
 
     private Calendario() {
         calendario = new HashMap<>();
+        cargarDesdeJSON();
     }
 
     /**
@@ -32,6 +32,7 @@ public class Calendario {
     /**
      * Agrega la clase del parámetro a un bloque del horario, además, si no existe ese bloque crea una nueva lista
      * de clases para ese horario, y antes de agregar el bloque se verifica que el profesor no esté cursando ya en ese horario alguna otra clase.
+     * Guarda el estado actual del Calendario en el JSON.
      * @param clase: la clase en cuestión.
      * @throws ConflictoHorarioException .
      */
@@ -45,6 +46,7 @@ public class Calendario {
             }
         }
         clasesEnBloque.add(clase);
+        guardarEnJSON();
     }
 
     /**
@@ -91,6 +93,7 @@ public class Calendario {
     /**
      * Elimina una clase del calendario al buscar entre todas las clases la que
      * coincida con el ID de la clase.
+     * Guarda el estado actual del Calendario en el JSON.
      * @param id: Id de la clase a quitar.
      */
     public void removeClase(String id){
@@ -98,6 +101,7 @@ public class Calendario {
             List<Clase> clases = entry.getValue();
             clases.removeIf(clase -> id.equals(clase.getId()));
         }
+        guardarEnJSON();
     }
 
     /**
@@ -105,5 +109,27 @@ public class Calendario {
      */
     public void clear(){
         calendario.clear();
+    }
+
+    /**
+     * Carga las clases desde el archivo JSON y las agrega al calendario actual.
+     */
+    public void cargarDesdeJSON() {
+        Set<Clase> clasesGuardadas = ManejoClasesJSON.getInstancia().getObjetosNoModificable();
+        for (Clase c : clasesGuardadas) {
+            try {
+                addClaseToBloque(c);
+            } catch (ConflictoHorarioException e) {
+                System.err.println("Conflicto al restaurar clase: " + c.getId() + " - " + e.getMessage());
+            }
+        }
+    }
+
+    /**
+     * Guarda todas las clases actuales del calendario en el archivo JSON.
+     */
+    public void guardarEnJSON() {
+        List<Clase> clasesActuales = getTodasLasClases();
+        ManejoClasesJSON.getInstancia().guardarClasesDesdeCalendario(clasesActuales);
     }
 }

@@ -10,11 +10,10 @@ import java.util.Set;
  * @see ManejoGenericoJSON
  */
 public class EstudianteFactory extends ManejoGenericoJSON<Estudiante> {
-    private static final Type listType = new TypeToken<Set<Estudiante>>(){}.getType();
     private static final EstudianteFactory instancia = new EstudianteFactory();
 
     private EstudianteFactory() {
-        super("ListaEstudiantes", listType);
+        super("ListaEstudiantes", new TypeToken<Set<Estudiante>>(){}.getType());
     }
 
     /**
