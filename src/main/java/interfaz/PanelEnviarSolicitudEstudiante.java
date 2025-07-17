@@ -31,8 +31,8 @@ public class PanelEnviarSolicitudEstudiante extends JPanel {
         setBackground(new Color(30, 30, 30));
         setLayout(new GridLayout(3,2,5,5));
 
-        InterfazUtils.agregarTitulo("Ingresar Solicitud", this);
-        InterfazUtils.agregarTitulo("Preferencia de Clase", this);
+        InterfazUtils.agregarTitulo(" Enviar Solicitud", this);
+        InterfazUtils.agregarTitulo("      Elegir Clase", this);
 
         texto();
         seleccionarClase();
@@ -79,12 +79,10 @@ public class PanelEnviarSolicitudEstudiante extends JPanel {
         JButton botonRegistrar = new JButton("Solicitar");
         botonRegistrar.setPreferredSize(new Dimension(250, 40));
 
-
         panel.add(botonRegistrar);
         add(panel);
 
         botonRegistrar.addActionListener((ActionEvent _) -> {
-
             if (listaDias.getSelectedValuesList().isEmpty()){JOptionPane.showMessageDialog(null, "seleccione al menos un día.", "Error!", JOptionPane.ERROR_MESSAGE);return;}
             if (listaHorarios.getSelectedValuesList().isEmpty()){JOptionPane.showMessageDialog(null, "seleccione al menos un horario.", "Error!", JOptionPane.ERROR_MESSAGE); return;}
 
