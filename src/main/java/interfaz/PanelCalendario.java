@@ -1,5 +1,6 @@
 package interfaz;
 
+import Logica.BloqueHorario;
 import Logica.Calendario;
 import Logica.Clase;
 import Logica.Enums.Dia;
@@ -7,7 +8,6 @@ import Logica.Enums.Horario;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
 import java.util.List;
 
 /**
@@ -15,86 +15,93 @@ import java.util.List;
  */
 public class PanelCalendario extends JPanelConBotones {
 
-    private final Dia[] dias = Dia.values();
-    private final Map<Dia, List<String>> clasesPorDia = new EnumMap<>(Dia.class);
-    private final JButton[] botones=new JButton[5];
-
     public PanelCalendario(){
         super();
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-        setBackground(new Color(30, 30, 30));
+        setBackground(new Color(33, 33, 33));
         InterfazUtils.agregarTitulo("Calendario", this);
         add(Box.createRigidArea(new Dimension(0,70)));
 
-        cargarClases();
-        cuerpo();
+        cargarCuerpo();
         add(Box.createRigidArea(new Dimension(0,40)));
     }
 
     /**
-     * Carga las clases por día desde el calendario y crea botones representativos con color dinámico.
+     * Crea la tabla de etiquetas y botones para los días y horarios, con colores según cantidad de clases.
      */
-    private void cargarClases() {
-        for (Dia dia : dias) {
-            List<String> clases = new ArrayList<>();
-            int intensidadColor = 0;
+    private void cargarCuerpo() {
+        Dia[] dias = Dia.values();
+        Horario[] horarios = Horario.values();
 
-            for (Horario horario : Horario.values()) {
-                List<Clase> clasesBloque = Calendario.getInstancia().getClasesEnBloque(dia, horario);
-                if (clasesBloque != null) {
-                    for (Clase clase : clasesBloque) {
-                        if (clase != null) {
-                            clases.add(clase.getProfesor().getNombre() + " " + clase.getProfesor().getApellido() + "  " + clase.getAsignatura() + "   Cantidad Máxima de Estudiantes: " + clase.getCapacidadMaximaAlumnos() + "  Valor: $" + clase.getTarifa());
-                            intensidadColor += 10;
-                        }
-                    }
-                }
-            }
+        JPanel tabla = new JPanel(new GridLayout(horarios.length + 1, dias.length + 1, 5, 5));
+        tabla.setBackground(Color.WHITE);
 
-            clasesPorDia.put(dia, clases);
-            Color color = new Color(255, Math.max(0, 255 - intensidadColor), Math.max(0, 255 - intensidadColor));
-
-            JButton boton = new JButton("");
-            boton.setForeground(color);
-            boton.addActionListener(_ -> mostrarClases(dia));
-            botones[dia.ordinal()] = boton;
-        }
-    }
-
-    /**
-     * Muestra en un diálogo las clases programadas para un día específico.
-     * @param dia el día para el que se consultan las clases.
-     */
-    private void mostrarClases(Dia dia) {
-        List<String> clases = clasesPorDia.getOrDefault(dia, Collections.emptyList());
-        StringBuilder mensaje = new StringBuilder();
-
-        if (clases.isEmpty()) {
-            mensaje.append("No hay clases programadas para el ").append(dia.name().toLowerCase(Locale.ROOT));
-        } else {
-            for (String info : clases) {
-                mensaje.append(info).append("\n\n");
-            }
-        }
-
-        JOptionPane.showMessageDialog(this, mensaje.toString(), "Clases del " + dia.name(), JOptionPane.INFORMATION_MESSAGE);
-    }
-
-    /**
-     * Crea la tabla de etiquetas y botones para los días de la semana, y la agrega al panel.
-     */
-    private void cuerpo() {
-        JPanel tabla = new JPanel(new GridLayout(2, 5, 5, 5));
+        // Etiqueta vacía esquina
+        tabla.add(new JLabel(""));
 
         for (Dia dia : dias) {
-            JLabel etiqueta = new JLabel(dia.name().charAt(0) + dia.name().substring(1).toLowerCase());
-            etiqueta.setFont(new Font("Arial", Font.BOLD, 20));
-            tabla.add(etiqueta);
+            JLabel etiquetaDia = new JLabel(dia.name(), SwingConstants.CENTER);
+            etiquetaDia.setFont(new Font("Arial", Font.BOLD, 14));
+            tabla.add(etiquetaDia);
         }
 
-        for(JButton boton: botones){
-            tabla.add(boton);
+        for (Horario horario : horarios) {
+            JLabel etiquetaHorario = new JLabel(horario.name(), SwingConstants.CENTER);
+            etiquetaHorario.setFont(new Font("Arial", Font.BOLD, 13));
+            tabla.add(etiquetaHorario);
+
+            for (Dia dia : dias) {
+                BloqueHorario bloque = new BloqueHorario(dia, horario);
+                List<Clase> clases = Calendario.getInstancia().getClasesEnBloque(dia, horario);
+
+                JButton boton = getBotonColoreado(bloque, clases);
+                tabla.add(boton);
+            }
         }
         add(tabla);
+    }
+
+    private JButton getBotonColoreado(BloqueHorario bloque, List<Clase> clases) {
+        JButton boton = new JButton();
+        boton.setOpaque(true);
+        boton.setBorderPainted(true);
+        boton.setToolTipText(bloque.toString());
+
+        int n;
+        if (clases != null) {
+            n = Math.min(clases.size(), 10);
+        } else {
+            n = 0;
+        }
+
+        Color color;
+        if (n == 0) {
+            color = Color.WHITE;
+            boton.setEnabled(false);
+        } else {  // saque esta formula de internet, obviamente.
+            int r = Math.round(197 - (n - 1) * (197 - 46) / 9f);
+            int g = Math.round(232 - (n - 1) * (232 - 182) / 9f);
+            int b = Math.round(183 - (n - 1) * (183 - 44) / 9f);
+            color = new Color(r, g, b);
+            boton.addActionListener(_ -> mostrarClasesBloque(clases, bloque));
+        }
+
+        boton.setBackground(color);
+        boton.setForeground(Color.BLACK);
+        return boton;
+    }
+
+    private void mostrarClasesBloque(List<Clase> clases, BloqueHorario bloque) {
+        StringBuilder mensaje = new StringBuilder("Clases en " + bloque + ":\n\n");
+
+        if (clases == null || clases.isEmpty()) {
+            mensaje.append("No hay clases en este bloque.");
+        } else {
+            for (Clase clase : clases) {
+                mensaje.append("- ").append(clase.getProfesor().getNombre()).append(" ").append(clase.getProfesor().getApellido()).append(" | ").append(clase.getAsignatura()).append(" | Máx Estudiantes: ").append(clase.getCapacidadMaximaAlumnos()).append(" | Tarifa: $").append(clase.getTarifa()).append("\n\n");
+            }
+        }
+
+        JOptionPane.showMessageDialog(this, mensaje.toString(), "Clases", JOptionPane.INFORMATION_MESSAGE);
     }
 }

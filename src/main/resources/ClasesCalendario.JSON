@@ -1,1 +1,49 @@
-[]
+[
+  {
+    "profesor": {
+      "tarifas": [
+        12500,
+        5000
+      ],
+      "capacidadesMaximasAlumnos": [
+        5,
+        10
+      ],
+      "materiasQueDicta": [
+        "LENGUAJE",
+        "MATEMATICA"
+      ],
+      "disponibilidad": [
+        {
+          "dia": "MARTES",
+          "horario": "BLOQUE2"
+        },
+        {
+          "dia": "MARTES",
+          "horario": "BLOQUE1"
+        },
+        {
+          "dia": "LUNES",
+          "horario": "BLOQUE2"
+        },
+        {
+          "dia": "LUNES",
+          "horario": "BLOQUE1"
+        }
+      ],
+      "nombre": "p",
+      "apellido": "1",
+      "correo": "p1@mail.com",
+      "id": "p0"
+    },
+    "listaEstudiantes": {},
+    "asignatura": "LENGUAJE",
+    "bloqueHorario": {
+      "dia": "LUNES",
+      "horario": "BLOQUE1"
+    },
+    "capacidadMaximaAlumnos": 5,
+    "tarifa": 12500,
+    "id": "c489744a4-b99e-4b9a-9cab-dd0c06de8a0a"
+  }
+]

@@ -5,6 +5,7 @@ import Logica.Enums.Asignatura;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Panel para que el administrador cree nuevas clases usando datos del profesor.
@@ -96,7 +97,7 @@ public class PanelCrearClases extends JPanelConBotones {
             JOptionPane.showMessageDialog(null, "Por favor selecciona una capacidad y tarifa válida.");
             return;
         }
-        Clase clase = new Clase((Profesor) Objects.requireNonNull(comboProfesores.getSelectedItem()), Integer.toString(Calendario.getInstancia().getCantidadObjetos()), (Asignatura) comboAsignaturas.getSelectedItem(), (BloqueHorario) comboBloquesHorarios.getSelectedItem(), capacidad, tarifa);
+        Clase clase = new Clase((Profesor) Objects.requireNonNull(comboProfesores.getSelectedItem()), "c" + UUID.randomUUID(), (Asignatura) comboAsignaturas.getSelectedItem(), (BloqueHorario) comboBloquesHorarios.getSelectedItem(), capacidad, tarifa);
         Calendario.getInstancia().addClaseToBloque(clase);
         JOptionPane.showMessageDialog(this, "Clase creada exitosamente.", "Clase Creada", JOptionPane.INFORMATION_MESSAGE);
     }

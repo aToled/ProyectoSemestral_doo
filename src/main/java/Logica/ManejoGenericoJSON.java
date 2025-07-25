@@ -104,10 +104,10 @@ public abstract class ManejoGenericoJSON <T extends Identificable> {
      */
     public T buscarObjeto(String id){
         for(T o: objetos){
-            if(Objects.equals(o.getId(), id)){
+            if (o.getId().trim().equals(id.trim())) {
                 return o;
             }
         }
-        throw new NoSuchElementException("Objeto: " + id + " no encontrada");
+        throw new NoSuchElementException("Objeto: " + id + " no encontrado");
     }
 }

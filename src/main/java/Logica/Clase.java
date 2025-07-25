@@ -168,6 +168,6 @@ public class Clase extends IdentificableAbstracta{
 
     @Override
     public String toString(){
-        return "Clase: "+getId()+", Profesor: "+profesor+", BloqueHorario: "+bloqueHorario+", Tarifa: $"+tarifa+", Cantidad actual de Estudiantes: "+cantidadEstudiantes()+", Cantidad máxima de Estudiantes: "+capacidadMaximaAlumnos;
+        return "Clase: "+getAsignatura()+", BloqueHorario: "+bloqueHorario+", Tarifa: $"+tarifa+", Cantidad de Estudiantes: "+cantidadEstudiantes();
     }
 }

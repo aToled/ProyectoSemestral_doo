@@ -5,6 +5,7 @@ import Logica.Enums.Dia;
 import Logica.Enums.Horario;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Representa un Estudiante que puede asignar sus preferencias para enviar una solicitud sobre
@@ -39,7 +40,7 @@ public class Estudiante extends Persona {
      * @return la solicitud.
      */
     public Solicitud crearSolicitud(Asignatura a){
-        String idSolicitud = Integer.toString(GestorSolicitudes.getInstancia().getCantidadObjetos());
+        String idSolicitud = "s" + UUID.randomUUID();
         Solicitud s = new Solicitud(idSolicitud, this, a);
         GestorSolicitudes.getInstancia().agregar(s);
         return s;

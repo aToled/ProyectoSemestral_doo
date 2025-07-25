@@ -87,6 +87,8 @@ public class PanelEnviarSolicitudEstudiante extends JPanelConBotones {
         panel.setOpaque(false);
 
         listaClases = new JComboBox<>();
+        listaClases.setPreferredSize(new Dimension(600, 30));
+        listaClases.setMaximumRowCount(10);
         panel.add(InterfazUtils.label("Clases Sugeridas:", new Font("Arial", Font.BOLD, 20)));
         panel.add(listaClases);
 

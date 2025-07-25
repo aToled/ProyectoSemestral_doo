@@ -6,6 +6,7 @@ import Logica.EstudianteFactory;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.UUID;
 
 /**
  * Panel de registro para nuevos estudiantes. Permite ingresar nombre, apellido, correo y contraseña,
@@ -91,8 +92,8 @@ public class PanelRegistroEstudiante extends JPanelConBotones {
     }
 
     private void registrarEstudiante() {
-        int id = EstudianteFactory.getInstancia().getCantidadObjetos();
-        Estudiante estudiante = EstudianteFactory.crearEstudiante(campoNombre.getText(), campoApellido.getText(), campoCorreo.getText(), String.valueOf(id));
+        String id = "e" + UUID.randomUUID();
+        Estudiante estudiante = EstudianteFactory.crearEstudiante(campoNombre.getText(), campoApellido.getText(), campoCorreo.getText(), id);
         if (estudiante.setPassword(campoPassword.getText())) {
             Ventana.irA(new PanelInicioSesionEstudiante());
             EstudianteFactory.agregarEstudiante(estudiante);

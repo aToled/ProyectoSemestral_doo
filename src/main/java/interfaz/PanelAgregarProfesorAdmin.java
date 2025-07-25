@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Panel que permite al administrador registrar a un nuevo Profesor.
@@ -97,7 +98,7 @@ public class PanelAgregarProfesorAdmin extends JPanelConBotones {
             String nombre = campoNombre.getText();
             String apellido = campoApellido.getText();
             String correo = campoCorreo.getText();
-            String id = String.valueOf(ProfesorFactory.getInstancia().getCantidadObjetos());
+            String id = "p" + UUID.randomUUID();
 
             if (nombre.isEmpty() || apellido.isEmpty() || correo.isEmpty()){JOptionPane.showMessageDialog(null, "Nombre, Apellido y Correo no pueden estar vacíos.", "Error!", JOptionPane.ERROR_MESSAGE);return;}
 

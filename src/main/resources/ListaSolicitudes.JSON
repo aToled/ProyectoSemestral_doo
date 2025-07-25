@@ -1,1 +1,184 @@
-[]
+[
+  {
+    "estudiante": {
+      "materiasInteres": [
+        "MATEMATICA",
+        "LENGUAJE"
+      ],
+      "bloquesHorariosInteres": [
+        {
+          "dia": "MARTES",
+          "horario": "BLOQUE2"
+        }
+      ],
+      "diasInteres": [
+        "LUNES"
+      ],
+      "horariosInteres": [
+        "BLOQUE1"
+      ],
+      "preferirMenorTarifa": true,
+      "preferirClaseConMenosEstudiantes": true,
+      "password": "a",
+      "nombre": "a",
+      "apellido": "a",
+      "correo": "a",
+      "id": "e0"
+    },
+    "asignatura": "LENGUAJE",
+    "estadoSolicitud": "ACEPTADA",
+    "clasesSugeridas": [],
+    "claseElegida": {
+      "profesor": {
+        "tarifas": [
+          12500,
+          5000
+        ],
+        "capacidadesMaximasAlumnos": [
+          5,
+          10
+        ],
+        "materiasQueDicta": [
+          "LENGUAJE",
+          "MATEMATICA"
+        ],
+        "disponibilidad": [
+          {
+            "dia": "MARTES",
+            "horario": "BLOQUE2"
+          },
+          {
+            "dia": "MARTES",
+            "horario": "BLOQUE1"
+          },
+          {
+            "dia": "LUNES",
+            "horario": "BLOQUE2"
+          },
+          {
+            "dia": "LUNES",
+            "horario": "BLOQUE1"
+          }
+        ],
+        "nombre": "p",
+        "apellido": "1",
+        "correo": "p1@mail.com",
+        "id": "p0"
+      },
+      "listaEstudiantes": {
+        "e0": {
+          "materiasInteres": [
+            "MATEMATICA",
+            "LENGUAJE"
+          ],
+          "bloquesHorariosInteres": [
+            {
+              "dia": "MARTES",
+              "horario": "BLOQUE2"
+            }
+          ],
+          "diasInteres": [
+            "LUNES"
+          ],
+          "horariosInteres": [
+            "BLOQUE1"
+          ],
+          "preferirMenorTarifa": true,
+          "preferirClaseConMenosEstudiantes": true,
+          "password": "a",
+          "nombre": "a",
+          "apellido": "a",
+          "correo": "a",
+          "id": "e0"
+        }
+      },
+      "asignatura": "LENGUAJE",
+      "bloqueHorario": {
+        "dia": "LUNES",
+        "horario": "BLOQUE1"
+      },
+      "capacidadMaximaAlumnos": 5,
+      "tarifa": 12500,
+      "id": "c489744a4-b99e-4b9a-9cab-dd0c06de8a0a"
+    },
+    "id": "s20b92f96-5e29-4af4-b2a1-e686d992fadb"
+  },
+  {
+    "estudiante": {
+      "materiasInteres": [
+        "MATEMATICA",
+        "LENGUAJE"
+      ],
+      "bloquesHorariosInteres": [
+        {
+          "dia": "MARTES",
+          "horario": "BLOQUE2"
+        }
+      ],
+      "diasInteres": [
+        "LUNES"
+      ],
+      "horariosInteres": [
+        "BLOQUE1"
+      ],
+      "preferirMenorTarifa": true,
+      "preferirClaseConMenosEstudiantes": true,
+      "password": "a",
+      "nombre": "a",
+      "apellido": "a",
+      "correo": "a",
+      "id": "e0"
+    },
+    "asignatura": "LENGUAJE",
+    "estadoSolicitud": "RECHAZADA",
+    "clasesSugeridas": [],
+    "claseElegida": {
+      "profesor": {
+        "tarifas": [
+          12500,
+          5000
+        ],
+        "capacidadesMaximasAlumnos": [
+          5,
+          10
+        ],
+        "materiasQueDicta": [
+          "LENGUAJE",
+          "MATEMATICA"
+        ],
+        "disponibilidad": [
+          {
+            "dia": "MARTES",
+            "horario": "BLOQUE2"
+          },
+          {
+            "dia": "MARTES",
+            "horario": "BLOQUE1"
+          },
+          {
+            "dia": "LUNES",
+            "horario": "BLOQUE2"
+          },
+          {
+            "dia": "LUNES",
+            "horario": "BLOQUE1"
+          }
+        ],
+        "nombre": "p",
+        "apellido": "1",
+        "correo": "p1@mail.com",
+        "id": "p0"
+      },
+      "listaEstudiantes": {},
+      "asignatura": "LENGUAJE",
+      "bloqueHorario": {
+        "dia": "LUNES",
+        "horario": "BLOQUE1"
+      },
+      "capacidadMaximaAlumnos": 5,
+      "tarifa": 12500,
+      "id": "c489744a4-b99e-4b9a-9cab-dd0c06de8a0a"
+    },
+    "id": "scca2e105-ed74-428b-b6bb-e96714ffc5a6"
+  }
+]

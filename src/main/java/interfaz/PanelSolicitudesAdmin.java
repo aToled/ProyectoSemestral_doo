@@ -13,6 +13,7 @@ import java.util.Set;
  */
 public class PanelSolicitudesAdmin extends JPanelConBotones {
     private JComboBox<String> comboSolicitudes;
+    private final GestorSolicitudes gestor = GestorSolicitudes.getInstancia();
     private JButton btnAceptar;
     private JButton btnRechazar;
 
@@ -22,7 +23,7 @@ public class PanelSolicitudesAdmin extends JPanelConBotones {
     public PanelSolicitudesAdmin() {
         super();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBackground(new Color(30, 30, 30));
+        setBackground(new Color(33, 33, 33));
 
         InterfazUtils.agregarTitulo("Solicitudes", this);
         add(Box.createRigidArea(new Dimension(0, 30)));
@@ -67,9 +68,9 @@ public class PanelSolicitudesAdmin extends JPanelConBotones {
         if (id == null) return;
 
         if (aceptar) {
-            GestorSolicitudes.getInstancia().aceptar(id);
+            gestor.aceptar(id);
         } else {
-            GestorSolicitudes.getInstancia().rechazar(id);
+            gestor.rechazar(id);
         }
 
         actualizarSolicitudes();
@@ -80,7 +81,7 @@ public class PanelSolicitudesAdmin extends JPanelConBotones {
      */
     private void actualizarSolicitudes() {
         comboSolicitudes.removeAllItems();
-        Set<Solicitud> solicitudes = GestorSolicitudes.getInstancia().getObjetosNoModificable();
+        Set<Solicitud> solicitudes = gestor.getObjetosNoModificable();
         boolean hayPendientes = false;
 
         for (Solicitud sol : solicitudes) {

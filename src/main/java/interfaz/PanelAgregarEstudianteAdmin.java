@@ -5,6 +5,7 @@ import Logica.EstudianteFactory;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.UUID;
 
 /**
  * Panel que permite al administrador registrar a un nuevo Estudiante.
@@ -70,13 +71,14 @@ public class PanelAgregarEstudianteAdmin extends JPanelConBotones {
         panel.add(botonAgregar);
 
         botonAgregar.addActionListener(_ -> {
-            int id = EstudianteFactory.getInstancia().getCantidadObjetos();
-            Estudiante  estudiante = EstudianteFactory.crearEstudiante(campoNombre.getText(), campoApellido.getText(), campoCorreo.getText(), String.valueOf(id));
+            String id = "e" + UUID.randomUUID();
+            Estudiante  estudiante = EstudianteFactory.crearEstudiante(campoNombre.getText(), campoApellido.getText(), campoCorreo.getText(), id);
+            EstudianteFactory.agregarEstudiante(estudiante);
             if (estudiante.setPassword(campoPassword.getText())) {
                 JOptionPane.showMessageDialog(this, "Estudiante agregado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 Ventana.irA(new PanelCrearEliminarPerfil());
             } else {
-                EstudianteFactory.eliminarEstudiante(String.valueOf(id));
+                EstudianteFactory.eliminarEstudiante(id);
                 JOptionPane.showMessageDialog(this, "Contraseña inválida.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
