@@ -1,5 +1,6 @@
 package Logica;
 
+import Logica.Identificables.Clase;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.List;

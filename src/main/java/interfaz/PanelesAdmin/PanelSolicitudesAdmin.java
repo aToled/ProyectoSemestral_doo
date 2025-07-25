@@ -1,7 +1,10 @@
-package interfaz;
+package interfaz.PanelesAdmin;
 
 import Logica.*;
 import Logica.Enums.EstadoSolicitud;
+import Logica.Identificables.Solicitud;
+import interfaz.Utils.InterfazUtils;
+import interfaz.Utils.JPanelConBotones;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,5 +1,6 @@
 package Logica;
 
+import Logica.Identificables.Estudiante;
 import com.google.gson.reflect.TypeToken;
 import java.util.Set;
 

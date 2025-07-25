@@ -1,5 +1,9 @@
 package interfaz;
 
+import interfaz.ManejoSesion.PanelInicioORegistroEstudiante;
+import interfaz.ManejoSesion.PanelInicioSesionAdmin;
+import interfaz.Utils.InterfazUtils;
+
 import javax.swing.*;
 import java.awt.*;
 

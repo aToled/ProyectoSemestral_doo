@@ -1,10 +1,13 @@
-package interfaz;
+package interfaz.PanelesAdmin;
 
-import Logica.Estudiante;
 import Logica.EstudianteFactory;
-import Logica.Profesor;
-import Logica.ProfesorFactory;
 
+import Logica.Identificables.Estudiante;
+import Logica.Identificables.Profesor;
+import Logica.ProfesorFactory;
+import interfaz.Utils.InterfazUtils;
+import interfaz.Utils.JPanelConBotones;
+import interfaz.Ventana;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Set;

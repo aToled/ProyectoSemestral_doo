@@ -1,4 +1,6 @@
 package Logica;
+import Logica.Identificables.Solicitud;
+
 import java.util.Set;
 
 /**

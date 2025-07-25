@@ -1,7 +1,8 @@
 package Logica.Estrategias;
 
-import Logica.Clase;
-import Logica.Solicitud;
+import Logica.Identificables.Clase;
+import Logica.Identificables.Solicitud;
+
 import java.util.Set;
 
 public interface EstrategiaSolicitud {

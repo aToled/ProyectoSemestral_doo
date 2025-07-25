@@ -1,6 +1,7 @@
 package Logica;
 
 import Logica.Enums.Asignatura;
+import Logica.Identificables.Profesor;
 import com.google.gson.reflect.TypeToken;
 import java.util.Set;
 

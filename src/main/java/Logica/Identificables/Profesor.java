@@ -1,5 +1,6 @@
-package Logica;
+package Logica.Identificables;
 
+import Logica.BloqueHorario;
 import Logica.Enums.Asignatura;
 import java.util.Set;
 

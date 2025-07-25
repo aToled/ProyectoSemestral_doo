@@ -1,12 +1,13 @@
 package Logica;
 
+import Logica.Identificables.IdentificableAbstracta;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class IdentificableTest {
-    static class TestIdentificable extends IdentificableAbstracta{ TestIdentificable(String id) {super(id);}}
+    static class TestIdentificable extends IdentificableAbstracta { TestIdentificable(String id) {super(id);}}
     private TestIdentificable a, b, c;
 
     @BeforeEach

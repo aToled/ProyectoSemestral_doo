@@ -2,6 +2,8 @@ package Logica;
 
 import Logica.Enums.EstadoSolicitud;
 import Logica.Estrategias.EstrategiaSolicitud;
+import Logica.Identificables.Clase;
+import Logica.Identificables.Solicitud;
 import com.google.gson.reflect.TypeToken;
 import java.util.*;
 

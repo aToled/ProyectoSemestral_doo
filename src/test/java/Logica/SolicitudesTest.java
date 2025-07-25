@@ -6,6 +6,10 @@ import Logica.Enums.EstadoSolicitud;
 import Logica.Enums.Horario;
 import Logica.Estrategias.EstrategiaDefault;
 import Logica.Estrategias.EstrategiaSolicitud;
+import Logica.Identificables.Clase;
+import Logica.Identificables.Estudiante;
+import Logica.Identificables.Profesor;
+import Logica.Identificables.Solicitud;
 import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;

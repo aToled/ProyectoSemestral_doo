@@ -3,6 +3,7 @@ package Logica;
 import Logica.Enums.Asignatura;
 import Logica.Enums.Dia;
 import Logica.Enums.Horario;
+import Logica.Identificables.Profesor;
 import org.junit.jupiter.api.Test;
 import java.util.Set;
 

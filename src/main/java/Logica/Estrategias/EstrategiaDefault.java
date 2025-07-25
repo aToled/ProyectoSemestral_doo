@@ -1,8 +1,8 @@
 package Logica.Estrategias;
 
 import Logica.Calendario;
-import Logica.Clase;
-import Logica.Solicitud;
+import Logica.Identificables.Clase;
+import Logica.Identificables.Solicitud;
 import java.util.LinkedHashSet;
 import java.util.Set;
 

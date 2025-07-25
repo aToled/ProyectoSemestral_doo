@@ -1,7 +1,6 @@
 package interfaz;
 
-import Logica.Estudiante;
-
+import Logica.Identificables.Estudiante;
 import javax.swing.*;
 import java.util.Stack;
 
@@ -50,7 +49,7 @@ public class Ventana extends JFrame {
         cambiarPanel(new PanelEntrada());
     }
 
-    protected static void refrescar(){
+    public static void refrescar(){
         instancia.repaint();
         instancia.revalidate();
     }

@@ -1,5 +1,7 @@
-package Logica;
+package Logica.Identificables;
 
+import Logica.BloqueHorario;
+import Logica.Calendario;
 import Logica.Enums.Asignatura;
 import java.util.HashMap;
 import java.util.Map;

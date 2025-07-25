@@ -1,9 +1,13 @@
-package interfaz;
+package interfaz.PanelesAdmin;
 
 import Logica.*;
 import Logica.Enums.Asignatura;
 import Logica.Enums.Dia;
 import Logica.Enums.Horario;
+import Logica.Identificables.Profesor;
+import interfaz.Utils.InterfazUtils;
+import interfaz.Utils.JPanelConBotones;
+import interfaz.Ventana;
 
 import javax.swing.*;
 import java.awt.*;

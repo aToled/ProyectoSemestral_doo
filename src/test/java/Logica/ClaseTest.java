@@ -1,5 +1,8 @@
 package Logica;
 
+import Logica.Identificables.Clase;
+import Logica.Identificables.Estudiante;
+import Logica.Identificables.Profesor;
 import org.junit.jupiter.api.*;
 import Logica.Enums.*;
 import java.util.Set;

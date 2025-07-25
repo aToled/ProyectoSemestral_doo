@@ -1,10 +1,12 @@
-package interfaz;
+package interfaz.PanelesAdmin;
 
 import Logica.BloqueHorario;
 import Logica.Calendario;
-import Logica.Clase;
 import Logica.Enums.Dia;
 import Logica.Enums.Horario;
+import Logica.Identificables.Clase;
+import interfaz.Utils.InterfazUtils;
+import interfaz.Utils.JPanelConBotones;
 
 import javax.swing.*;
 import java.awt.*;

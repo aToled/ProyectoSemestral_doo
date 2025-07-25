@@ -1,7 +1,9 @@
-package Logica;
+package Logica.Identificables;
 
 import Logica.Enums.Asignatura;
 import Logica.Enums.EstadoSolicitud;
+import Logica.GestorSolicitudes;
+
 import java.util.LinkedHashSet;
 import java.util.Set;
 

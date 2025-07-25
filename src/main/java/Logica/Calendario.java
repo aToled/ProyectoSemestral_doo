@@ -4,6 +4,7 @@ import java.util.*;
 
 import Logica.Enums.*;
 import Logica.Excepciones.*;
+import Logica.Identificables.Clase;
 
 /**
  * Clase calendario donde se almacenaran las clases, las almacena en el disco.

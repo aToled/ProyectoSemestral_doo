@@ -1,4 +1,4 @@
-package Logica;
+package Logica.Identificables;
 
 /**
  * Clase genérica de Persona la cual contiene varios atributos básicos como nombre, apellido, correo.

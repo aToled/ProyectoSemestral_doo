@@ -1,9 +1,14 @@
-package interfaz;
+package interfaz.PanelesEstudiante;
 
 import Logica.*;
 import Logica.Enums.Asignatura;
 import Logica.Enums.EstadoSolicitud;
 import Logica.Estrategias.*;
+import Logica.Identificables.Clase;
+import Logica.Identificables.Estudiante;
+import Logica.Identificables.Solicitud;
+import interfaz.Utils.InterfazUtils;
+import interfaz.Utils.JPanelConBotones;
 
 import javax.swing.*;
 import java.awt.*;

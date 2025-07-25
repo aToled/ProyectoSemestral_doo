@@ -1,7 +1,10 @@
-package interfaz;
+package interfaz.PanelesAdmin;
 
-import Logica.Estudiante;
 import Logica.EstudianteFactory;
+import Logica.Identificables.Estudiante;
+import interfaz.Utils.InterfazUtils;
+import interfaz.Utils.JPanelConBotones;
+import interfaz.Ventana;
 
 import javax.swing.*;
 import java.awt.*;
@@ -72,7 +75,7 @@ public class PanelAgregarEstudianteAdmin extends JPanelConBotones {
 
         botonAgregar.addActionListener(_ -> {
             String id = "e" + UUID.randomUUID();
-            Estudiante  estudiante = EstudianteFactory.crearEstudiante(campoNombre.getText(), campoApellido.getText(), campoCorreo.getText(), id);
+            Estudiante estudiante = EstudianteFactory.crearEstudiante(campoNombre.getText(), campoApellido.getText(), campoCorreo.getText(), id);
             EstudianteFactory.agregarEstudiante(estudiante);
             if (estudiante.setPassword(campoPassword.getText())) {
                 JOptionPane.showMessageDialog(this, "Estudiante agregado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);

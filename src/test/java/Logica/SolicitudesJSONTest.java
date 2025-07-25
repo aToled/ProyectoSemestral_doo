@@ -1,6 +1,8 @@
 package Logica;
 
 import Logica.Enums.Asignatura;
+import Logica.Identificables.Estudiante;
+import Logica.Identificables.Solicitud;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

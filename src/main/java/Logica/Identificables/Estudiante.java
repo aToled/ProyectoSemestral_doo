@@ -1,8 +1,11 @@
-package Logica;
+package Logica.Identificables;
 
+import Logica.BloqueHorario;
 import Logica.Enums.Asignatura;
 import Logica.Enums.Dia;
 import Logica.Enums.Horario;
+import Logica.GestorSolicitudes;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package Logica;
+package Logica.Identificables;
 
 /**
  * Clase base abstracta para entidades identificables mediante un ID único, además,

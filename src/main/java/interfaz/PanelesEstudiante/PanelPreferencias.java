@@ -1,11 +1,13 @@
-package interfaz;
+package interfaz.PanelesEstudiante;
 
 import Logica.BloqueHorario;
 import Logica.Enums.Asignatura;
 import Logica.Enums.Dia;
 import Logica.Enums.Horario;
-import Logica.Estudiante;
 import Logica.EstudianteFactory;
+import Logica.Identificables.Estudiante;
+import interfaz.Utils.InterfazUtils;
+import interfaz.Utils.JPanelConBotones;
 
 import javax.swing.*;
 import java.awt.*;

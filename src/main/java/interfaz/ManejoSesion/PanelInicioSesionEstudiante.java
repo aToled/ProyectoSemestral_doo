@@ -1,7 +1,11 @@
-package interfaz;
+package interfaz.ManejoSesion;
 
-import Logica.Estudiante;
 import Logica.EstudianteFactory;
+import Logica.Identificables.Estudiante;
+import interfaz.PanelesEstudiante.PanelBotonesEstudiante;
+import interfaz.Utils.InterfazUtils;
+import interfaz.Utils.JPanelConBotones;
+import interfaz.Ventana;
 
 import javax.swing.*;
 import java.awt.*;

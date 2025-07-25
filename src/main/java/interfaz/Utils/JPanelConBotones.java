@@ -1,4 +1,6 @@
-package interfaz;
+package interfaz.Utils;
+
+import interfaz.Ventana;
 
 import javax.swing.*;
 import java.awt.*;

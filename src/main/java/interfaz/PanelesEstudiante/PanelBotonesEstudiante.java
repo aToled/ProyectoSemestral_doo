@@ -1,4 +1,8 @@
-package interfaz;
+package interfaz.PanelesEstudiante;
+
+import interfaz.Utils.InterfazUtils;
+import interfaz.Utils.JPanelConBotones;
+import interfaz.Ventana;
 
 import javax.swing.*;
 import java.awt.*;
