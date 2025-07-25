@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * Panel de creación de solicitudes de estudiantes.
  */
-public class PanelEnviarSolicitudEstudiante extends JPanel {
+public class PanelEnviarSolicitudEstudiante extends JPanelConBotones {
     private JComboBox<Asignatura> listaAsignaturas;
     private JComboBox<Clase> listaClases;
     private final Estudiante estudiante;
@@ -21,20 +21,22 @@ public class PanelEnviarSolicitudEstudiante extends JPanel {
     private JButton elegirClase;
 
     public PanelEnviarSolicitudEstudiante(Estudiante estudiante){
+        super();
         this.estudiante = estudiante;
-        setBackground(new Color(30, 30, 30));
-        setLayout(new GridLayout(3,2,5,5));
+        JPanel contenidoPrincipal = new JPanel(new GridLayout(3,2,5,5));
+        contenidoPrincipal.setBackground(new Color(33, 33, 33));
 
-        InterfazUtils.agregarTitulo(" Crear Solicitud", this);
-        InterfazUtils.agregarTitulo("      Elegir Clase", this);
+        InterfazUtils.agregarTitulo(" Crear Solicitud", contenidoPrincipal);
+        InterfazUtils.agregarTitulo("      Elegir Clase", contenidoPrincipal);
 
-        seleccionarAsignatura();
-        seleccionarClase();
-        botonCrearSolicitud();
-        volver();
+        contenidoPrincipal.add(seleccionarAsignatura());
+        contenidoPrincipal.add(seleccionarClase());
+        contenidoPrincipal.add(botonCrearSolicitud());
+
+        add(contenidoPrincipal, BorderLayout.CENTER);
     }
 
-    private void seleccionarAsignatura() {
+    private JPanel seleccionarAsignatura() {
         JPanel panel = new JPanel(new FlowLayout());
         panel.setOpaque(false);
 
@@ -42,13 +44,13 @@ public class PanelEnviarSolicitudEstudiante extends JPanel {
         panel.add(InterfazUtils.label("Asignatura:", new Font("Arial", Font.BOLD, 20)));
         panel.add(listaAsignaturas);
 
-        add(panel);
+        return panel;
     }
 
     /**
      * Se crean el botón para enviar solicitud y se le asignan las funcionalidades.
      */
-    private void botonCrearSolicitud() {
+    private JPanel botonCrearSolicitud() {
         JPanel panel = new JPanel(new FlowLayout());
         panel.setOpaque(false);
 
@@ -56,7 +58,6 @@ public class PanelEnviarSolicitudEstudiante extends JPanel {
         botonCrearSolicitud.setPreferredSize(new Dimension(300, 40));
 
         panel.add(botonCrearSolicitud);
-        add(panel);
 
         botonCrearSolicitud.addActionListener((ActionEvent _) -> {
             Asignatura asignaturaSeleccionada = (Asignatura) listaAsignaturas.getSelectedItem();
@@ -75,12 +76,13 @@ public class PanelEnviarSolicitudEstudiante extends JPanel {
                 GestorSolicitudes.getInstancia().eliminar(solicitud.getId());
             }
         });
+        return panel;
     }
 
     /**
      * Creación de los componentes para seleccionar clases dependiendo de las sugerencias.
      */
-    public void seleccionarClase(){
+    public JPanel seleccionarClase(){
         JPanel panel = new JPanel(new FlowLayout());
         panel.setOpaque(false);
 
@@ -91,8 +93,6 @@ public class PanelEnviarSolicitudEstudiante extends JPanel {
         elegirClase = new JButton("Elegir clase y confirmar solicitud");
         elegirClase.setEnabled(false);
         panel.add(elegirClase);
-
-        add(panel);
 
         elegirClase.addActionListener((ActionEvent _) -> {
             Clase claseSeleccionada = (Clase) listaClases.getSelectedItem();
@@ -106,6 +106,7 @@ public class PanelEnviarSolicitudEstudiante extends JPanel {
                 JOptionPane.showMessageDialog(this, "Seleccione una clase válida.", "Error", JOptionPane.WARNING_MESSAGE);
             }
         });
+        return panel;
     }
 
     /**
@@ -125,20 +126,5 @@ public class PanelEnviarSolicitudEstudiante extends JPanel {
             elegirClase.setEnabled(false);
             JOptionPane.showMessageDialog(this, "No se encontraron clases disponibles.", "Sin Sugerencias", JOptionPane.WARNING_MESSAGE);
         }
-    }
-
-    /**
-     * Agrega un botón para volver atrás.
-     */
-    private void volver(){
-        JPanel panel = new JPanel(new FlowLayout());
-        panel.setOpaque(false);
-
-        JButton botonVolver  = new JButton("Volver");
-        botonVolver.setPreferredSize(new Dimension(250,40));
-        panel.add(botonVolver);
-
-        botonVolver.addActionListener(_ -> Ventana.solicitudEstudiante(estudiante));
-        add(panel);
     }
 }

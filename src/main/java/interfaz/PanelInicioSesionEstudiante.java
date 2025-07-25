@@ -10,15 +10,16 @@ import java.util.Set;
 /**
  * Panel que permite al Estudiante iniciar sesión.
  */
-public class PanelInicioEstudiante extends JPanel {
+public class PanelInicioSesionEstudiante extends JPanelConBotones {
     private JTextField campoCorreo;
     private JTextField campoPassword;
 
     /**
      * Inicializa el panel con los componentes necesarios para el inicio de sesión.
      */
-    public PanelInicioEstudiante(){
-        setBackground(new Color(30, 30, 30));
+    public PanelInicioSesionEstudiante(){
+        super();
+        setBackground(new Color(33, 33, 33));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         InterfazUtils.agregarTitulo("Inicio Sesión Estudiante", this);
@@ -75,12 +76,7 @@ public class PanelInicioEstudiante extends JPanel {
         botonIniciar.setPreferredSize(new Dimension(250, 40));
         panel.add(botonIniciar);
 
-        JButton botonSalida = new JButton("Salir");
-        botonSalida.setPreferredSize(new Dimension(250, 40));
-        panel.add(botonSalida);
-
         botonIniciar.addActionListener(_ -> procesarInicioSesion());
-        botonSalida.addActionListener(_ -> Ventana.principal());
 
         add(panel);
     }
@@ -98,7 +94,8 @@ public class PanelInicioEstudiante extends JPanel {
             // Asegúrate de que getCorreo() y getId() existen en tu clase Estudiante
             if (est.getCorreo().equals(correo) && est.getPassword().equals(password)) {
                 JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso para: " + est.getNombre() + " " + est.getApellido(), "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                Ventana.solicitudEstudiante(est); // Pasamos la instancia del estudiante encontrado
+                Ventana.setEstudianteActual(est);
+                Ventana.irA(new PanelBotonesEstudiante());
                 return; // Salimos del bucle una vez que lo encontramos
             }
         }

@@ -11,7 +11,7 @@ import java.awt.*;
  * Panel de registro para nuevos estudiantes. Permite ingresar nombre, apellido, correo y contraseña,
  * luego crea una cuenta de Estudiante en el sistema.
  */
-public class PanelRegistroEstudiante extends JPanel {
+public class PanelRegistroEstudiante extends JPanelConBotones {
 
     private JTextField campoNombre, campoApellido, campoCorreo, campoPassword;
 
@@ -19,7 +19,8 @@ public class PanelRegistroEstudiante extends JPanel {
      * Configura la vista principal del panel, su layout y componentes.
      */
     public PanelRegistroEstudiante(){
-        setBackground(new Color(30, 30, 30));
+        super();
+        setBackground(new Color(33, 33, 33));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         agregarTitulo();
@@ -85,12 +86,7 @@ public class PanelRegistroEstudiante extends JPanel {
         botonRegistrar.setPreferredSize(new Dimension(250,40));
         panel.add(botonRegistrar);
 
-        JButton botonSalir = new JButton("Salir");
-        botonSalir.setPreferredSize(new Dimension(250,40));
-        panel.add(botonSalir);
-
         botonRegistrar.addActionListener(_ -> registrarEstudiante());
-        botonSalir.addActionListener(_ -> Ventana.principal());
         add(panel);
     }
 
@@ -98,7 +94,7 @@ public class PanelRegistroEstudiante extends JPanel {
         int id = EstudianteFactory.getInstancia().getCantidadObjetos();
         Estudiante estudiante = EstudianteFactory.crearEstudiante(campoNombre.getText(), campoApellido.getText(), campoCorreo.getText(), String.valueOf(id));
         if (estudiante.setPassword(campoPassword.getText())) {
-            Ventana.solicitudEstudiante(estudiante);
+            Ventana.irA(new PanelInicioSesionEstudiante());
             EstudianteFactory.agregarEstudiante(estudiante);
         }
     }

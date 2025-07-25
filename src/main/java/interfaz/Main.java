@@ -6,10 +6,9 @@ import javax.swing.*;
  * Se agrega la Ventana,
  * todo el manejo se hace detras
  */
-public class main {
+public class Main {
     public static void main(String[] args){
-
-        JFrame frame = Ventana.getInstancia();
+        JFrame frame = new Ventana();
         frame.repaint();
     }
 }

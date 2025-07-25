@@ -14,7 +14,7 @@ import java.util.Set;
 /**
  * Panel que permite al administrador registrar a un nuevo Profesor.
  */
-public class PanelAgregarProfesorAdmin extends JPanel {
+public class PanelAgregarProfesorAdmin extends JPanelConBotones {
 
     private JTextField campoNombre, campoApellido, campoCorreo;
     private JTextField campoCapacidades, campoTarifas;
@@ -26,6 +26,7 @@ public class PanelAgregarProfesorAdmin extends JPanel {
      * Inicializa el panel con los componentes necesarios para el registro.
      */
     public PanelAgregarProfesorAdmin(){
+        super();
         setBackground(new Color(30, 30, 30));
         setVisible(true);
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
@@ -89,11 +90,7 @@ public class PanelAgregarProfesorAdmin extends JPanel {
         JButton botonRegistrar = new JButton("Registrar");
         botonRegistrar.setPreferredSize(new Dimension(250, 40));
 
-        JButton botonSalida = new JButton("Salir");
-        botonSalida.setPreferredSize(new Dimension(250, 40));
-
         panel.add(botonRegistrar);
-        panel.add(botonSalida);
         add(panel);
 
         botonRegistrar.addActionListener((ActionEvent _) -> {
@@ -145,8 +142,7 @@ public class PanelAgregarProfesorAdmin extends JPanel {
             ProfesorFactory.agregarProfesor(nuevo);
 
             JOptionPane.showMessageDialog(null, "Profesor registrado con éxito.", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
-            Ventana.perfil();
+            Ventana.irA(new PanelCrearEliminarPerfil());
         });
-        botonSalida.addActionListener(_ -> Ventana.principal());
     }
 }

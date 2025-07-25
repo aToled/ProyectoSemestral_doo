@@ -1,14 +1,15 @@
 package interfaz;
 
-import Logica.Estudiante;
 import javax.swing.*;
 import java.awt.*;
 
 /**
  * Panel que le da la opción al estudiante de seleccionar preferencias, clases y enviar solicitud
  */
-public class AgregarSolicitudEstudiante extends JPanel {
-    public AgregarSolicitudEstudiante(Estudiante estudiante) {
+public class PanelBotonesEstudiante extends JPanelConBotones {
+
+    public PanelBotonesEstudiante() {
+        super();
         setBackground(new Color(30, 30, 30));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         InterfazUtils.agregarTitulo("Estudiante", this);
@@ -21,7 +22,7 @@ public class AgregarSolicitudEstudiante extends JPanel {
         add(botonSolicitudClases);
         add(Box.createRigidArea(new Dimension(0, 60)));
 
-        botonPreferencias.addActionListener(_ -> Ventana.preferencias(estudiante));
-        botonSolicitudClases.addActionListener(_ -> Ventana.seleccionarClase(estudiante));
+        botonPreferencias.addActionListener(_ -> Ventana.irA(new PanelPreferencias(Ventana.getEstudianteActual())));
+        botonSolicitudClases.addActionListener(_ -> Ventana.irA(new PanelEnviarSolicitudEstudiante(Ventana.getEstudianteActual())));
     }
 }

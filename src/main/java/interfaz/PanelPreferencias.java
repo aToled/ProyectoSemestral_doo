@@ -15,7 +15,7 @@ import java.util.*;
  * Panel que permite al estudiante configurar sus preferencias,
  * como menor tarifa, menor cantidad de alumnos, y horario/día preferido.
  */
-public class PanelPreferencias extends JPanel {
+public class PanelPreferencias extends JPanelConBotones {
     private boolean menorTarifa = false;
     private boolean menorCantidadEstudiantes = false;
     private final Set<Asignatura> materiasPreferidas = EnumSet.noneOf(Asignatura.class);
@@ -30,13 +30,13 @@ public class PanelPreferencias extends JPanel {
      * @param estudiante el estudiante que realiza la solicitud
      */
     public PanelPreferencias(Estudiante estudiante){
+        super();
         this.estudiante = estudiante;
-        setBackground(new Color(30, 30, 30));
+        setBackground(new Color(33, 33, 33));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         InterfazUtils.agregarTitulo("Preferencias", this);
 
         agregarOpciones();
-        agregarBotonContinuar();
         agregarBotonGuardarPreferencias();
     }
 
@@ -145,21 +145,6 @@ public class PanelPreferencias extends JPanel {
         btnBloques.addActionListener(_ -> mostrarSelectorBloques());
 
         panel.add(checkTarifa); panel.add(checkEstudiantes); panel.add(btnMaterias); panel.add(btnDias); panel.add(btnHoras); panel.add(btnBloques);
-        add(panel);
-    }
-
-    /**
-     * Agrega el botón "CONTINUAR", que redirige a la solicitud para el estudiante.
-     */
-    private void agregarBotonContinuar(){
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        panel.setOpaque(false);
-
-        JButton continuar = new JButton("CONTINUAR");
-        continuar.addActionListener(_ -> Ventana.solicitudEstudiante(estudiante));
-
-        panel.add(continuar);
-        add(Box.createRigidArea(new Dimension(0, 40)));
         add(panel);
     }
 

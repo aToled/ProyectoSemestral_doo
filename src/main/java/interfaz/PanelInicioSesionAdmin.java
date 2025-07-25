@@ -6,7 +6,7 @@ import java.awt.*;
 /**
  * Panel que permite al administrador iniciar sesión.
  */
-public class PanelInicioAdmin extends JPanel {
+public class PanelInicioSesionAdmin extends JPanelConBotones {
     private static final String password = "a";
     private static final String usuario = "a";
 
@@ -17,8 +17,9 @@ public class PanelInicioAdmin extends JPanel {
     /**
      * Inicializa el panel con los componentes necesarios para el inicio de sesión.
      */
-    public PanelInicioAdmin(){
-        setBackground(new Color(30, 30, 30));
+    public PanelInicioSesionAdmin(){
+        super();
+        setBackground(new Color(33, 33, 33));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         InterfazUtils.agregarTitulo("Ingresar Como Admin", this);
@@ -77,13 +78,8 @@ public class PanelInicioAdmin extends JPanel {
         botonIniciar.setPreferredSize(new Dimension(250, 40));
         panelBotones.add(botonIniciar);
 
-        JButton botonSalida = new JButton("Salir");
-        botonSalida.setPreferredSize(new Dimension(250, 40));
-        panelBotones.add(botonSalida);
-
         add(panelBotones);
         botonIniciar.addActionListener(_ -> verificarCredenciales(panelBotones));
-        botonSalida.addActionListener(_ -> Ventana.principal());
     }
 
     /**
@@ -96,7 +92,7 @@ public class PanelInicioAdmin extends JPanel {
         String contrasenaIngresada = campoPassword.getText();
 
         if (usuario.equals(usuarioIngresado) && password.equals(contrasenaIngresada)) {
-            Ventana.admin();
+            Ventana.irA(new PanelBotonesAdmin());
         } else if (!mensajeErrorMostrado) {
             JLabel errorLabel = InterfazUtils.label("Campos Incorrectos", new Font("Arial", Font.BOLD, 15));
             errorLabel.setForeground(Color.RED);

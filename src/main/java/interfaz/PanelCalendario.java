@@ -13,13 +13,14 @@ import java.util.List;
 /**
  * Crea el calendario que visualizara el Admin.
  */
-public class PanelCalendario extends JPanel {
+public class PanelCalendario extends JPanelConBotones {
 
     private final Dia[] dias = Dia.values();
     private final Map<Dia, List<String>> clasesPorDia = new EnumMap<>(Dia.class);
     private final JButton[] botones=new JButton[5];
 
     public PanelCalendario(){
+        super();
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         setBackground(new Color(30, 30, 30));
         InterfazUtils.agregarTitulo("Calendario", this);
@@ -28,7 +29,6 @@ public class PanelCalendario extends JPanel {
         cargarClases();
         cuerpo();
         add(Box.createRigidArea(new Dimension(0,40)));
-        agregarBotonSalir();
     }
 
     /**
@@ -96,18 +96,5 @@ public class PanelCalendario extends JPanel {
             tabla.add(boton);
         }
         add(tabla);
-    }
-
-    /**
-     * Agrega un botón de salida que redirige a la ventana principal.
-     */
-    private void agregarBotonSalir() {
-        JPanel panelBotonSalir = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        panelBotonSalir.setOpaque(false);
-
-        JButton btnSalir = new JButton("Salir");
-        btnSalir.addActionListener(_ -> Ventana.principal());
-        panelBotonSalir.add(btnSalir);
-        add(panelBotonSalir);
     }
 }

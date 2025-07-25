@@ -9,15 +9,15 @@ import java.awt.*;
  */
 public class PanelEntrada extends JPanel {
     public PanelEntrada(){
-        setBackground(new Color(30, 30, 30));
+        setBackground(new Color(33, 33, 33));
         setLayout(new FlowLayout());
         InterfazUtils.agregarTitulo("Sistema de clases Particulares", this);
 
         JButton botonAdmin = InterfazUtils.addBotonesConIcono("/botonAdmin.png", this, 40);
         JButton botonEstudiante = InterfazUtils.addBotonesConIcono("/botonEstudiante.png", this, 40);
 
-        botonAdmin.addActionListener(_ -> Ventana.adminInicio());
-        botonEstudiante.addActionListener(_ -> Ventana.estudiante());
+        botonAdmin.addActionListener(_ -> Ventana.irA(new PanelInicioSesionAdmin()));
+        botonEstudiante.addActionListener(_ -> Ventana.irA(new PanelInicioORegistroEstudiante()));
 
         repaint();
         revalidate();

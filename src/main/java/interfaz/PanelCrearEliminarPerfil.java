@@ -12,15 +12,16 @@ import java.util.Set;
 /**
  * Panel que permite al usuario eliminar estudiantes o profesores y acceder a las opciones para registrar nuevos perfiles.
  */
-public class PanelPerfil extends JPanel {
+public class PanelCrearEliminarPerfil extends JPanelConBotones {
     private final JComboBox<String> comboEstudiantes = new JComboBox<>();
     private final JComboBox<String> comboProfesores = new JComboBox<>();
 
     /**
      * Inicializa el panel de perfil, estableciendo su diseño y componentes principales.
      */
-    public PanelPerfil(){
-        setBackground(new Color(30, 30, 30));
+    public PanelCrearEliminarPerfil(){
+        super();
+        setBackground(new Color(33, 33, 33));
         setLayout(new GridLayout(1, 2));
 
         JPanel panelEliminar = new JPanel();
@@ -187,7 +188,7 @@ public class PanelPerfil extends JPanel {
         radioProfesor.setOpaque(false);
         radioProfesor.addItemListener(_ -> {
             if (radioProfesor.isSelected()) {
-                Ventana.agregarProfesor();
+                Ventana.irA(new PanelAgregarProfesorAdmin());
             }
         });
 
@@ -197,7 +198,7 @@ public class PanelPerfil extends JPanel {
         radioEstudiante.setOpaque(false);
         radioEstudiante.addItemListener(_ -> {
             if (radioEstudiante.isSelected()) {
-                Ventana.agregarEstudiante();
+                Ventana.irA(new PanelAgregarEstudianteAdmin());
             }
         });
         panel.add(radioProfesor);

@@ -1,33 +1,26 @@
 package interfaz;
 
 import Logica.*;
-import Logica.Enums.Asignatura;
 import Logica.Enums.EstadoSolicitud;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Objects;
 import java.util.Set;
 
 /**
  * Panel utilizado por el administrador para gestionar solicitudes pendientes,
  * permite aceptar o rechazar solicitudes usando estrategias definidas.
  */
-public class PanelSolicitudesAdmin extends JPanel {
+public class PanelSolicitudesAdmin extends JPanelConBotones {
     private JComboBox<String> comboSolicitudes;
     private JButton btnAceptar;
     private JButton btnRechazar;
-    private Profesor profesor;
-    private JComboBox<Profesor> comboProfesores;
-    private JComboBox<Asignatura> comboAsignaturas;
-    private JComboBox<BloqueHorario> comboBloquesHorarios;
-    private JComboBox<Long> comboTarifas;
-    private JComboBox<Integer> comboCapacidades;
 
     /**
      * Inicializa el panel de gestión de solicitudes y creación de clases.
      */
     public PanelSolicitudesAdmin() {
+        super();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(new Color(30, 30, 30));
 
@@ -35,12 +28,6 @@ public class PanelSolicitudesAdmin extends JPanel {
         add(Box.createRigidArea(new Dimension(0, 30)));
 
         configurarGestionSolicitudes();
-        add(Box.createRigidArea(new Dimension(0, 15)));
-
-        InterfazUtils.agregarTitulo("Crear Clase", this);
-        add(Box.createRigidArea(new Dimension(0, 20)));
-
-        configurarCreacionClases();
         add(Box.createVerticalGlue());
     }
 
@@ -48,7 +35,8 @@ public class PanelSolicitudesAdmin extends JPanel {
      * Configura los controles para aceptar o rechazar solicitudes.
      */
     private void configurarGestionSolicitudes() {
-        JPanel panelControles = crearPanelFlow();
+        JPanel panelControles = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelControles.setOpaque(false);
 
         comboSolicitudes = new JComboBox<>();
         comboSolicitudes.setPreferredSize(new Dimension(300, 30));
@@ -109,92 +97,5 @@ public class PanelSolicitudesAdmin extends JPanel {
             btnAceptar.setEnabled(true);
             btnRechazar.setEnabled(true);
         }
-    }
-
-    /**
-     * Configura el formulario para crear una clase nueva.
-     */
-    private void configurarCreacionClases() {
-        Font fuente = new Font("Arial", Font.BOLD, 20);
-        JPanel panelFormulario = new JPanel(new GridLayout(6, 2, 5, 5));
-        panelFormulario.setOpaque(false);
-
-        comboProfesores = new JComboBox<>();
-        for (Profesor p : ProfesorFactory.cargarProfesores()) comboProfesores.addItem(p);
-        profesor = (Profesor) comboProfesores.getSelectedItem();
-
-        comboAsignaturas = new JComboBox<>();
-        comboBloquesHorarios = new JComboBox<>();
-        comboTarifas = new JComboBox<>();
-        comboCapacidades = new JComboBox<>();
-
-        comboProfesores.addActionListener(_ -> {
-            profesor = (Profesor) comboProfesores.getSelectedItem();
-            actualizarDatosProfesor();
-        });
-
-        panelFormulario.add(InterfazUtils.label("Profesor:", fuente)); panelFormulario.add(comboProfesores);
-        panelFormulario.add(InterfazUtils.label("Asignatura:", fuente)); panelFormulario.add(comboAsignaturas);
-        panelFormulario.add(InterfazUtils.label("Disponibilidad:", fuente)); panelFormulario.add(comboBloquesHorarios);
-        panelFormulario.add(InterfazUtils.label("Tarifa:", fuente)); panelFormulario.add(comboTarifas);
-        panelFormulario.add(InterfazUtils.label("Capacidad Máxima:", fuente)); panelFormulario.add(comboCapacidades);
-
-        JButton btnCrear = new JButton("Crear");
-        btnCrear.setPreferredSize(new Dimension(150, 30));
-        btnCrear.addActionListener(_ -> crearClase());
-
-        JButton btnSalir = new JButton("Salir");
-        btnSalir.setPreferredSize(new Dimension(150, 30));
-        btnSalir.addActionListener(_ -> Ventana.principal());
-
-        JPanel panelCrear = crearPanelFlow(); panelCrear.add(btnCrear); panelFormulario.add(panelCrear);
-        JPanel panelSalir = crearPanelFlow(); panelSalir.add(btnSalir); panelFormulario.add(panelSalir);
-        panelFormulario.setAlignmentX(Component.CENTER_ALIGNMENT); add(panelFormulario);
-
-        actualizarDatosProfesor();
-    }
-
-    /**
-     * Actualiza los combos del formulario según el profesor seleccionado.
-     */
-    private void actualizarDatosProfesor() {
-        if (profesor == null) return;
-
-        comboAsignaturas.removeAllItems();
-        for (Asignatura a : profesor.getMateriasQueDicta()) comboAsignaturas.addItem(a);
-
-        comboBloquesHorarios.removeAllItems();
-        for (BloqueHorario h : profesor.getDisponibilidad()) comboBloquesHorarios.addItem(h);
-
-        comboTarifas.removeAllItems();
-        for (Long t : profesor.getTarifas()) comboTarifas.addItem(t);
-
-        comboCapacidades.removeAllItems();
-        for (Integer c : profesor.getCapacidadesMaximasAlumnos()) comboCapacidades.addItem(c);
-    }
-
-    /**
-     * Crea una clase nueva con los datos seleccionados en el formulario.
-     */
-    private void crearClase() {
-        Integer capacidad = (Integer) comboCapacidades.getSelectedItem();
-        Long tarifa = (Long) comboTarifas.getSelectedItem();
-        if (capacidad == null || tarifa == null) {
-            JOptionPane.showMessageDialog(null, "Por favor selecciona una capacidad y tarifa válida.");
-            return;
-        }
-        Clase clase = new Clase((Profesor) Objects.requireNonNull(comboProfesores.getSelectedItem()), Integer.toString(Calendario.getInstancia().getCantidadObjetos()), (Asignatura) comboAsignaturas.getSelectedItem(), (BloqueHorario) comboBloquesHorarios.getSelectedItem(), capacidad, tarifa);
-        Calendario.getInstancia().addClaseToBloque(clase);
-        JOptionPane.showMessageDialog(this, "Clase creada exitosamente.", "Clase Creada", JOptionPane.INFORMATION_MESSAGE);
-    }
-
-    /**
-     * Crea un panel con layout tipo Flow centrado.
-     * @return el panel creado
-     */
-    private JPanel crearPanelFlow() {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panel.setOpaque(false);
-        return panel;
     }
 }

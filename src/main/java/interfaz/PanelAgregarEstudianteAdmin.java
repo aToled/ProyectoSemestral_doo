@@ -9,13 +9,14 @@ import java.awt.*;
 /**
  * Panel que permite al administrador registrar a un nuevo Estudiante.
  */
-public class PanelAgregarEstudianteAdmin extends JPanel {
+public class PanelAgregarEstudianteAdmin extends JPanelConBotones {
     private JTextField campoNombre, campoApellido, campoCorreo, campoPassword;
 
     /**
      * Inicializa el panel con los componentes necesarios para el registro.
      */
     public PanelAgregarEstudianteAdmin(){
+        super();
         setBackground(new Color(30, 30, 30));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -68,23 +69,17 @@ public class PanelAgregarEstudianteAdmin extends JPanel {
         botonAgregar.setPreferredSize(new Dimension(250, 40));
         panel.add(botonAgregar);
 
-        JButton botonSalir = new JButton("Salir");
-        botonSalir.setPreferredSize(new Dimension(250, 40));
-        panel.add(botonSalir);
-
         botonAgregar.addActionListener(_ -> {
             int id = EstudianteFactory.getInstancia().getCantidadObjetos();
             Estudiante  estudiante = EstudianteFactory.crearEstudiante(campoNombre.getText(), campoApellido.getText(), campoCorreo.getText(), String.valueOf(id));
             if (estudiante.setPassword(campoPassword.getText())) {
-                JOptionPane.showMessageDialog(this, "Estudiante agregado correctamente.",
-                        "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                Ventana.perfil();
+                JOptionPane.showMessageDialog(this, "Estudiante agregado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                Ventana.irA(new PanelCrearEliminarPerfil());
             } else {
                 EstudianteFactory.eliminarEstudiante(String.valueOf(id));
                 JOptionPane.showMessageDialog(this, "Contraseña inválida.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
-        botonSalir.addActionListener(_ -> Ventana.principal());
         add(panel);
     }
 }
