@@ -60,4 +60,13 @@ public class InterfazUtils {
         }
         return null;
     }
+
+    public static JCheckBox crearCheckbox(String texto, Font fuente, java.util.function.Consumer<Boolean> onToggle) {
+        JCheckBox check = new JCheckBox(texto);
+        check.setFont(fuente);
+        check.setForeground(Color.WHITE);
+        check.setOpaque(false);
+        check.addActionListener(_ -> onToggle.accept(check.isSelected()));
+        return check;
+    }
 }

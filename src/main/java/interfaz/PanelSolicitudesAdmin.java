@@ -23,7 +23,6 @@ public class PanelSolicitudesAdmin extends JPanel {
     private JComboBox<BloqueHorario> comboBloquesHorarios;
     private JComboBox<Long> comboTarifas;
     private JComboBox<Integer> comboCapacidades;
-    private int id = 1000;
 
     /**
      * Inicializa el panel de gestión de solicitudes y creación de clases.
@@ -134,16 +133,11 @@ public class PanelSolicitudesAdmin extends JPanel {
             actualizarDatosProfesor();
         });
 
-        panelFormulario.add(InterfazUtils.label("Profesor:", fuente));
-        panelFormulario.add(comboProfesores);
-        panelFormulario.add(InterfazUtils.label("Asignatura:", fuente));
-        panelFormulario.add(comboAsignaturas);
-        panelFormulario.add(InterfazUtils.label("Disponibilidad:", fuente));
-        panelFormulario.add(comboBloquesHorarios);
-        panelFormulario.add(InterfazUtils.label("Tarifa:", fuente));
-        panelFormulario.add(comboTarifas);
-        panelFormulario.add(InterfazUtils.label("Capacidad Máxima:", fuente));
-        panelFormulario.add(comboCapacidades);
+        panelFormulario.add(InterfazUtils.label("Profesor:", fuente)); panelFormulario.add(comboProfesores);
+        panelFormulario.add(InterfazUtils.label("Asignatura:", fuente)); panelFormulario.add(comboAsignaturas);
+        panelFormulario.add(InterfazUtils.label("Disponibilidad:", fuente)); panelFormulario.add(comboBloquesHorarios);
+        panelFormulario.add(InterfazUtils.label("Tarifa:", fuente)); panelFormulario.add(comboTarifas);
+        panelFormulario.add(InterfazUtils.label("Capacidad Máxima:", fuente)); panelFormulario.add(comboCapacidades);
 
         JButton btnCrear = new JButton("Crear");
         btnCrear.setPreferredSize(new Dimension(150, 30));
@@ -153,16 +147,9 @@ public class PanelSolicitudesAdmin extends JPanel {
         btnSalir.setPreferredSize(new Dimension(150, 30));
         btnSalir.addActionListener(_ -> Ventana.principal());
 
-        JPanel panelCrear = crearPanelFlow();
-        panelCrear.add(btnCrear);
-        panelFormulario.add(panelCrear);
-
-        JPanel panelSalir = crearPanelFlow();
-        panelSalir.add(btnSalir);
-        panelFormulario.add(panelSalir);
-
-        panelFormulario.setAlignmentX(Component.CENTER_ALIGNMENT);
-        add(panelFormulario);
+        JPanel panelCrear = crearPanelFlow(); panelCrear.add(btnCrear); panelFormulario.add(panelCrear);
+        JPanel panelSalir = crearPanelFlow(); panelSalir.add(btnSalir); panelFormulario.add(panelSalir);
+        panelFormulario.setAlignmentX(Component.CENTER_ALIGNMENT); add(panelFormulario);
 
         actualizarDatosProfesor();
     }
@@ -196,7 +183,7 @@ public class PanelSolicitudesAdmin extends JPanel {
             JOptionPane.showMessageDialog(null, "Por favor selecciona una capacidad y tarifa válida.");
             return;
         }
-        Clase clase = new Clase((Profesor) Objects.requireNonNull(comboProfesores.getSelectedItem()), String.valueOf(id++), (Asignatura) comboAsignaturas.getSelectedItem(), (BloqueHorario) comboBloquesHorarios.getSelectedItem(), capacidad, tarifa);
+        Clase clase = new Clase((Profesor) Objects.requireNonNull(comboProfesores.getSelectedItem()), Integer.toString(Calendario.getInstancia().getCantidadObjetos()), (Asignatura) comboAsignaturas.getSelectedItem(), (BloqueHorario) comboBloquesHorarios.getSelectedItem(), capacidad, tarifa);
         Calendario.getInstancia().addClaseToBloque(clase);
         JOptionPane.showMessageDialog(this, "Clase creada exitosamente.", "Clase Creada", JOptionPane.INFORMATION_MESSAGE);
     }

@@ -52,4 +52,11 @@ public class EstudianteFactory extends ManejoGenericoJSON<Estudiante> {
     public static void eliminarEstudiante(String id) {
         instancia.eliminar(id);
     }
+
+    /**
+     * @see ManejoGenericoJSON
+     */
+    public static void guardarEstudiantes() {
+        instancia.guardar();
+    }
 }

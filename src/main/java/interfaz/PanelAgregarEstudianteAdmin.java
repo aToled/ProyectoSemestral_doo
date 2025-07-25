@@ -73,7 +73,7 @@ public class PanelAgregarEstudianteAdmin extends JPanel {
         panel.add(botonSalir);
 
         botonAgregar.addActionListener(_ -> {
-            int id = EstudianteFactory.getInstancia().getCantidadObjetos() + 1;
+            int id = EstudianteFactory.getInstancia().getCantidadObjetos();
             Estudiante  estudiante = EstudianteFactory.crearEstudiante(campoNombre.getText(), campoApellido.getText(), campoCorreo.getText(), String.valueOf(id));
             if (estudiante.setPassword(campoPassword.getText())) {
                 JOptionPane.showMessageDialog(this, "Estudiante agregado correctamente.",

@@ -7,8 +7,8 @@ import java.awt.*;
  * Panel que permite al administrador iniciar sesión.
  */
 public class PanelInicioAdmin extends JPanel {
-    private static final String password = "admin";
-    private static final String usuario = "admin";
+    private static final String password = "a";
+    private static final String usuario = "a";
 
     private JPasswordField campoPassword;
     private JTextField campoUsuario;

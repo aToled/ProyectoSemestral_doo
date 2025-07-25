@@ -2,15 +2,12 @@ package interfaz;
 
 import Logica.*;
 import Logica.Enums.Asignatura;
-import Logica.Enums.Dia;
-import Logica.Enums.Horario;
+import Logica.Enums.EstadoSolicitud;
 import Logica.Estrategias.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -19,121 +16,64 @@ import java.util.Set;
 public class PanelEnviarSolicitudEstudiante extends JPanel {
     private JComboBox<Asignatura> listaAsignaturas;
     private JComboBox<Clase> listaClases;
-    private JList<Dia> listaDias;
-    private JList<Horario> listaHorarios;
     private final Estudiante estudiante;
     private Solicitud solicitud = null;
-    private final GestorSolicitudes gestor = GestorSolicitudes.getInstancia();
-    private JButton registrar;
+    private JButton elegirClase;
 
     public PanelEnviarSolicitudEstudiante(Estudiante estudiante){
         this.estudiante = estudiante;
         setBackground(new Color(30, 30, 30));
         setLayout(new GridLayout(3,2,5,5));
 
-        InterfazUtils.agregarTitulo(" Enviar Solicitud", this);
+        InterfazUtils.agregarTitulo(" Crear Solicitud", this);
         InterfazUtils.agregarTitulo("      Elegir Clase", this);
 
-        texto();
+        seleccionarAsignatura();
         seleccionarClase();
-        botones();
+        botonCrearSolicitud();
         volver();
     }
 
-    /**
-     * Crea los componentes para generar la creación de una solicitud.
-     */
-    private void texto(){
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(5, 2, 5, 5));
+    private void seleccionarAsignatura() {
+        JPanel panel = new JPanel(new FlowLayout());
         panel.setOpaque(false);
-        Font fuente = new Font("Arial", Font.BOLD, 20);
 
-        listaAsignaturas = new JComboBox<>();
-        for(Asignatura asignatura: Asignatura.values()){
-            listaAsignaturas.addItem(asignatura);
-        }
+        listaAsignaturas = new JComboBox<>(Asignatura.values());
+        panel.add(InterfazUtils.label("Asignatura:", new Font("Arial", Font.BOLD, 20)));
+        panel.add(listaAsignaturas);
 
-        listaDias = new JList<>(Dia.values());
-        listaDias.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-
-        listaHorarios = new JList<>(Horario.values());
-        listaHorarios.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-
-        panel.add(InterfazUtils.label("Asignaturas:", fuente)); panel.add(new JScrollPane(listaAsignaturas));
-        panel.add(InterfazUtils.label("Días disponibles (Seleccionar Multiples con CTRL):", fuente)); panel.add(new JScrollPane(listaDias));
-        panel.add(InterfazUtils.label("Horarios disponibles (Seleccionar Multiples con CTRL):", fuente)); panel.add(new JScrollPane(listaHorarios));
-
-        panel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(panel);
+        add(panel);
     }
 
     /**
-     * Se crean los botones para enviar solicitud y se le asignan las funcionalidades.
+     * Se crean el botón para enviar solicitud y se le asignan las funcionalidades.
      */
-    private void botones() {
-        JPanel panel = new JPanel();
-        panel.setLayout(new FlowLayout());
+    private void botonCrearSolicitud() {
+        JPanel panel = new JPanel(new FlowLayout());
         panel.setOpaque(false);
 
-        JButton botonRegistrar = new JButton("Solicitar");
-        botonRegistrar.setPreferredSize(new Dimension(250, 40));
+        JButton botonCrearSolicitud = new JButton("crear solicitud y obtener clases posibles");
+        botonCrearSolicitud.setPreferredSize(new Dimension(300, 40));
 
-        panel.add(botonRegistrar);
+        panel.add(botonCrearSolicitud);
         add(panel);
 
-        botonRegistrar.addActionListener((ActionEvent _) -> {
-            if (listaDias.getSelectedValuesList().isEmpty()){JOptionPane.showMessageDialog(null, "seleccione al menos un día.", "Error!", JOptionPane.ERROR_MESSAGE);return;}
-            if (listaHorarios.getSelectedValuesList().isEmpty()){JOptionPane.showMessageDialog(null, "seleccione al menos un horario.", "Error!", JOptionPane.ERROR_MESSAGE); return;}
-
-            Set<Dia> dias = new HashSet<>(listaDias.getSelectedValuesList());
-            Set<Horario> horarios = new HashSet<>(listaHorarios.getSelectedValuesList());
-
-
-            if(horarios.size()==1 && dias.size() ==1) {
-                new BloqueHorario(dias.iterator().next(), horarios.iterator().next());
-                PanelPreferencias.diaHoraPreferido = true;
-                PanelPreferencias.diaPreferido = false;
-                PanelPreferencias.horaPreferido = false;
-            }else{
-                for (Dia dia : dias) {
-                    estudiante.addDiasInteres(dia);
-                }
-                for (Horario horario : horarios) {
-                    estudiante.addHorariosInteres(horario);
-                }
-
-                PanelPreferencias.diaHoraPreferido = false;
-                PanelPreferencias.diaPreferido = (!dias.isEmpty());
-                PanelPreferencias.horaPreferido = (!horarios.isEmpty());
+        botonCrearSolicitud.addActionListener((ActionEvent _) -> {
+            Asignatura asignaturaSeleccionada = (Asignatura) listaAsignaturas.getSelectedItem();
+            if (asignaturaSeleccionada == null) {
+                JOptionPane.showMessageDialog(this, "Seleccione una asignatura.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
 
-            solicitud = estudiante.crearSolicitud((Asignatura) listaAsignaturas.getSelectedItem());
+            solicitud = estudiante.crearSolicitud(asignaturaSeleccionada);
+            GestorSolicitudes.getInstancia().resolver(solicitud.getId(), new EstrategiaMenorTarifa(), new EstrategiaConMenosEstudiantes(), new EstrategiaBloqueHorarioPreferido(), new EstrategiaDiaPreferido(), new EstrategiaHorarioPreferido(), new EstrategiaDefault());
+            agregarClasesAlCombo();
 
-            ArrayList<EstrategiaSolicitud> estrategias = new ArrayList<>();
-
-            if(PanelPreferencias.menorTarifa){
-                estrategias.add(new EstrategiaMenorTarifa());
+            if(solicitud.getEstadoSolicitud() != EstadoSolicitud.INCONCLUSO){
+                JOptionPane.showMessageDialog(this, "Solicitud creada y resuelta.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                GestorSolicitudes.getInstancia().eliminar(solicitud.getId());
             }
-            if(PanelPreferencias.menorCantidadEstudiantes){
-                estrategias.add(new EstrategiaConMenosEstudiantes());
-            }
-            if(PanelPreferencias.diaHoraPreferido){
-                estrategias.add(new EstrategiaBloqueHorarioPreferido());
-            } else if(PanelPreferencias.diaPreferido){
-                estrategias.add(new EstrategiaDiaPreferido());
-            } else if(PanelPreferencias.horaPreferido){
-                estrategias.add(new EstrategiaHorarioPreferido());
-            }
-            estrategias.add(new EstrategiaDefault());
-
-            gestor.resolver(solicitud.getId(), estrategias.toArray(new EstrategiaSolicitud[0]));
-
-            combo();
-
-            JOptionPane.showMessageDialog(null, "Su solicitud ha sido ingresada con éxito.", "Solicitud Agregada", JOptionPane.INFORMATION_MESSAGE);
-
-
         });
     }
 
@@ -141,53 +81,49 @@ public class PanelEnviarSolicitudEstudiante extends JPanel {
      * Creación de los componentes para seleccionar clases dependiendo de las sugerencias.
      */
     public void seleccionarClase(){
-
-        Font fuente = new Font("Arial", Font.BOLD, 20);
-
-        JPanel panelBoton = new JPanel();
-        panelBoton.setLayout(new FlowLayout());
-        panelBoton.setOpaque(false);
+        JPanel panel = new JPanel(new FlowLayout());
+        panel.setOpaque(false);
 
         listaClases = new JComboBox<>();
+        panel.add(InterfazUtils.label("Clases Sugeridas:", new Font("Arial", Font.BOLD, 20)));
+        panel.add(listaClases);
 
-        panelBoton.add(InterfazUtils.label("Clases Sugeridas:", fuente));
-        panelBoton.add(listaClases);
+        elegirClase = new JButton("Elegir clase y confirmar solicitud");
+        elegirClase.setEnabled(false);
+        panel.add(elegirClase);
 
-        registrar = new JButton("Ingresar Clase Elegida");
-        panelBoton.add(registrar);
-        registrar.setEnabled(false);
-        panelBoton.setPreferredSize(new Dimension(100,30));
+        add(panel);
 
-        add(panelBoton);
-
-        registrar.addActionListener((ActionEvent _) -> {
-            if (listaClases.getSelectedItem() != null) {
-                Clase claseSeleccionada = (Clase) listaClases.getSelectedItem();
+        elegirClase.addActionListener((ActionEvent _) -> {
+            Clase claseSeleccionada = (Clase) listaClases.getSelectedItem();
+            if (claseSeleccionada != null && solicitud != null) {
                 solicitud.setClaseElegida(claseSeleccionada);
-                gestor.agregar(solicitud);
-                JOptionPane.showMessageDialog(null, "Clase asignada a la solicitud.", "Clase Asignada", JOptionPane.INFORMATION_MESSAGE);
+                GestorSolicitudes.getInstancia().agregar(solicitud);
+                solicitud.clearClasesSugeridas();
+                listaClases.removeAllItems();
+                JOptionPane.showMessageDialog(this, "Clase asignada a la solicitud.", "Clase Asignada", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, "Por favor, seleccione una clase de la lista.", "Error de Selección", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Seleccione una clase válida.", "Error", JOptionPane.WARNING_MESSAGE);
             }
         });
     }
 
     /**
-     * Agrega las clases al JComboBox, sirve para mantener actualizado.
+     * Agrega las clases al JComboBox, sirve para mantenerlo actualizado.
      */
-    private void combo(){
+    private void agregarClasesAlCombo(){
         listaClases.removeAllItems();
-
         Set<Clase> clasesSugeridas = solicitud.getClasesSugeridas();
+
         if (clasesSugeridas != null && !clasesSugeridas.isEmpty()){
-            registrar.setEnabled(true);
-            for(Clase clase: clasesSugeridas){
+            elegirClase.setEnabled(true);
+            for(Clase clase : clasesSugeridas){
                 listaClases.addItem(clase);
             }
             listaClases.setSelectedIndex(0);
         } else {
-            registrar.setEnabled(false);
-            JOptionPane.showMessageDialog(null, "No se encontraron clases sugeridas para su solicitud. Intente con otras preferencias.", "Sin Sugerencias", JOptionPane.INFORMATION_MESSAGE);
+            elegirClase.setEnabled(false);
+            JOptionPane.showMessageDialog(this, "No se encontraron clases disponibles.", "Sin Sugerencias", JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -198,11 +134,11 @@ public class PanelEnviarSolicitudEstudiante extends JPanel {
         JPanel panel = new JPanel(new FlowLayout());
         panel.setOpaque(false);
 
-        JButton botonSalir = new JButton("Volver");
-        botonSalir.setPreferredSize(new Dimension(250,40));
-        panel.add(botonSalir);
+        JButton botonVolver  = new JButton("Volver");
+        botonVolver.setPreferredSize(new Dimension(250,40));
+        panel.add(botonVolver);
 
-        botonSalir.addActionListener(_ -> Ventana.solicitudEstudiante(estudiante));
+        botonVolver.addActionListener(_ -> Ventana.solicitudEstudiante(estudiante));
         add(panel);
     }
 }

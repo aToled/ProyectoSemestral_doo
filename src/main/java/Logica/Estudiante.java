@@ -12,10 +12,10 @@ import java.util.Set;
  * @see Persona
  */
 public class Estudiante extends Persona {
-    private final Set<Asignatura> materiasInteres;
-    private final Set<BloqueHorario> bloquesHorariosInteres;
-    private final Set<Dia> diasInteres;
-    private final Set<Horario> horariosInteres;
+    private Set<Asignatura> materiasInteres;
+    private Set<BloqueHorario> bloquesHorariosInteres;
+    private Set<Dia> diasInteres;
+    private Set<Horario> horariosInteres;
     private boolean preferirMenorTarifa;
     private boolean preferirClaseConMenosEstudiantes;
     private String password;
@@ -39,7 +39,7 @@ public class Estudiante extends Persona {
      * @return la solicitud.
      */
     public Solicitud crearSolicitud(Asignatura a){
-        String idSolicitud = getId() + "_" + (int)(Math.random() * 100000);
+        String idSolicitud = Integer.toString(GestorSolicitudes.getInstancia().getCantidadObjetos());
         Solicitud s = new Solicitud(idSolicitud, this, a);
         GestorSolicitudes.getInstancia().agregar(s);
         return s;
@@ -49,6 +49,10 @@ public class Estudiante extends Persona {
     public void addBloquesHorariosInteres(BloqueHorario b) {bloquesHorariosInteres.add(b);}
     public void addDiasInteres(Dia d) {diasInteres.add(d);}
     public void addHorariosInteres(Horario h) {horariosInteres.add(h);}
+    public void setMateriasInteres(Set<Asignatura> materiasInteres) {this.materiasInteres = materiasInteres;}
+    public void setBloquesHorariosInteres(Set<BloqueHorario> bloquesHorariosInteres) {this.bloquesHorariosInteres = bloquesHorariosInteres;}
+    public void setDiasInteres(Set<Dia> diasInteres) {this.diasInteres = diasInteres;}
+    public void setHorariosInteres(Set<Horario> horariosInteres) {this.horariosInteres = horariosInteres;}
     public void setPreferirMenorTarifa(boolean b) {this.preferirMenorTarifa = b;}
     public void setPreferirClaseConMenosEstudiantes(boolean b) {this.preferirClaseConMenosEstudiantes = b;}
     public boolean setPassword(String password){

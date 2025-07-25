@@ -238,16 +238,32 @@
     "id": "19"
   },
   {
-    "materiasInteres": [],
-    "bloquesHorariosInteres": [],
-    "diasInteres": [],
-    "horariosInteres": [],
-    "preferirMenorTarifa": false,
+    "materiasInteres": [
+      "MATEMATICA",
+      "LENGUAJE",
+      "INGLES",
+      "HISTORIA",
+      "CIENCIAS"
+    ],
+    "bloquesHorariosInteres": [
+      {
+        "dia": "LUNES",
+        "horario": "BLOQUE8"
+      }
+    ],
+    "diasInteres": [
+      "MARTES",
+      "MIERCOLES"
+    ],
+    "horariosInteres": [
+      "BLOQUE12"
+    ],
+    "preferirMenorTarifa": true,
     "preferirClaseConMenosEstudiantes": false,
     "password": "a",
     "nombre": "a",
     "apellido": "a",
     "correo": "a",
-    "id": "21"
+    "id": "20"
   }
 ]

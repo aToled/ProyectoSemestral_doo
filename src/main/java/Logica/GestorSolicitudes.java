@@ -57,18 +57,18 @@ public class GestorSolicitudes extends ManejoGenericoJSON<Solicitud> {
         for(EstrategiaSolicitud e : estrategias){
             if(e.puedeAplicar(sol)){
                 Set<Clase> propuestas = e.proponerClase(sol);
-                if(propuestas != null && !propuestas.isEmpty()){
+                if(propuestas != null && !propuestas.isEmpty() && !propuestas.contains(null)){
                     sugerencias.addAll(propuestas);
                 }
             }
         }
         if(!sugerencias.isEmpty()){
             sol.setClasesSugeridas(sugerencias);
-            guardar();
-            notificar();
+            actualizar();
             return true;
-        }else {
+        } else {
             sol.setEstadoSolicitud(EstadoSolicitud.INCONCLUSO);
+            actualizar();
             return false;
         }
     }

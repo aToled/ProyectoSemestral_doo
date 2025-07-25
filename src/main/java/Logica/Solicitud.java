@@ -26,6 +26,10 @@ public class Solicitud extends IdentificableAbstracta {
         this.clasesSugeridas = new LinkedHashSet<>();
     }
 
+    public void clearClasesSugeridas(){
+        clasesSugeridas.clear();
+    }
+
     // getters:
     public Estudiante getEstudiante() {return estudiante;}
     public Asignatura getAsignatura() {return asignatura;}
